@@ -16,7 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using GoogleMapsAPI.NET.API.Common.Components.Locations.Common;
 using GoogleMapsAPI.NET.API.Directions;
 using GoogleMapsAPI.NET.API.Directions.Results;
-using Handy_Mapp.Data;
+using HandyMapp.Data;
+using HandyMapp.Models;
 using Handy_Mapp.Models.Navigation;
 
 namespace Handy_Mapp.Controllers

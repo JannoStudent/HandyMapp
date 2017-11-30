@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using HandyMapp.Models;
 using HandyMapp.Models.AccountViewModels;
 using HandyMapp.Services;
+using Handy_Mapp.Controllers;
 
 namespace HandyMapp.Controllers
 {
