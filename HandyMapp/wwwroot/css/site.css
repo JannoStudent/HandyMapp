@@ -1,35 +1,207 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
+.navbar-default {
+    background-color: white;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar-default {
+    margin-bottom: 0;
+    webkit-box-shadow: 0 8px 6px -6px #999;
+    moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.brand-logo {
+    width: 70%; /* you can use % */
+    height: auto;
+    margin-top: -8px;
+    margin-right: 0;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+/*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
+.glyphicon:before {
+    margin-right: 5px;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+/*////////////////////////////////////// BACKGROUND INDEX //////////////////////////////////////*/
+.backgroundIMG {
+    background: url('../images/Jumbotron_background.jpg') no-repeat center center;
+    ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+/* transparentJumboT and transparentJumboT is a temporary solution for having the background to full height */
+.tranparentJumboT {
+    height: 320px;
+    padding-right: 30px;
 }
+
+.tranparentJumboB {
+    height: 62px;
+}
+
+
+/*////////////////////////////////////// JUMBOTRON (excluding INDEX) //////////////////////////////////////*/
+.jumbotron-notFront {
+    background-color: #285e8e;
+    color: white;
+    margin-bottom: 0;
+}
+
+/*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
+.frontpage_text {
+    float: right;
+    font-weight: bold;
+    background-color: #1370B8;
+    color: white;
+    padding: 6px 6px 8px 6px;
+    margin-top: 155px;
+}
+
+.frontpage_text2, .h5 {
+    margin-bottom: 0;
+    float: right;
+    font-weight: bold;
+    background-color: #1370B8;
+    color: white;
+    padding: 6px 6px 8px 6px;
+}
+
+.frontpage_text3 {
+    margin-top: 0;
+    float: right;
+    font-weight: bold;
+    background-color: #1370B8;
+    color: white;
+    padding: 8px 4px 8px 8px;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
+p .hard:hover {
+    font-weight: bold;
+}
+
+.lowerThumbnail {
+    background-color: #1370B8;
+}
+
+.lowerThumbnail_text {
+    color: white;
+    margin-bottom: 2.5px;
+    margin-top: 5px;
+}
+
+/* thumbnail 1,2,3,4 will all be in one class. Leave it for now
+   These ID's + "transition" class are the hover animation*/
+
+.transition {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.thumbnail-mode {
+    margin: 20px 0 0px 0;
+    border-color: #1370B8;
+    border-width: 4px;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -moz-transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0);
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.thumbnail-navigation {
+    margin: 40px 0 10px 0;
+    border-color: #1370B8;
+    border-width: 3px;
+}
+
+.thumbnail-mini {
+    margin-top: 40px;
+    background-color: #FEC20F;
+}
+
+.hoverThumbnails:hover {
+    background-color: #FEC20F;
+    font-weight: bold;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+
+
+.thumbnail-container-frontPage {
+    padding-right: 35px;
+    padding-left: 35px;
+}
+
+/* card-img-top classes are the thumbnail images */
+.card-img-top {
+    width: 40%; /* you can use % */
+    height: auto;
+    padding: 40px 0 40px 0;
+    margin: 0 0 0 0;
+}
+
+.card-img-top-walkingAid {
+    width: 70%; /* you can use % */
+    height: auto;
+    margin: 20px 0px 0px 0px;
+}
+
+.card-img-top-walkingAid-mini {
+    width: 50%;
+    height: auto;
+}
+
+/*////////////////////////////////////// BREADCRUMBS //////////////////////////////////////*/
+.breadcrumb {
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+/*////////////////////////////////////// OBSTACLE TABLE //////////////////////////////////////*/
+.obstaclesTile {
+    margin: 40px 0 0 -30px;
+    background-color: #F5F5F5;
+}
+
+.obstacleCheckboxes {
+    font-size: 25px;
+}
+
+/*////////////////////////////////////// TEST //////////////////////////////////////*/
+.row {
+    margin: 0;
+}
+
+/*////////////////////////////////////// RANDOM //////////////////////////////////////*/
+/*
+footer{
+    background-color: transparent;
+    border-color: lightgray;
+    border-bottom: none;
+    height: 20px;
+    position: fixed;
+}
+*/
+
