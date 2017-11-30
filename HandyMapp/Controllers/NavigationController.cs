@@ -1,31 +1,27 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Client;
-using GoogleMapsAPI.NET.API.Directions.Components;
 using GoogleMapsAPI.NET.API.Directions.Enums;
-using Microsoft.AspNetCore.Mvc;
-using Handy_Mapp.Models;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.Extensions.DependencyInjection;
-using GoogleMapsAPI.NET.API.Common.Components.Locations.Common;
-using GoogleMapsAPI.NET.API.Directions;
 using GoogleMapsAPI.NET.API.Directions.Results;
 using Handy_Mapp.Data;
 using Handy_Mapp.Models.Navigation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 
 namespace Handy_Mapp.Controllers
 {
-    public class HomeController : Controller
+    public class NavigationController : Controller
     {
+        private List<Vector> _route;
+        private Vector _start, _end;
+        private List<Node> _openList, _closedList;
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ApplicationDbContext context)
+        public NavigationController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -35,53 +31,11 @@ namespace Handy_Mapp.Controllers
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult ShowRoute(string from, string to)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Preferences()
-        {
-            return View();
-        }
-
-        public IActionResult SelectWalkingAid()
-        {
-            return View();
-        }
-
-        public IActionResult InputRoute()
-        {
-            return View();
-        }
-
-        public IActionResult RouteOptions()
-        {
-            return View();
-        }
-
-        public IActionResult RouteOnMap()
-        {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult TestAPI()
-        {
-            // Get client
             var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
-
-            var startString = "Amerikaweg 201, 2717 AZ Zoetermeer, Netherlands";
-            var endString = "Aziëweg, 2726 Zoetermeer, Netherlands";
-            var directionsResult = client.Directions.GetDirections(startString, endString, TransportationModeEnum.Walking, null, true, null, "dutch", UnitSystemEnum.Metric, null, DateTime.Now, null, true, null, TransitRoutingPreferenceEnum.LessWalking, TrafficModelEnum.BestGuess);
+            var directionsResult = client.Directions.GetDirections(from, to, TransportationModeEnum.Walking, null, true, null, "dutch", UnitSystemEnum.Metric, null, DateTime.Now, null, true, null, TransitRoutingPreferenceEnum.LessWalking, TrafficModelEnum.BestGuess);
 
             List<GetDirectionsRouteResult> routes = directionsResult.Routes;
             //List<Vector> vectors = new List<Vector>();
@@ -127,7 +81,7 @@ namespace Handy_Mapp.Controllers
                         child = _context.Vectors.First(x =>
                             x.Latitude == step.EndLocation.Latitude &&
                             x.Longitude == step.EndLocation.Longitude);
-                        
+
                         if (!_context.VectorPaths.Any(x => x.VectorId1 == parent.Id && x.VectorId2 == child.Id))
                         {
                             vectorPath1 = new VectorPath(step.Distance.Value)
@@ -153,14 +107,88 @@ namespace Handy_Mapp.Controllers
 
             return View(directionsResult);
         }
-
-        public IActionResult Error()
+        
+        public IActionResult Navigate()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            Calculate(_context.Vectors.First(x => x.Id == 27), _context.Vectors.First(x => x.Id == 1));
+            return View();
         }
 
+        public List<Vector> Calculate(Vector start, Vector end)
+        {
+            this._start = start;
+            this._end = end;
+            this._openList = new List<Node>();
+            this._closedList = new List<Node>();
+            Node current = new Node(null, start, 0, 0, start.GetDistance(end));
+            _openList.Add(current);
+            CalculateRoute();
+            return _route;
+        }
 
+        private void CalculateRoute()
+        {
+            if (_openList.Count > 0)
+            {
+                _openList.Sort();
+                Node current = _openList[0];
 
+                if (current.Vector.Equals(_end))
+                {
+                    CreateRoute(current);
+                    return;
+                }
+                _openList.Remove(current);
+                _closedList.Add(current);
+                DiscoverRoute(current);
+                CalculateRoute();
+            }
+            _closedList.Clear();
+        }
 
+        private void DiscoverRoute(Node current)
+        {
+            Dictionary<VectorPath, Vector> vectorPaths = _context.VectorPaths.Where(x => x.VectorId1 == current.Vector.Id)
+                .Join(_context.Vectors, vp => vp.VectorId2, v => v.Id, (vp, v) => new {VectorPath = vp, vector = v})
+                .ToDictionary(x => x.VectorPath, x => x.vector);
+            foreach (var at in vectorPaths)
+            {
+                double tCost = (double) at.Key.Distance;
+                double gCost = current.GCost + tCost;
+                double hCost = at.Value.GetDistance(_end);
+                Node node = new Node(current, at.Value, tCost, gCost, hCost);
+                if (!TerreinList(_openList, at.Value) && gCost >= node.GCost)
+                {
+                    if (!TerreinList(_openList, at.Value) || gCost < node.GCost)
+                    {
+                        _openList.Add(node);
+                    }
+                }
+            }
+        }
+
+        private void CreateRoute(Node current)
+        {
+            _route = new List<Vector>();
+            while (current.Parrent != null)
+            {
+                _route.Add(current.Vector);
+                current = current.Parrent;
+            }
+            _route.Add(current.Vector);
+            _route.Reverse();
+            foreach (var var in _route)
+            {
+                Console.WriteLine(var.Id);
+            }
+
+            _openList.Clear();
+            _closedList.Clear();
+        }
+        
+        private bool TerreinList(List<Node> list, Vector vector)
+        {
+            return list.Any(n => n.Vector.Id == vector.Id);
+        }
     }
 }
