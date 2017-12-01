@@ -7,23 +7,43 @@
 <!-- JUMBOTRON -->
 <div class="jumbotron text-center jumbotron-notFront">
     <div class="container">
-        <h3>From to where:</h3>
     </div>
 </div>
 
 <!--Breadcrumbs-->
-<div class="container">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Select Walking Aid</li>
-    </ol>
+<div class="description-container">
+    <p class="description-text">Select one of the suggested routes:</p>
 </div>
 
-<div class="container">
-    <div class="row ">
-        <div class="col-sm-12 col-md-3 col-lg-3" id="thumbnail1">
-            <span style="color:white;"> Different route options based on the preferences</span>
-            <a class="btn btn-block btn-primary" asp-controller="Home" asp-action="RouteOnMap"><span class="glyphicon glyphicon-ok-circle"></span>Route on the map</a>
+<div class="container thumbnail-container-frontPage">
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4" id="thumbnail1">
+            <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="Index" style="cursor: pointer;">
+                <img class="card-img-top" src="img/map_v2.svg" alt="">
+                <div class="caption lowerThumbnail">
+                    <h3 class="lowerThumbnail_text_big">Route 1</h3>
+                    <p class="hard lowerThumbnail_text">- click to select this route - </p>
+                    <!--<p><a href="#" class="btn btn-default" role="button"> <span class="glyphicon glyphicon-info-sign fa-fw"></span>About this mode</a></p>-->
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4" id="thumbnail2">
+            <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="SelectWalkingAid" style="cursor: pointer;">
+                <img class="card-img-top" src="img/navigation_v2.svg" alt="">
+                <div class="caption lowerThumbnail">
+                    <h3 class="lowerThumbnail_text_big">Route 2</h3>
+                    <p class="hard lowerThumbnail_text">- click to select this route - </p>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4" id="thumbnail3">
+            <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="Index" style="cursor: pointer;">
+                <img class="svg colorFill card-img-top" src="img/add_v2.svg" alt="">
+                <div class="caption lowerThumbnail">
+                    <h3 class="lowerThumbnail_text_big">Route 3</h3>
+                    <p class="hard lowerThumbnail_text">- click to select this route - </p>
+                </div>
+            </a>
         </div>
     </div>
 </div>

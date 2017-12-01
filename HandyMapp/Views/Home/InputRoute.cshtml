@@ -6,28 +6,31 @@
 <!-- JUMBOTRON -->
 <div class="jumbotron text-center jumbotron-notFront">
     <div class="container">
-        <h3>From to where:</h3>
     </div>
 </div>
 
 <!--Breadcrumbs-->
-<div class="container">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Select Walking Aid</li>
-    </ol>
+<div class="description-container">
+    <p class="description-text">Type in the start and end of your route:</p>
 </div>
 
-<div class="container">
-  <div class="row ">
-    <div class="col-sm-12 col-md-3 col-lg-3" id="thumbnail1">
-      <span style="color:white;"> Input for the route...</span>
-      <a class="btn btn-block btn-primary" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-3 col-lg-3">
-      <input/>
-    </div>
-  </div>
+<div class="container form-container">
+    <form>
+        <div class="form-group">
+            <label class="from-to">From:</label>
+            <input type="text" class="form-control" placeholder="Type in the address of your start location...">
+        </div>
+
+        <div class="form-group">
+            <label class="from-to">To:</label>
+            <input type="email" class="form-control" placeholder="Type in the address of your destination...">
+        </div>
+
+        <hr>
+
+        <div class="col-sm-12 col-md-12 col-lg-12" id="thumbnail1">
+            <span style="color:white;"> Input for the route...</span>
+            <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
+        </div>
+    </form>
 </div>
