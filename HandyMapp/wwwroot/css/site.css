@@ -61,14 +61,12 @@
 }
 
 /*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
-
 p .hard:hover {
     font-weight: bold;
 }
 
 .lowerThumbnail {
     background-color: #1370B8;
-    text-decoration: none;
 }
 
 .lowerThumbnail_text {
@@ -82,7 +80,25 @@ p .hard:hover {
     margin-bottom: 2.5px;
     margin-top: 5px;
     font-size: 30px;
-    text-decoration: none;
+}
+
+.thumbnail-container-walkingAid{
+    padding-left: 0;
+}
+
+#thumbnail1{
+    padding-left:0;
+    padding-right:30px;
+}
+
+#thumbnail2 {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+#thumbnail3 {
+    padding-left: 0;
+    padding-right: 30px;
 }
 
 /* thumbnail 1,2,3,4 will all be in one class. Leave it for now
@@ -116,7 +132,12 @@ p .hard:hover {
     margin: 40px 0 10px 0;
     border-color: #1370B8;
     border-width: 3px;
+}
 
+.thumbnail-navigation:hover {
+    text-decoration: none;
+    background-color: #FEC20F;
+    font-weight: bold;
 }
 
 .thumbnail-mini {
@@ -207,3 +228,11 @@ footer{
 }
 */
 
+.form-container{
+    margin-top: 40px;
+    padding: 0 0 0 0;
+}
+
+.from-to{
+    font-size: 25px;
+}
