@@ -62,6 +62,10 @@ namespace Handy_Mapp.Controllers
         {
             return View();
         }
+        public IActionResult street_eval()
+        {
+            return View();
+        }
 
         public IActionResult RouteOnMap()
         {
