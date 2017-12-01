@@ -22,6 +22,18 @@
     margin-right: 5px;
 }
 
+/*////////////////////////////////////// SUBPAGES Standard style STEPS /////////////////////////////////*/
+.WhiteFill {
+    fill: #FFFFFF;
+}
+
+.blueFill {
+    fill: #285e8e;
+}
+
+#Laag_1 {
+}
+
 /*////////////////////////////////////// BACKGROUND INDEX //////////////////////////////////////*/
 
 /* transparentJumboT and transparentJumboT is a temporary solution for having the background to full height */
@@ -40,6 +52,10 @@
     background-color: #285e8e;
     color: white;
     margin-bottom: 0;
+}
+
+#Steps {
+    padding: 0px;
 }
 
 /*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
