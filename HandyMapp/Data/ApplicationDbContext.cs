@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HandyMapp.Models;
-using Handy_Mapp.Models.Addresmoddels;
-using Handy_Mapp.Models.Navigation;
+using HandyMapp.Models.Addresmoddels;
+using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Data
 {

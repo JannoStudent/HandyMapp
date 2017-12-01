@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Handy_Mapp.Models.Navigation;
+using HandyMapp.Models.Navigation;
 
-namespace Handy_Mapp.Models.Addresmoddels
+namespace HandyMapp.Models.Addresmoddels
 {
     public partial class Street
     {
