@@ -60,7 +60,7 @@ namespace HandyMapp.Controllers
 
         public IActionResult PlaceInput()
         {
-            return View();
+            return View("~/Views/Home/Buildings/PlaceInput.cshtml");
         }
 
         public IActionResult Contact()
