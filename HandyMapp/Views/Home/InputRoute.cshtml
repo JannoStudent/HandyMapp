@@ -6,6 +6,40 @@
 <!-- JUMBOTRON -->
 <div class="jumbotron text-center jumbotron-notFront">
     <div class="container">
+
+
+        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+            <a class="step-breadcrumbs" asp-controller="Home" asp-action="SelectWalkingAid" style="cursor: pointer;">
+                <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
+                <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+                    <text x="27.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">1</text>
+                </g>
+            </a>
+        </svg>
+
+        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+            <a class="step-breadcrumbs" asp-controller="Home" asp-action="Preferences" style="cursor: pointer;">
+                <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
+                <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+                    <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">2</text>
+                </g>
+            </a>
+        </svg>
+
+        <svg class="stepActivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+            <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
+            <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+                <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8; stroke-width:1px">3</text>
+            </g>
+        </svg>
+
+            <svg class="stepDiactivated" opacity="0.5" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+            <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle>
+            <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+            <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">4</text>
+            </g>
+        </svg>
+
     </div>
 </div>
 
@@ -13,22 +47,20 @@
 <div class="description-container">
     <p class="description-text">Type in the start and end of your route:</p>
 </div>
-
-<div class="container form-container">
+<br>
+<div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
     <form>
         <div class="form-group">
             <label class="from-to">From:</label>
             <input type="text" class="form-control" placeholder="Type in the address of your start location...">
         </div>
-
+        <br>
         <div class="form-group">
             <label class="from-to">To:</label>
             <input type="email" class="form-control" placeholder="Type in the address of your destination...">
         </div>
 
-        <hr>
-
-        <div class="col-sm-12 col-md-12 col-lg-12" id="thumbnail1">
+        <div class="col-sm-12 col-md-12 col-lg-12 form-button">
             <span style="color:white;"> Input for the route...</span>
             <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
         </div>

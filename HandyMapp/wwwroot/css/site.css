@@ -24,9 +24,11 @@
 
 /*////////////////////////////////////// JUMBOTRON (excluding INDEX) //////////////////////////////////////*/
 .jumbotron-notFront {
-    background-color: #285e8e;
+    background-color: #1370B8;
     color: white;
     margin: 40px 0 0 0;
+    border-radius: 6px 6px 0px 0px;
+    padding: 25px 0 25px 0;
 }
 
 /*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
@@ -101,8 +103,6 @@ p .hard:hover {
     padding-right: 30px;
 }
 
-/* thumbnail 1,2,3,4 will all be in one class. Leave it for now
-   These ID's + "transition" class are the hover animation*/
 
 .transition {
     -webkit-transform: scale(1.1);
@@ -138,6 +138,11 @@ p .hard:hover {
     text-decoration: none;
     background-color: #FEC20F;
     font-weight: bold;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
 }
 
 .thumbnail-mini {
@@ -192,7 +197,7 @@ p .hard:hover {
     padding: 10px 15px;
     list-style: none;
     background-color: #f5f5f5;
-    border-radius: 6px;
+    border-radius: 0 0 6px 6px;
 }
 
 .description-text{
@@ -235,4 +240,31 @@ footer{
 
 .from-to{
     font-size: 25px;
+}
+
+.btn:hover {
+    background-color: #1370B8;
+}
+
+.form-button{
+    padding: 0 0 0 0;
+}
+
+
+/*/////////////////////////// STEPS //////////////////////////*/
+.stepActivated {
+    width: 10%;
+    height: 10%;
+    margin: 0 10px 0 10px;
+}
+
+.stepDiactivated {
+    width: 10%;
+    height: 10%;
+    opacity: 0.5;
+    margin: 0 10px 0 10px;
+}
+
+.step-breadcrumbs:hover {
+    text-decoration: none;
 }
