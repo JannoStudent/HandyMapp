@@ -27,10 +27,14 @@
     background-color: #1370B8;
     color: white;
     margin: 40px 0 0 0;
-    border-radius: 6px 6px 0px 0px;
     padding: 25px 0 25px 0;
 }
 
+.container .jumbotron, .container-fluid .jumbotron {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 0px;
+}
 /*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
 .frontpage_text {
     float: right;
@@ -253,14 +257,14 @@ footer{
 
 /*/////////////////////////// STEPS //////////////////////////*/
 .stepActivated {
-    width: 10%;
-    height: 10%;
+    width: 5%;
+    height: 5%;
     margin: 0 10px 0 10px;
 }
 
 .stepDiactivated {
-    width: 10%;
-    height: 10%;
+    width: 5%;
+    height: 5%;
     opacity: 0.5;
     filter: alpha(opacity=50);
     margin: 0 10px 0 10px;
