@@ -1,1 +1,74 @@
 ﻿
+
+/*WhiteFill:   #FFFFFF         BlueFill:   #285e8e       opacity:   0.55%         */
+
+/*Number 1*/
+#Number1Fill {
+    fill: #FFFFFF;
+}
+
+#Number1Border {
+    fill: #FFFFFF;
+}
+
+#Number1Number {
+    fill: #285e8e;
+}
+
+/*Number 2*/
+#Number2Fill {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+#Number2Border {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+#Number2Number {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+/*Number 3*/
+#Number3Fill {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+#Number3Border {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+#Number3Number {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+/*Number 4*/
+#Number4Fill {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+#Number4Border {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+#Number4Number {
+    opacity: 0.55;
+    filter: alpha(opacity=50);
+}
+
+/*Number House*/
+#NumberHouseFill {
+}
+
+#NumberHouseBorder {
+}
+
+#NumberHouseNumber {
+}
