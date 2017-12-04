@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Handy_Mapp.Models.Navigation
+namespace HandyMapp.Models.Navigation
 {
     public enum ObstacleType
     {

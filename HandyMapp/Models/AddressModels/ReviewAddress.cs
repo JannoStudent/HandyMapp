@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Handy_Mapp.Models.Addresmoddels;
+using HandyMapp.Models.Addresmoddels;
 
-namespace Handy_Mapp.Models.AddressModels
+namespace HandyMapp.Models.AddressModels
 {
     public class ReviewAddress
     {

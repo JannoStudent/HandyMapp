@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using GoogleMapsAPI.NET.API.Client;
-using GoogleMapsAPI.NET.API.Directions.Components;
+﻿using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Directions.Enums;
-using Microsoft.AspNetCore.Mvc;
-using Handy_Mapp.Models;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.Extensions.DependencyInjection;
-using GoogleMapsAPI.NET.API.Common.Components.Locations.Common;
-using GoogleMapsAPI.NET.API.Directions;
 using GoogleMapsAPI.NET.API.Directions.Results;
 using HandyMapp.Data;
 using HandyMapp.Models;
-using Handy_Mapp.Models.Navigation;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Controllers
 {
@@ -66,6 +56,11 @@ namespace HandyMapp.Controllers
         public IActionResult RouteOnMap()
         {
             return View();
+        }
+
+        public IActionResult PlaceInput()
+        {
+            return View("~/Views/Home/Buildings/PlaceInput.cshtml");
         }
 
         public IActionResult Contact()

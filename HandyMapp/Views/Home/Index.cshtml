@@ -2,21 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class=" backgroundIMG">
-    <div class="container tranparentJumboT">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2 class="frontpage_text" id="titleLine1">De routeplanner voor minder validen in Zoetermeer.</h2>
-            </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <h2 class="frontpage_text" id="titleLine1">De routeplanner voor minder validen in Zoetermeer.</h2>
         </div>
     </div>
     <div class="container thumbnail-container-frontPage">
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4" id="thumbnail1">
-                <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="Index" style="cursor: pointer;">
+                <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="PlaceInput" style="cursor: pointer;">
                     <img class="card-img-top" src="img/map_v2.svg" alt="">
                     <div class="caption lowerThumbnail">
-                        <h3 class="lowerThumbnail_text">Ontdek toegankelijke plaatsen</h3>
+                        <h3 class="lowerThumbnail_text_big">Ontdek toegankelijke plaatsen</h3>
                         <p class="hard lowerThumbnail_text">- click to select this mode - </p>
                         <!--<p><a href="#" class="btn btn-default" role="button"> <span class="glyphicon glyphicon-info-sign fa-fw"></span>About this mode</a></p>-->
                     </div>
@@ -26,7 +24,7 @@
                 <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="SelectWalkingAid" style="cursor: pointer;">
                     <img class="card-img-top" src="img/navigation_v2.svg" alt="">
                     <div class="caption lowerThumbnail">
-                        <h3 class="lowerThumbnail_text">Plan een toegankelijke route</h3>
+                        <h3 class="lowerThumbnail_text_big">Plan een toegankelijke route</h3>
                         <p class="hard lowerThumbnail_text">- click to select this mode - </p>
                     </div>
                 </a>
@@ -35,11 +33,14 @@
                 <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Home" asp-action="Index" style="cursor: pointer;">
                     <img class="svg colorFill card-img-top" src="img/add_v2.svg" alt="">
                     <div class="caption lowerThumbnail">
-                        <h3 class="lowerThumbnail_text">Beoordeel straten en gebouwen</h3>
+                        <h3 class="lowerThumbnail_text_big">Beoordeel straten en gebouwen</h3>
                         <p class="hard lowerThumbnail_text">- click to select this mode - </p>
                     </div>
                 </a>
             </div>
         </div>
     </div>
-</div>
+
+@section Style {
+<link rel="stylesheet" href="~/css/Index_StyleSheet.css"/>
+}
