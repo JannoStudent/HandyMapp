@@ -262,6 +262,7 @@ footer{
     width: 10%;
     height: 10%;
     opacity: 0.5;
+    filter: alpha(opacity=50);
     margin: 0 10px 0 10px;
 }
 
