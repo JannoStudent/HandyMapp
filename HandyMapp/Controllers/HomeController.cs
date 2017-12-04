@@ -58,9 +58,10 @@ namespace HandyMapp.Controllers
             return View();
         }
 
+        [Route("[controller]/[action]/Buildings")]
         public IActionResult PlaceInput()
         {
-            return View("~/Views/Home/Buildings/PlaceInput.cshtml");
+            return View();
         }
 
         public IActionResult Contact()

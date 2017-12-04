@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HandyMapp.Models;
-using Handy_Mapp.Models.Addresmoddels;
-using Handy_Mapp.Models.Navigation;
-using Handy_Mapp.Models.AddressModels;
+using HandyMapp.Models.Addresmoddels;
+using HandyMapp.Models.Navigation;
+using HandyMapp.Models.AddressModels;
 
 namespace HandyMapp.Data
 {
@@ -24,6 +24,7 @@ namespace HandyMapp.Data
         public virtual DbSet<Vector> Vectors { get; set; }
         public virtual DbSet<VectorPath> VectorPaths { get; set; }
         public virtual DbSet<Obstacle> Obstacles { get; set; }
+        public virtual DbSet<ReviewAddress> ReviewAddress { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -158,6 +159,6 @@ namespace HandyMapp.Data
 
         }
 
-        public DbSet<Handy_Mapp.Models.AddressModels.ReviewAddress> ReviewAddress { get; set; }
+
     }
 }

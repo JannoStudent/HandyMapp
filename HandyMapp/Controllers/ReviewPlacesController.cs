@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HandyMapp.Data;
-using Handy_Mapp.Models.AddressModels;
+using HandyMapp.Models.AddressModels;
 
 namespace HandyMapp.Controllers
 {
