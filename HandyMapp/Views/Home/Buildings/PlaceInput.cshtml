@@ -4,5 +4,26 @@
   Layout = "~/Views/Shared/_Subpages.cshtml";
 }
 
-<h2>PlaceInput</h2>
+<div class="jumbotron text-center jumbotron-notFront">
+  <div class="container">
+  </div>
+</div>
+
+
+<div class="description-container">
+  <p class="description-text">Type in the start and end of your route:</p>
+</div>
+<br>
+<div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+  <form>
+    <div class="form-group">
+      <label class="from-to">What do you like to find?</label>
+      <input type="text" class="form-control" placeholder="For example: Restaurant, Gemeentehuis of station.." autofocus>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12 form-button">
+      <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
+    </div>
+  </form>
+</div>
 
