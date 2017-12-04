@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using HandyMapp.Models;
 using Handy_Mapp.Models.Addresmoddels;
 using Handy_Mapp.Models.Navigation;
+using Handy_Mapp.Models.AddressModels;
 
 namespace HandyMapp.Data
 {
@@ -156,5 +157,7 @@ namespace HandyMapp.Data
             });
 
         }
+
+        public DbSet<Handy_Mapp.Models.AddressModels.ReviewAddress> ReviewAddress { get; set; }
     }
 }

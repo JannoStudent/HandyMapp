@@ -12,7 +12,6 @@ namespace Handy_Mapp.Models.AddressModels
         public int? AdressId { get; set; }
         public string Description { get; set; }
         public int Rating { get; set; }
-
         public Address Address { get; set; }
 
     }
