@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Controllers
@@ -57,13 +58,7 @@ namespace HandyMapp.Controllers
         {
             return View();
         }
-
-        [Route("[controller]/[action]/Buildings")]
-        public IActionResult PlaceInput()
-        {
-            return View();
-        }
-
+        
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -73,7 +68,8 @@ namespace HandyMapp.Controllers
 
         public IActionResult TestAPI()
         {
-            return View();
+            IEnumerable < PlacePrediction > placePredictions = new List<PlacePrediction>();
+            return View(placePredictions);
         }
 
         public IActionResult Error()

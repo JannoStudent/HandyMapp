@@ -145,7 +145,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Streets");
                 });
 
-            modelBuilder.Entity("Handy_Mapp.Models.AddressModels.ReviewAddress", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.AddressModels.ReviewPlace", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -162,7 +162,7 @@ namespace HandyMapp.Data.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("ReviewAddress");
+                    b.ToTable("ReviewPlace");
                 });
 
             modelBuilder.Entity("Handy_Mapp.Models.Navigation.Obstacle", b =>
@@ -419,7 +419,7 @@ namespace HandyMapp.Data.Migrations
                         .HasConstraintName("FK_Address_Street");
                 });
 
-            modelBuilder.Entity("Handy_Mapp.Models.AddressModels.ReviewAddress", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.AddressModels.ReviewPlace", b =>
                 {
                     b.HasOne("Handy_Mapp.Models.Addresmoddels.Address", "Address")
                         .WithMany()

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using HandyMapp.Models.Navigation;
+﻿using System.Collections.Generic;
 
-namespace HandyMapp.Models.Addresmoddels
+namespace HandyMapp.Models.AddressModels
 {
     public partial class Street
     {

@@ -10,7 +10,7 @@ namespace HandyMapp.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ReviewAddress",
+                name: "ReviewPlace",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -33,14 +33,14 @@ namespace HandyMapp.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReviewAddress_AddressId",
-                table: "ReviewAddress",
+                table: "ReviewPlace",
                 column: "AddressId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ReviewAddress");
+                name: "ReviewPlace");
         }
     }
 }

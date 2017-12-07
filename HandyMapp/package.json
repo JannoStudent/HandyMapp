@@ -1,0 +1,20 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "grunt": "1.0.1",
+    "grunt-contrib-concat": "1.0.1",
+    "grunt-contrib-uglify": "2.2.1",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-minify-html": "3.0.0",
+    "grunt-replace": "1.0.1",
+    "grunt-contrib-cssmin": "2.2.1",
+    "grunt-tinyimg": "1.0.0",
+    "grunt-contrib-watch": "1.0.0",
+    "gulp": "3.9.1",
+    "gulp-concat": "2.6.1",
+    "gulp-cssmin": "0.1.7",
+    "gulp-uglify": "2.0.1",
+    "rimraf": "2.6.1"
+  }
+}

@@ -6,62 +6,62 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HandyMapp.Data;
-using HandyMapp.Models.AddressModels;
+using HandyMapp.Models.Navigation;
 
-namespace HandyMapp.Controllers
+namespace HandyMapp.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/ReviewPlaces")]
-    public class ReviewPlacesController : Controller
+    [Route("api/Vectors")]
+    public class VectorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ReviewPlacesController(ApplicationDbContext context)
+        public VectorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/ReviewPlaces
+        // GET: api/Vectors
         [HttpGet]
-        public IEnumerable<ReviewAddress> GetReviewAddress()
+        public IEnumerable<Vector> GetVectors()
         {
-            return _context.ReviewAddress;
+            return _context.Vectors;
         }
 
-        // GET: api/ReviewPlaces/5
+        // GET: api/Vectors/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetReviewAddress([FromRoute] int id)
+        public async Task<IActionResult> GetVector([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var reviewAddress = await _context.ReviewAddress.SingleOrDefaultAsync(m => m.Id == id);
+            var vector = await _context.Vectors.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (reviewAddress == null)
+            if (vector == null)
             {
                 return NotFound();
             }
 
-            return Ok(reviewAddress);
+            return Ok(vector);
         }
 
-        // PUT: api/ReviewPlaces/5
+        // PUT: api/Vectors/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReviewAddress([FromRoute] int id, [FromBody] ReviewAddress reviewAddress)
+        public async Task<IActionResult> PutVector([FromRoute] int id, [FromBody] Vector vector)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != reviewAddress.Id)
+            if (id != vector.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(reviewAddress).State = EntityState.Modified;
+            _context.Entry(vector).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace HandyMapp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewAddressExists(id))
+                if (!VectorExists(id))
                 {
                     return NotFound();
                 }
@@ -82,45 +82,45 @@ namespace HandyMapp.Controllers
             return NoContent();
         }
 
-        // POST: api/ReviewPlaces
+        // POST: api/Vectors
         [HttpPost]
-        public async Task<IActionResult> PostReviewAddress([FromBody] ReviewAddress reviewAddress)
+        public async Task<IActionResult> PostVector([FromBody] Vector vector)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.ReviewAddress.Add(reviewAddress);
+            _context.Vectors.Add(vector);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReviewAddress", new { id = reviewAddress.Id }, reviewAddress);
+            return CreatedAtAction("GetVector", new { id = vector.Id }, vector);
         }
 
-        // DELETE: api/ReviewPlaces/5
+        // DELETE: api/Vectors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReviewAddress([FromRoute] int id)
+        public async Task<IActionResult> DeleteVector([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var reviewAddress = await _context.ReviewAddress.SingleOrDefaultAsync(m => m.Id == id);
-            if (reviewAddress == null)
+            var vector = await _context.Vectors.SingleOrDefaultAsync(m => m.Id == id);
+            if (vector == null)
             {
                 return NotFound();
             }
 
-            _context.ReviewAddress.Remove(reviewAddress);
+            _context.Vectors.Remove(vector);
             await _context.SaveChangesAsync();
 
-            return Ok(reviewAddress);
+            return Ok(vector);
         }
 
-        private bool ReviewAddressExists(int id)
+        private bool VectorExists(int id)
         {
-            return _context.ReviewAddress.Any(e => e.Id == id);
+            return _context.Vectors.Any(e => e.Id == id);
         }
     }
 }
