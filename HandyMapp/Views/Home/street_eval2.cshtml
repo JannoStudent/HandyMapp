@@ -5,13 +5,12 @@
 
 }
 
-
-
 <html>
 <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/start_rating.css" />
     <style>
          /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
@@ -32,21 +31,28 @@
              margin: 0;
              padding: 0;
          }
+
+
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
-    
-    <h1>Final Evaluation</h1>
-    <div id="c1">
-        <div id="map"></div>
-        <div id="pano"></div>
-    </div>
-        <div id="content" style="margin-left:5%;"></div>
-   
-    <script>
-        var map,latZoe,lngZoe;
+    <div style="width:100%">
+        <h1>Final Evaluation</h1>
+        <div id="c1">
+            <div id="map"></div>
+            <div id="pano"></div>
+        </div>
+        <div id="content" style="padding-left:5%;">
 
-        function initMap(){
+        </div>
+    </div>
+    <script>
+        var map, latZoe, lngZoe, latLng;
+       
+     
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
             //zoetermeer coords
             latZoe = @Model.lat;
             lngZoe = @Model.lng;
@@ -79,9 +85,60 @@
                 });
             map.setStreetView(panorama);
 
+            var latlng = { lat: latZoe, lng: lngZoe };
+
+            geocoder.geocode({ 'location': latlng }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        placeId = results[1].place_id;
+                        console.log(results[1].place_id);
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    console.log('Geocoder failed due to: ' + status);
+                }
+            });
+            latLng = new google.maps.LatLng(@Model.lat, @Model.lng);
+            geocode(latLng);
+
+            function geocode(position) {
+                geocoder.geocode({
+                    latLng: position
+                }, function (responses) {
+                    //window.location.hash = '#' + latLng.lat() + "," + latLng.lng();
+                    if (responses && responses.length > 0) {
+                        document.getElementById("content").innerHTML = '<h2>You are evaluating the street: </h2> <h3>' + responses[0].formatted_address + '</h3></br>' +
+                           
+                            '<h3> Please rate the street on their accessibility</h3>'+
+                               ' <fieldset class="rating">'+
+                                    '<input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>'+
+                            '<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>' +
+                            '<input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>' +
+                            '<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>' +
+                            '<input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>' +
+                            '<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>' +
+                            '<input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>' +
+                            '<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>' +
+                            '<input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>' +
+                            '<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>' +
+                            '</fieldset><br></br><br></br>' +
+                            '<h3>Leave a comment here:</h3><textarea rows="4" cols="80">' +
+                            'TYPE BRO' +
+                            '</textarea >';
+                    } else {
+                        console.log('Sorry but Google Maps could not determine the approximate postal address of this location.');
+                    }
+                });
+            }
+           
+
         }
     </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
             async defer></script>
-</body>
+    </body>
 </html>
