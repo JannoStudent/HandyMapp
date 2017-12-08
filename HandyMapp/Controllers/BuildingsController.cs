@@ -6,19 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HandyMapp.Controllers
 {
+    //[Route("buildings")]
     public class BuildingsController : Controller
     {
-        public IActionResult Index()
-        {
-            return Redirect("/Home/Buildings/PlaceInput");
-        }
-
-        public IActionResult PlaceInput()
+        public IActionResult PlacesResult()
         {
             return View();
         }
 
-        public IActionResult SelectPlace(GoogleMapsAPI.NET.API.Geocoding.Results.GeocodeResult restult)
+        public IActionResult SelectArea()
+        {
+            return View();
+        }
+
+        public IActionResult WayOfSearching()
+        {
+            return View();
+        }
+
+
+
+        /*public IActionResult SelectPlace(GoogleMapsAPI.NET.API.Geocoding.Results.GeocodeResult restult)
         {
             GoogleMapsAPI.NET.API.Places.Results.PlaceDetailsResult test;
             
@@ -28,6 +36,6 @@ namespace HandyMapp.Controllers
         public IActionResult ReviewPlace(string placeId)
         {
             return View();
-        }
+        }*/
     }
 }
