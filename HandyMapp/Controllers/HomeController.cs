@@ -84,7 +84,24 @@ namespace HandyMapp.Controllers
 
             return View();
         }
+        public IActionResult street_eval()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult street_eval2()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult street_eval2(string Value1, string Value2)
+        {
+            street_eval_model model = new street_eval_model();
+            model.lat = Value1;
+            model.lng = Value2;
+            return View("street_eval2", model);
+        }
         public IActionResult TestAPI()
         {
             // Get client
