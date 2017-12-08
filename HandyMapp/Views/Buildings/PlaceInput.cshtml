@@ -51,17 +51,45 @@
 </div>
 <br>
 <div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-  <form>
-    <div class="form-group">
-      <label class="from-to">What do you like to find?</label>
-      <input type="text" class="form-control" placeholder="For example: Restaurant, Gemeentehuis of station.." autofocus>
-    </div>
+    <form>
+        <div class="form-group">
+            <label class="from-to">What do you like to find?</label>
+            <input type="text" class="form-control search" placeholder="For example: Restaurant, Gemeentehuis of station.." autofocus>
+        </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-12 form-button">
-      <button class="btn btn-block btn-primary btn-lg" type="submit" asp-controller="Buildings" asp-action="PlacesResult">
-        <span><span class="glyphicon glyphicon-ok-circle"></span>Route options</span>
-      </button>
-    </div>
-  </form>
+        <div class="col-sm-12 col-md-12 col-lg-12 form-button">
+            <button class="btn btn-block btn-primary btn-lg" type="submit" asp-controller="Buildings" asp-action="PlacesResult">
+                <span><span class="glyphicon glyphicon-ok-circle"></span>Route options</span>
+            </button>
+        </div>
+    </form>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        var arrDescription = [];
+        $(".search").keypress(function() {
+            if ($(".search").val().length >= 3) {
+                arrDescription = [];
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("Get", "PlacesAutoComplete")/' + $(".search").val(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data);
+                        data.forEach(function(element) {
+                            arrDescription.push(element.description + element.placeId);
+                        });
+                    },
+                    error: window.errorFunc
+                });
+                $( ".search" ).autocomplete({
+                    source: arrDescription,
+                    position: { my: "left top ", at: "left+0 top+30"  }
+                });
+            }
+        });
+    </script>
+}
 
