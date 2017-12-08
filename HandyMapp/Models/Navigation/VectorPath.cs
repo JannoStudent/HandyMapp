@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Handy_Mapp.Models.Navigation
+namespace HandyMapp.Models.Navigation
 {
     public partial class VectorPath : IComparable<VectorPath>
     {

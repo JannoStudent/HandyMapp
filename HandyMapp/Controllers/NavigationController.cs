@@ -5,14 +5,16 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Client;
+using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Directions.Enums;
 using GoogleMapsAPI.NET.API.Directions.Results;
 using HandyMapp.Data;
-using Handy_Mapp.Models.Navigation;
+using HandyMapp.Models.Navigation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
+using StackExchange.Redis;
 
-namespace Handy_Mapp.Controllers
+namespace HandyMapp.Controllers
 {
     public class NavigationController : Controller
     {
@@ -35,6 +37,7 @@ namespace Handy_Mapp.Controllers
         public IActionResult ShowRoute(string from, string to)
         {
             var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+            var test = client.StreetViewImage.GetStreetViewImage(location: new GeoCoordinatesLocation(100, 123));
             var directionsResult = client.Directions.GetDirections(from, to, TransportationModeEnum.Walking, null, true, null, "dutch", UnitSystemEnum.Metric, null, DateTime.Now, null, true, null, TransitRoutingPreferenceEnum.LessWalking, TrafficModelEnum.BestGuess);
 
             List<GetDirectionsRouteResult> routes = directionsResult.Routes;

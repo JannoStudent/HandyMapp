@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 
-namespace Handy_Mapp.Models.Addresmoddels
+namespace HandyMapp.Models.AddressModels
 {
     public partial class PostCode
     {

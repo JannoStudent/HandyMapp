@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Handy_Mapp.Models.Addresmoddels;
 
-namespace Handy_Mapp.Models.Navigation 
+namespace HandyMapp.Models.Navigation 
 {
     public partial class Vector
     {
