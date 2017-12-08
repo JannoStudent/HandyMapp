@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HandyMapp.Controllers
 {
-    //[Route("buildings")]
     public class BuildingsController : Controller
     {
+        public IActionResult Index()
+        {
+            return Redirect("/Home/Buildings/WayOfSearching");
+        }
+
         public IActionResult PlacesResult()
         {
             return View();
