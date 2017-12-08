@@ -1,0 +1,549 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Evaluate</title>
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8" />
+    <style>
+        .gmap {
+            width: 80%;
+            height: 400px;
+            border: 1px solid #4D2722;
+        }
+
+        .border_box {
+            margin-top: 5%;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&libraries=places" charset="utf-8"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <script>
+
+        var API_KEY = 'AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs';
+        // URL for places requests
+        var PLACES_URL = 'https://maps.googleapis.com/maps/api/place/details/json?' +
+            'key=' + API_KEY + '&placeid=';
+
+        // URL for Speed limits
+        var SPEED_LIMIT_URL = 'https://roads.googleapis.com/v1/speedLimits';
+        var coords;
+        var geocoder = new google.maps.Geocoder();
+        /**
+          * type Array<ExtendedLatLng>
+        */
+        var originals = [];     // the original input points, a list of ExtendedLatLng
+        var address, marker, infowindow, latLng;
+        var interpolate = true;
+        var map, latlng, rectangle, maxzoomservice;
+        var placesService;
+        var originalCoordsLength;
+        // Settingup Arrays
+        var infoWindows = [];
+        var markers = [];
+        var boundsC = [];
+        var placeIds = [];
+        var polylines = [];
+        var snappedCoordinates = [];
+
+        var mylat, mylng, mystring, mynumber, ausgabe, coords_array;
+
+        // Symbol that gets animated along the polyline
+        var lineSymbol = {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            strokeColor: '#005db5',
+            strokeWidth: '#005db5'
+        };
+        // GETTING COORDS AND VISALIZE THEM
+
+        var map, latZoe, lngZoe;
+        var service;
+        var infoWindow;
+        var service;
+        var place, placeId;
+        var placesearch;
+
+        function initialize() {
+            //zoetermeer coords
+            latZoe = 52.0575;
+            lngZoe = 4.49306;
+            //set up google map
+            //map Object
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                //latLng: new google.maps.LatLng(latZoe, lngZoe),
+                center: new google.maps.LatLng(latZoe, lngZoe),
+                //mapTypeId: 'hybrid',
+                zoom: 15,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE
+                },
+                scaleControl: true,
+                streetViewControl: true,
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_TOP
+                },
+                fullscreenControl: true
+
+            });
+
+            marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP
+            });
+            infoWindow = new google.maps.InfoWindow({
+                content: '<div id="iw" style="max-width:300px;font-size:1.1em;color:#333">Drag the red marker anywhere on the map to know the approximate postal address of that location.<br>For help, please <a href="https://twitter.com/labnol" target="_blank">tweet</a> <i class="ti ti-twitter"></i> or <a href="mailto:amit@labnol.org?Subject=MapsAddress" taret="_blank">email us</a>.</div>'
+            });
+            marker.addListener('click', toggleBounce);
+            latLng = new google.maps.LatLng(latZoe, lngZoe);
+
+
+            google.maps.event.addListener(marker, 'dragstart', function (e) {
+
+                infoWindow.close();
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function (e) {
+                clearMarkers();
+                markers = [];
+
+                var point = marker.getPosition();
+                map.panTo(point);
+                geocode(point);
+
+            });
+            google.maps.event.addListener(map, 'click', function (event) {
+                placeMarker(event.latLng);
+                
+                mylat = event.latLng.lat();
+                mylng = event.latLng.lng();
+                latitude = mylat;
+                longitude = mylng;
+                var latlng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+
+                geocoder.geocode({ 'location': latlng }, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        if (results[1]) {
+                            placeId = results[1].place_id;
+                            place = results[1].place;
+                            console.log(results[1].place_id);
+                        } else {
+                            window.alert('No results found');
+                        }
+                    } else {
+                        console.log('Geocoder failed due to: ' + status);
+                    }
+                });
+                createPhotoMarker(place);
+                latLng = new google.maps.LatLng(mylat, mylng);
+                geocode(event.latLng);
+                //marker.setPosition(latLng);
+                marker.setVisible(true);
+                map.panTo(latLng);
+                map.setZoom(17);
+            });
+
+            function placeMarker(location) {
+                clearMarkers();
+                marker.setMap(null);
+                marker = null;
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            }
+            function clearMarkers() {
+                setMapOnAll(null);
+            }
+            function setMapOnAll(map) {
+                for (var i = 0; i < marker.length; i++) {
+                    marker[i].setMap(map);
+                }
+
+            }
+
+            // Places object
+            placesService = new google.maps.places.PlacesService(map);
+
+          
+            //initialize places service to perform TextSearch
+            service = new google.maps.places.PlacesService(map);
+            var defaultBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(52.093302, 4.558484),
+                new google.maps.LatLng(52.031030, 4.414744));
+
+            var input = document.getElementById('searchfield');
+            var options = {
+                bounds: defaultBounds
+            };
+
+            autocomplete = new google.maps.places.Autocomplete(input, options);
+            autocomplete.bindTo('bounds', map);
+
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                clearMarkers();
+                infoWindow.close();
+                marker.setVisible(false);
+                place = autocomplete.getPlace();
+                
+                placesearch = $('#searchfield').val();
+                createPhotoMarker(placesearch);
+                document.getElementById('map_canvas').style.visibility = 'visible';
+                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + placesearch + "&key=" + API_KEY, function (data) {
+                    mystring = data.results[0].formatted_address;
+                    mylat = data.results[0].geometry.location.lat;
+                    mylng = data.results[0].geometry.location.lng;
+                    placeId = place.place_id;
+
+                    latLng = new google.maps.LatLng(mylat, mylng);
+                    geocode(latLng);
+                    marker.setPosition(latLng);
+                    marker.setVisible(true);
+                    map.panTo(latLng);
+
+
+                    /*$("<ul/>", {
+                      "class": "zombies",
+                      html: mystring + '<hr />' + mylat + '<hr />' + mylng
+                    }).appendTo("body");*/
+                });
+
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+                map.setZoom(17);
+                //updateMap();
+            });
+
+            function geocode(position) {
+                geocoder.geocode({
+                    latLng: position
+                }, function (responses) {
+                    //var pos = marker.getPosition();
+                    window.location.hash = '#' + latLng.lat() + "," + latLng.lng();
+                    //marker.setPosition(latLng.lat().toString(), latLng.lng().toString());
+                    //alert("KUCKST DU OB RICHTIG " + latLng.lat() + "," + latLng.lng());
+                    if (responses && responses.length > 0) {
+                        showInfoWindow(responses[0].formatted_address);
+                    } else {
+                        console.log('Sorry but Google Maps could not determine the approximate postal address of this location.');
+                    }
+                });
+            }
+
+            function showInfoWindow(address) {
+                var html_infowindow = '';
+                var html_eval_text = '';
+                //var pos = marker.getPosition();
+                // window.location.hash = '#' + pos.lat() + "," + pos.lng();
+                window.location.hash = '#' + latLng.lat() + "," + latLng.lng();
+                html_infowindow += '<b>Postal Address:</b> </br>' + address;
+                //html_infowindow += '<b>placeID: </b> ' + placeId;
+                html_infowindow += '<br><small>' + '<i class="ti ti-location-pin"></i> Latitude: ' + latLng.lat().toString().substr(0, 10) + ' &nbsp; Longitude: ' + latLng.lng().toString().substr(0, 10) + '</small><br>';
+
+                html_eval_text += '<b><span style="font-size:140%;">Postal Address:</b> </br>' + address + '</span>';
+
+                var pos = new google.maps.LatLng(mylat, mylng);
+                map.panTo(pos);
+                infoWindow.setContent("<div id='iw' style='max-width:250px;color:#000'>" + html_infowindow + "</div>");
+                document.getElementById("info_to_street").innerHTML = '<span style="font-size:200%;">' + html_eval_text + "<br><button type='button' style='font-size:200%;' class='btn btn-primary'>Is that the street you want to evaluate?</button></span></br>";
+                document.getElementById("info_to_street").addEventListener('click', function () {
+                    window.location.href = "Home/street_eval2";
+
+                }, false);
+
+                infoWindow.open(map, marker);
+            }
+            function showAddress(val) {
+                if (val === "") {
+                    alert("Please enter a search query");
+                    return;
+                }
+                infoWindow.close();
+                geocoder.geocode({
+                    'address': decodeURI(val)
+                }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        marker.setPosition(results[0].geometry.location);
+                        //map.panTo(marker.getPosition());
+                        geocode(results[0].geometry.location);
+                    } else {
+                        defaultLocation();
+                        alert("Sorry but Google Maps could not find this location.");
+                    }
+                });
+            }
+            function defaultLocation() {
+                initialize();
+                //alert("default locatie");
+            }
+            function toggleBounce() {
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            }
+
+            function locationFound(position) {
+                showMap(position.coords.latitude, position.coords.longitude);
+            }
+
+
+            function clearMap() {
+                // Clear the polyline
+                for (var i = 0; i < polylines.length; i++) {
+                    polylines[i].setMap(null);
+                }
+                // Clear all markers
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                }
+                rectangle.setMap(null);
+                // Empty everything
+                polylines = [];
+                markers = [];
+                //boundsC = [];
+                snappedCoordinates = [];
+                placeIds = [];
+                infoWindows = [];
+                $('#unsnappedPoints').empty();
+            }
+            // Parse the value in the input element
+            // to get all coordinates
+            function parseCoordsFromQuery(input) {
+                var coords;
+                input = decodeURIComponent(input);
+                if (input.split('path=').length > 1) {
+                    input = decodeURIComponent(input);
+                    // Split on the ampersand to get all params
+                    var parts = input.split('&');
+                    // Check each part to see if it starts with 'path='
+                    // grabbing out the coordinates if it does
+                    for (var i = 0; i < parts.length; i++) {
+                        if (parts[i].split('path=').length > 1) {
+                            coords = parts[i].split('path=')[1];
+                            break;
+                        }
+                    }
+                } else {
+                    coords = decodeURIComponent(input);
+                }
+
+                // Parse the "Lat,Lng|..." coordinates into an array of ExtendedLatLng
+                originals = [];
+                var points = coords.split('|');
+                for (var i = 0; i < points.length; i++) {
+                    var point = points[i].split(',');
+                    originals.push({ lat: Number(point[0]), lng: Number(point[1]), index: i });
+                }
+
+                return coords;
+            }
+            // Clear the map of any old data and plot the request
+            $('#plot').click(function (e) {
+                clearMap();
+                bendAndSnap();
+                e.preventDefault();
+            });
+
+            // Make AJAX request to the snapToRoadsAPI
+            // with coordinates parsed from text input element.
+            function bendAndSnap() {
+                //hure
+                coords = parseCoordsFromQuery($('#coords').val());
+                location.hash = coords;
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://roads.googleapis.com/v1/snapToRoads',
+                    data: {
+                        interpolate: $('#interpolate').is(':checked'),
+                        key: API_KEY,
+                        path: coords
+                    },
+                    success: function (data) {
+                        $('#requestURL').html('<a target="blank" href="' +
+                            this.url + '">Request URL</a>');
+                        processSnapToRoadResponse(data);
+                        drawSnappedPolyline(snappedCoordinates);
+                        drawOriginals(originals);
+                        fitBounds(markers);
+                    },
+                    error: function () {
+                        $('#requestURL').html('<strong>That query didn\'t work :(</strong>' +
+                            '<p>Try looking at the <a href="' + this.url +
+                            '">Request URL</a></p>');
+                        clearMap();
+                    }
+                });
+            }
+            // Parse the value in the input element
+            // to get all coordinates
+            function getMissingPoints(originalIndexes, originalCoordsLength) {
+                var unsnappedPoints = [];
+                var coordsArray = coords.split('|');
+                var hasMissingCoords = false;
+                for (var i = 0; i < originalCoordsLength; i++) {
+                    if (originalIndexes.indexOf(i) < 0) {
+                        hasMissingCoords = true;
+                        var latlng = {
+                            'lat': parseFloat(coordsArray[i].split(',')[0]),
+                            'lng': parseFloat(coordsArray[i].split(',')[1])
+                        };
+                        unsnappedPoints.push(latlng);
+                        latlng.unsnapped = true;
+                    }
+                }
+                return unsnappedPoints;
+            }
+
+
+            function createPhotoMarker(place) {
+                var photos = place.photos;
+                if (!photos) {
+                    alert("no photos");
+                    return;
+                }
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location,
+                    title: place.name,
+                    icon: photos[0].getUrl({ 'maxWidth': 35, 'maxHeight': 35 })
+                });
+            }
+
+
+        } // End init functio  
+
+        /**
+          * Add a marker to the map and check for special 'interpolated'
+          * and 'unsnapped' properties to control which colour marker is used
+          * param {ExtendedLatLng} coords - Coords of where to add the marker
+          * return {!Object} marker - the marker object created
+          */
+        function addMarker(coords) {
+            var marker = new google.maps.Marker({
+                position: coords,
+                title: coords.lat + ',' + coords.lng,
+                map: map,
+                opacity: 0.5
+            });
+            coords.marker = marker;  // Save a reference for easy access later
+            markers.push(marker);
+
+            return marker;
+        }
+
+      
+        /**
+          * Fit the map bounds to the current set of markers
+          * param {Array<Object>} markers Array of all map markers
+          */
+        function fitBounds(markers) {
+            var bounds = new google.maps.LatLngBounds;
+            for (var i = 0; i < markers.length; i++) {
+                bounds.extend(markers[i].getPosition());
+            }
+            map.fitBounds(bounds);
+        }
+
+        /**
+          * Uses Places library to get Place Details for a Place ID
+          * param {string}   placeId         The Place ID to look up
+          * param {Function} foundCallback   Called if the place is found
+          * param {Function} missingCallback Called if nothing is found
+          * param {Function} errorCallback   Called if request fails
+          */
+        function getPlaceDetails(placeId,
+            foundCallback, missingCallback, errorCallback) {
+            var request = {
+                placeId: placeId
+            };
+
+            placesService.getDetails(request, function (place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    foundCallback(place);
+                } else if (status == google.maps.places.PlacesServiceStatus.NOT_FOUND) {
+                    missingCallback();
+                } else if (errorCallback) {
+                    errorCallback();
+                }
+            });
+        }
+
+      
+        /**
+          * Open an infowindow on either the map or the active streetview pano
+          * param {Object} infowindow Infowindow to be opened
+          * param {Object} marker Marker the infowindow is anchored to
+          */
+        function openInfoWindow(infowindow, marker) {
+            // If streetView is visible display the infoWindow over the pano
+            // and anchor to the marker
+            if (map.getStreetView().getVisible()) {
+                infowindow.open(map.getStreetView(), marker);
+            }
+            // Otherwise open it on the map and anchor to the marker
+            else {
+                infowindow.open(map, marker);
+            }
+        }
+
+      
+        /**
+          * Close all open infoWindows
+          * param {Array<Object>} infoWindows - all infowindow objects
+          */
+        function closeAllInfoWindows(infoWindows) {
+            for (var i = 0; i < infoWindows.length; i++) {
+                infoWindows[i].close();
+            }
+        }
+       
+ 
+
+        $(function () {
+            initialize();
+        });
+
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <div>
+        <div>
+            <span style="font-size:200%"><b>Streetevaluation</b></span><br />
+            <span style="font-size:200%">Enter text or mark a street on the map </span>
+        </div>
+        <div style="float:left; margin-top:2.0%; width:40%;height:40%;">
+            <input type="text" style="font-size:140%;width:100%; height:50px" name="searchfield" id="searchfield" />
+        </div>
+        <div style="position:absolute;  overflow: hidden; margin-top:-5%; margin-left:50%; width:50%;height:40%;">
+            <div id="info_to_street" style=" height:100%;  width:100%;" value=""></div>
+        </div>
+
+    </div>
+    <div id="map_canvas" style="position:absolute; width:20%; height:125px; position:absolute;" class="gmap border_box">
+
+    </div>
+</body>
+
+</html>

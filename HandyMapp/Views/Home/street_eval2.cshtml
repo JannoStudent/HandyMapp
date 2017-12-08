@@ -1,0 +1,88 @@
+﻿@model street_eval_model
+
+@{
+    ViewData["Title"] = "street_eval2";
+
+}
+
+
+
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+         /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+        #content,#c1 {
+            float: left;           
+        }
+        #map, #pano {
+            float: both;
+            margin-left: 0px;
+            margin-top: 0px;
+            height: 300px;
+            width: 450px;
+        }
+     
+         /* Optional: Makes the sample page fill the window. */
+         html, body {
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+    </style>
+</head>
+<body>
+    
+    <h1>Final Evaluation</h1>
+    <h1>Final Evaluation</h1>
+    <div id="c1">
+        <div id="map"></div>
+        <div id="pano"></div>
+    </div>
+        <div id="content" style="margin-left:5%;">@Model.street</div>
+   
+    <script>
+        var map,latZoe,lngZoe;
+
+        function initMap(){
+            //zoetermeer coords
+            latZoe = @Model.lat;
+            lngZoe = @Model.lng;
+            //set up google map
+            //map Object
+            map = new google.maps.Map(document.getElementById('map'), {
+                //mapTypeId: google.maps.MapTypeId.ROADMAP,
+                //latLng: new google.maps.LatLng(latZoe, lngZoe),
+                center: new google.maps.LatLng(latZoe, lngZoe),
+                mapTypeId: 'hybrid',
+                zoom: 25,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE
+                },
+                scaleControl: true,
+                streetViewControl: true,
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_TOP
+                },
+                fullscreenControl: true
+            });
+            var panorama = new google.maps.StreetViewPanorama(
+                document.getElementById('pano'), {
+                    position: new google.maps.LatLng(latZoe, lngZoe),
+                    pov: {
+                        heading: 34,
+                        pitch: 10
+                    }
+                });
+            map.setStreetView(panorama);
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
+            async defer></script>
+</body>
+</html>
