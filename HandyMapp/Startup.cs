@@ -21,6 +21,7 @@ namespace HandyMapp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -39,6 +40,7 @@ namespace HandyMapp
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+            services.AddNodeServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +73,7 @@ namespace HandyMapp
 
                 routes.MapRoute(
                     name: "Buildings",
-                    template: "Home/{controller}/{action=Index}/{id?}");
+                    template: "Home/{controller}/{action=WayOfSearching}/{id?}");
             });
         }
     }

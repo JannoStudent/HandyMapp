@@ -8,7 +8,7 @@
 <div class="jumbotron text-center jumbotron-notFront">
     <div class="container">
 
-        <svg class="stepDiactivated" opacity="0.5" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+        <svg class="stepDiactivated stepVisited" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
             <a class="step-breadcrumbs" asp-controller="Home" asp-action="SelectWalkingAid" style="cursor: pointer;">
                 <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
             <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
@@ -31,7 +31,7 @@
                 </g>
         </svg>
 
-        <svg class="stepDiactivated" opacity="0.5" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
             <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle> 
             <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
             <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">4</text>
@@ -42,8 +42,11 @@
 </div>
 
 <!--Breadcrumbs-->
-<div class="description-container">
-    <p class="description-text">Check or Uncheck obstacles:</p>
+<div class="input-group description-container">
+    <span class="input-group-btn">
+        <a class="btn btn-default back-button" asp-controller="home" asp-action="SelectWalkingAid"><span class="glyphicon glyphicon-arrow-left"></span>BACK</a>
+    </span>
+    <p class="description-text container-fluid">Choose you're preferences:</p>
 </div>
 
 <div class="container">
