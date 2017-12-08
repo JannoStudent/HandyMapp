@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Client;
-using GoogleMapsAPI.NET.API.Directions.Components;
 using GoogleMapsAPI.NET.API.Directions.Enums;
 using Microsoft.AspNetCore.Mvc;
-using Handy_Mapp.Models;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.Extensions.DependencyInjection;
-using GoogleMapsAPI.NET.API.Common.Components.Locations.Common;
-using GoogleMapsAPI.NET.API.Directions;
 using GoogleMapsAPI.NET.API.Directions.Results;
 using HandyMapp.Data;
 using HandyMapp.Models;
 using Handy_Mapp.Models.Navigation;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Handy_Mapp.Controllers
 {
@@ -62,11 +54,42 @@ namespace Handy_Mapp.Controllers
         {
             return View();
         }
+
+        [HttpGet]
         public IActionResult street_eval()
         {
             return View();
         }
 
+       /* public IActionResult street_eval2(street_eval_model model)
+        {
+            return View(model);
+        }*/
+        
+        public IActionResult street_eval2(string Value1, string Value2)
+        {
+            street_eval_model model = new street_eval_model();
+            model.lat = Value1;
+            model.lng = Value2;
+            return View("street_eval2",model);
+        }
+
+
+        [HttpPost]
+        public ActionResult street_eval(street_eval_model m)
+        {
+            //save to the database the data 
+
+            //this is for transferring alert data - such an "Completed saving" message to the user 
+            TempData["displayalert"] = " this is from Index POST action!";
+            //used in PRG 
+            return RedirectToAction("street_eval2", new street_eval_model() { lat = m.lat, lng = m.lng });
+        }
+
+        public IActionResult build_eval()
+        {
+            return View();
+        }
         public IActionResult RouteOnMap()
         {
             return View();
@@ -132,7 +155,7 @@ namespace Handy_Mapp.Controllers
                         child = _context.Vectors.First(x =>
                             x.Latitude == step.EndLocation.Latitude &&
                             x.Longitude == step.EndLocation.Longitude);
-                        
+
                         if (!_context.VectorPaths.Any(x => x.VectorId1 == parent.Id && x.VectorId2 == child.Id))
                         {
                             vectorPath1 = new VectorPath(step.Distance.Value)
@@ -167,5 +190,12 @@ namespace Handy_Mapp.Controllers
 
 
 
+    }
+}
+
+namespace System.Web
+{
+    class HttpContext
+    {
     }
 }

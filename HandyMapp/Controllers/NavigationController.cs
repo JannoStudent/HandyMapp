@@ -35,6 +35,7 @@ namespace Handy_Mapp.Controllers
         public IActionResult ShowRoute(string from, string to)
         {
             var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+            
             var directionsResult = client.Directions.GetDirections(from, to, TransportationModeEnum.Walking, null, true, null, "dutch", UnitSystemEnum.Metric, null, DateTime.Now, null, true, null, TransitRoutingPreferenceEnum.LessWalking, TrafficModelEnum.BestGuess);
 
             List<GetDirectionsRouteResult> routes = directionsResult.Routes;

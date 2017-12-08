@@ -1,3 +1,4 @@
+@model street_eval_model;
 
 @{
     Layout = null;
@@ -7,7 +8,7 @@
 
 <html>
 <head>
-    
+
     <title>Evaluate</title>
     <meta http-equiv="content-type" content="text/html;" charset="UTF-8" />
     <style>
@@ -110,15 +111,16 @@
             marker.addListener('click', toggleBounce);
             latLng = new google.maps.LatLng(latZoe, lngZoe);
 
+
             google.maps.event.addListener(marker, 'dragstart', function (e) {
-              
+
                 infoWindow.close();
             });
 
             google.maps.event.addListener(marker, 'dragend', function (e) {
                 clearMarkers();
                 markers = [];
-                
+
                 var point = marker.getPosition();
                 map.panTo(point);
                 geocode(point);
@@ -170,7 +172,7 @@
                 for (var i = 0; i < marker.length; i++) {
                     marker[i].setMap(map);
                 }
-               
+
             }
 
             // Places object
@@ -263,17 +265,29 @@
                 html_infowindow += '<b>Postal Address:</b> </br>' + address;
                 //html_infowindow += '<b>placeID: </b> ' + placeId;
                 html_infowindow += '<br><small>' + '<i class="ti ti-location-pin"></i> Latitude: ' + latLng.lat().toString().substr(0, 10) + ' &nbsp; Longitude: ' + latLng.lng().toString().substr(0, 10) + '</small><br>';
-
                 html_eval_text += '<b><span style="font-size:140%;">Postal Address:</b> </br>' + address + '</span>';
+                html_eval_text += '<form method="POST" id=\"sampleForm\" action="\street_eval2\" controller="\Home\">' +
+                    '<input style=\"visibility: hidden\" name=\"Value1\" type=\"text\" value="' + mylat +'">' +
+                    '<input style=\"visibility: hidden\"  name=\"Value2\" type=\"text\" value="' + mylng +'">' +
+                    '<button type=\"submit\" class=\"btn btn-primary\">Is that the street you want to evaluate?</button>' +
+                    ' </form > ';
 
                 var pos = new google.maps.LatLng(mylat, mylng);
                 map.panTo(pos);
+                //"<br><button type='button' style='font-size:200%;' class='btn btn-primary'></button></span>
                 infoWindow.setContent("<div id='iw' style='max-width:250px;color:#000'>" + html_infowindow + "</div>");
-                document.getElementById("info_to_street").innerHTML = '<span style="font-size:200%;">' + html_eval_text + "<br><button type='button' style='font-size:200%;' class='btn btn-primary'>Is that the street you want to evaluate?</button></span></br>";
-                document.getElementById("info_to_street").addEventListener('click', function () {
-                    window.location.href = "Home/street_eval2";
+                document.getElementById("info_to_street").innerHTML = '<span style="font-size:200%;">' + html_eval_text;
+                /*document.getElementById("info_to_street").addEventListener('click', function () {
+                    //Response.Redirect("street_eval2.aspx?Parameter=" + TextBox1.Text);
+                   // alert();
+                    /*$.post("Home/street_eval2", { lat: mylat, lng: mylng }, function (data) {
+                        //do whatever with the response
+                        alert();
+                        //window.location.href = "Home/street_eval2";
+                    });
+                    //});
 
-                }, false);
+                }, false);*/
 
                 infoWindow.open(map, marker);
             }
@@ -903,6 +917,27 @@
 </head>
 <body>
     <div>
+        <form asp-action="street_eval2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="lat" class="control-label"></label>
+                <input asp-for="lat" class="form-control" />
+                <span asp-validation-for="lat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lng" class="control-label"></label>
+                <input asp-for="lng" class="form-control" />
+                <span asp-validation-for="lng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="street" class="control-label"></label>
+                <input asp-for="street" class="form-control" />
+                <span asp-validation-for="street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
         <!--<form id="searchform" name="searchform" onSubmit="return validateForm()">-->
         <div>
             <span style="font-size:200%"><b>Streetevaluation</b></span><br />
