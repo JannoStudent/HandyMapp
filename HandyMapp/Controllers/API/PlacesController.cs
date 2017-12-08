@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Client;
+using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Places.Responses;
 using HandyMapp.Data;
 using Microsoft.AspNetCore.Http;
@@ -44,7 +45,21 @@ namespace HandyMapp.Controllers.API
                 return null;
             }
         }
-        
+
+        [Route("GetPlacesByLatLng/{lat:double}/{lng:double}")]
+        public IEnumerable<PlaceDetailsResponse> GetPlacesByLatLng(double lat, double lng)
+        {
+            try
+            {
+                return _client.Geocoding.ReverseGeocode(location: new GeoCoordinatesLocation(lat,lng),language:"NL").Results.ToList().Select(T =>_client.Places.GetPlaceDetails(T.PlaceId));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
         // POST: api/Places
         [HttpPost]
         public void Post([FromBody]string value)

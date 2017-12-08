@@ -31,23 +31,54 @@
 
 <script>
     function initMap() {
-        var map = new window.google.maps.Map(document.getElementById('map'), {
-            center: { lat: 52.058295, lng: 4.4950389 },
-            zoom: 13
-        });
+        var map = new window.google.maps.Map(document.getElementById('map'),
+            {
+                center: { lat: 52.058295, lng: 4.4950389 },
+                zoom: 13
+            });
 
         var markersArray = [];
         var geocoder = new window.google.maps.Geocoder;
         var service = new window.google.maps.places.PlacesService(map);
-        var infoWindow = new google.maps.InfoWindow();
+        var infowindow = new window.google.maps.InfoWindow();
+
+        window.google.maps.event.addListener(map,
+            'click',
+            function(event) {
+                clearOverlays();
+                //geocodeLatLng(geocoder, map, event.latLng);
+                markersArray.push(new window.google.maps.Marker({
+                    position: event.latLng,
+                    animation: window.google.maps.Animation.DROP,
+                    map: map
+                }));
+                infowindow.close();
+                geocodeLatLng(event.placeId);
+                console.log(event.latLng);
+            });
 
 
-        window.google.maps.event.addListener(map, 'click', function (event) {
-            clearOverlays();
-            geocodeLatLng(geocoder, map, event.latLng);
-            infoWindow.close();
-        });
+        function geocodeLatLng(latLng) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetPlacesByGeo", "Places")/' + latLng,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                },
+                error: window.errorFunc
+            });
+        }
 
+        function clearOverlays() {
+            for (var i = 0; i < markersArray.length; i++) {
+                markersArray[i].setMap(null);
+            }
+            markersArray.length = 0;
+        }
+
+        /*
         function geocodeLatLng(geocoder, map, latlng) {
             geocoder.geocode({ 'location': latlng }, function (results, status) {
                 if (status === 'OK') {
@@ -58,6 +89,7 @@
                             animation: window.google.maps.Animation.DROP,
                             map: map
                         }));
+                        infoWindow.close();
                         //infowindow.open(map, markersArray[0]);
                         $("#address").text(results[0].formatted_address);
                         $("#placeID").text(results[0].place_id);
@@ -73,7 +105,7 @@
                     window.alert('Geocoder failed due to: ' + status);
                 }
             });
-        }
+        }*/
 
         function setAddressDescription(result) {
             var description = "<b> Address </b>";
@@ -116,13 +148,6 @@
             });
         }
 
-        function clearOverlays() {
-            for (var i = 0; i < markersArray.length; i++) {
-                markersArray[i].setMap(null);
-            }
-            markersArray.length = 0;
-        }
-
         function placeDetailsById(placeId) {
             service.getDetails({
                 placeId: placeId
@@ -133,22 +158,6 @@
                         //createPhotoMarker(place);
                     }
                 });
-        }
-
-        function createPhotoMarker(place) {
-            var photos = place.photos;
-            if (!photos) {
-                alert("no photo");
-                return;
-            }
-            markersArray[0] = new window.google.maps.Marker({
-                map: map,
-                position: place.geometry.location,
-                title: place.name,
-                icon: photos[0].getUrl({ 'maxWidth': 35, 'maxHeight': 35 })
-            });
-
-            console.log(markersArray[0]);
         }
     }
 </script>
@@ -169,9 +178,9 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data) {
-                        //console.log(data);
+                        console.log(data);
                         data.forEach(function(element) {
-                            arrDescription.push(element.description);
+                            arrDescription.push(element.description + element.placeId);
                         });
                     },
                     error: window.errorFunc
@@ -182,9 +191,7 @@
                 });
             }
         });
-
     </script>
-
 }
 
 
