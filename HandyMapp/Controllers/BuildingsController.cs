@@ -24,7 +24,10 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-
+        public IActionResult PlaceInput()
+        {
+            return View();
+        }
 
         /*public IActionResult SelectPlace(GoogleMapsAPI.NET.API.Geocoding.Results.GeocodeResult restult)
         {
