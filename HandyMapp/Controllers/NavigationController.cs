@@ -8,11 +8,11 @@ using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Directions.Enums;
 using GoogleMapsAPI.NET.API.Directions.Results;
 using HandyMapp.Data;
-using Handy_Mapp.Models.Navigation;
+using HandyMapp.Models.Navigation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 
-namespace Handy_Mapp.Controllers
+namespace HandyMapp.Controllers
 {
     public class NavigationController : Controller
     {

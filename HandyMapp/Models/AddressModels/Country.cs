@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Handy_Mapp.Models.Addresmoddels
+namespace HandyMapp.Models.Addresmoddels
 {
     public partial class Country
     {
