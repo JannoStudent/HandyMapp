@@ -57,6 +57,10 @@
     fill: #c7c7c7;
 }
 
+path:hover:before {
+    fill: green;
+}
+
 /*Scrollbar*/
 #PlacesResults::-webkit-scrollbar-track
 {
