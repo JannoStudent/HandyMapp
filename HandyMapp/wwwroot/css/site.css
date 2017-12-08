@@ -17,6 +17,14 @@
     margin-right: 0;
 }
 
+.btn-default-contact:hover {
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
 /*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
 .glyphicon:before {
     margin-right: 5px;
@@ -142,11 +150,11 @@ p .hard:hover {
     text-decoration: none;
     background-color: #FEC20F;
     font-weight: bold;
-    -webkit-transition: all 300ms ease;
+    -webkit-tranHoverition: all 300ms ease;
     -moz-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
-    transition: all 300ms ease;
+    transition: all 300ms ease
 }
 
 .thumbnail-mini {
@@ -220,7 +228,7 @@ p .hard:hover {
 .back-button:hover{
     border-color: transparent;
     color: white;
-    -webkit-transition: all 300ms ease;
+    -webkit-tranHoverition: all 300ms ease;
     -moz-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
@@ -292,8 +300,16 @@ footer{
 
 .stepVisited:hover {
     color: white;
-    opacity:1;
-    -webkit-transition: all 300ms ease;
+    opacity: 1;
+    -webkit-tranHoverition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+.softHover {
+    -webkit-tranHoverition: all 300ms ease;
     -moz-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
