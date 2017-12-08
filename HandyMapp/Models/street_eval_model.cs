@@ -10,7 +10,7 @@ namespace HandyMapp.Models
         
         public string lat { get; set; }
         public string lng { get; set; }
-        public string street { get; set; }
+       
     }
      
 }
