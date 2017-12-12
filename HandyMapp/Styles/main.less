@@ -10,14 +10,10 @@
 
 /*////////////////////////////////////// TRANSITIONS (ANIMATIONS)//////////////////////////////////////*/
 .hoverScaleUp {
-    -moz-transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-    -ms-transform: scale(1.0);
-    transform: scale(1.0);
-    -ms-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -webkit-transition: all 0.4s;
-    transition: all 0.4s;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .hoverEaseChangeColor {
@@ -26,6 +22,18 @@
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
     transition: all 300ms ease;
+}
+
+//Needs to in thumbnails for hover transition and transform to work
+.initialThumbnailScaleAndEase {
+    -moz-transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0);
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
 /*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
@@ -69,6 +77,10 @@
     margin-top: 195px;
 }
 
+
+.row-centered {
+    margin: auto;
+}
 /*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
 p .hard:hover {
     font-weight: bold;
@@ -95,11 +107,6 @@ p .hard:hover {
     padding-left: 0;
 }
 
-#thumbnail1{
-    padding-left:0;
-    padding-right:30px;
-}
-
 .thumbnail-mode {
     margin: 40px 0 0 0;
     border-color: @brandcolorBlue;
@@ -107,7 +114,13 @@ p .hard:hover {
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    .hoverScaleUp;
+    .initialThumbnailScaleAndEase;
+}
+
+.thumbnail-navigation {
+    margin: 40px 0 10px 0;
+    border-color: @brandcolorBlue;
+    border-width: 3px;
 }
 
 .thumbnail-navigation:hover {
@@ -126,8 +139,8 @@ p .hard:hover {
     background-color: @brandcolorOrange;
     font-weight: bold;
     text-decoration: none;
-    .hoverScaleUp;
     .hoverEaseChangeColor;
+    .hoverScaleUp;
 }
 
 .thumbnail-container-frontPage {
@@ -151,7 +164,7 @@ p .hard:hover {
 }
 
 .description-container {
-    margin-top: 30px 0 10px 0;
+    margin-top: 0 0 15px 0;
     padding: 0;
     list-style: none;
     background-color: #f5f5f5;
@@ -186,4 +199,54 @@ p .hard:hover {
 
 .obstacleCheckboxes {
     font-size: 25px;
+}
+
+/*////////////////////////////////////// FORM //////////////////////////////////////*/
+.row {
+    margin: 0;
+}
+
+.form-container {
+    margin-top: 40px;
+    padding: 0 0 0 0;
+}
+
+.from-to {
+    font-size: 25px;
+}
+
+.btn:hover {
+    background-color: #1370B8;
+}
+
+.form-button {
+    padding: 0 0 0 0;
+}
+
+/*/////////////////////////// STEPS //////////////////////////*/
+.stepActivated {
+    width: 5%;
+    height: 5%;
+    margin: 0 10px 0 10px;
+}
+
+.stepDiactivated {
+    width: 5%;
+    height: 5%;
+    opacity: 0.5;
+    margin: 0 10px 0 10px;
+}
+
+.step-breadcrumbs:hover {
+    text-decoration: none;
+}
+
+.stepVisited:hover {
+    color: white;
+    opacity: 1;
+    .hoverEaseChangeColor;
+}
+
+.softHover {
+    .hoverEaseChangeColor;
 }

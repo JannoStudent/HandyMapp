@@ -6,6 +6,19 @@
 }
 /*////////////////////////////////////// TRANSITIONS (ANIMATIONS)//////////////////////////////////////*/
 .hoverScaleUp {
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.hoverEaseChangeColor {
+  -webkit-tranHoverition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+.initialThumbnailScaleAndEase {
   -moz-transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
@@ -14,13 +27,6 @@
   -o-transition: all 0.4s;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-}
-.hoverEaseChangeColor {
-  -webkit-tranHoverition: all 300ms ease;
-  -moz-transition: all 300ms ease;
-  -ms-transition: all 300ms ease;
-  -o-transition: all 300ms ease;
-  transition: all 300ms ease;
 }
 /*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
 .navbar-default {
@@ -61,6 +67,9 @@
   padding: 6px 6px 8px 6px;
   margin-top: 195px;
 }
+.row-centered {
+  margin: auto;
+}
 /*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
 p .hard:hover {
   font-weight: bold;
@@ -82,10 +91,6 @@ p .hard:hover {
 .thumbnail-container-walkingAid {
   padding-left: 0;
 }
-#thumbnail1 {
-  padding-left: 0;
-  padding-right: 30px;
-}
 .thumbnail-mode {
   margin: 40px 0 0 0;
   border-color: #1371B8;
@@ -101,6 +106,11 @@ p .hard:hover {
   -o-transition: all 0.4s;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
+}
+.thumbnail-navigation {
+  margin: 40px 0 10px 0;
+  border-color: #1371B8;
+  border-width: 3px;
 }
 .thumbnail-navigation:hover {
   text-decoration: none;
@@ -120,19 +130,15 @@ p .hard:hover {
   background-color: #FEC20F;
   font-weight: bold;
   text-decoration: none;
-  -moz-transform: scale(1);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-  -ms-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
   -webkit-tranHoverition: all 300ms ease;
   -moz-transition: all 300ms ease;
   -ms-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 .thumbnail-container-frontPage {
   padding-right: 15px;
@@ -152,7 +158,7 @@ p .hard:hover {
   margin: 20px 0px 0px 0px;
 }
 .description-container {
-  margin-top: 30px 0 10px 0;
+  margin-top: 0 0 15px 0;
   padding: 0;
   list-style: none;
   background-color: #f5f5f5;
@@ -186,4 +192,52 @@ p .hard:hover {
 }
 .obstacleCheckboxes {
   font-size: 25px;
+}
+/*////////////////////////////////////// FORM //////////////////////////////////////*/
+.row {
+  margin: 0;
+}
+.form-container {
+  margin-top: 40px;
+  padding: 0 0 0 0;
+}
+.from-to {
+  font-size: 25px;
+}
+.btn:hover {
+  background-color: #1370B8;
+}
+.form-button {
+  padding: 0 0 0 0;
+}
+/*/////////////////////////// STEPS //////////////////////////*/
+.stepActivated {
+  width: 5%;
+  height: 5%;
+  margin: 0 10px 0 10px;
+}
+.stepDiactivated {
+  width: 5%;
+  height: 5%;
+  opacity: 0.5;
+  margin: 0 10px 0 10px;
+}
+.step-breadcrumbs:hover {
+  text-decoration: none;
+}
+.stepVisited:hover {
+  color: white;
+  opacity: 1;
+  -webkit-tranHoverition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+.softHover {
+  -webkit-tranHoverition: all 300ms ease;
+  -moz-transition: all 300ms ease;
+  -ms-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  transition: all 300ms ease;
 }
