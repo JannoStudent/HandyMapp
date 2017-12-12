@@ -57,31 +57,7 @@ namespace HandyMapp.Controllers
         {
             return View();
         }
-<<<<<<<<< Temporary merge branch 1
-        
-=========
 
-        public IActionResult WayOfSearching()
-        {
-            return View("~/Views/Home/Buildings/WayOfSearching.cshtml");
-        }
-
-        public IActionResult PlaceInput()
-        {
-            return View("~/Views/Home/Buildings/PlaceInput.cshtml");
-        }
-
-        public IActionResult SelectArea()
-        {
-            return View("~/Views/Home/Buildings/SelectArea.cshtml");
-        }
-
-        public IActionResult PlacesResult()
-        {
-            return View("~/Views/Home/Buildings/PlacesResult.cshtml");
-        }
-
->>>>>>>>> Temporary merge branch 2
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

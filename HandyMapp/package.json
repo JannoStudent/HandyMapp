@@ -12,9 +12,12 @@
     "grunt-tinyimg": "1.0.0",
     "grunt-contrib-watch": "1.0.0",
     "gulp": "3.9.1",
+    "gulp-less" :  "3.3.2",
+    "rimraf": "2.6.2",
     "gulp-concat": "2.6.1",
-    "gulp-cssmin": "0.1.7",
-    "gulp-uglify": "2.0.1",
-    "rimraf": "2.6.1"
+    "gulp-cssmin": "^0.1.7",
+    "gulp-uglify": "^2.0.0",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-ext-replace": "^0.3.0"
   }
 }
