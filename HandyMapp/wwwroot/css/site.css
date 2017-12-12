@@ -81,7 +81,7 @@ p .hard:hover {
     padding-right: 30px;
 }
 
-#thumbnail3 {
+.thumbnail3 {
     padding-left: 0;
     padding-right: 30px;
 }
@@ -180,7 +180,7 @@ p .hard:hover {
     font-weight: bold;
     margin-bottom: 0;
     text-align: center;
-    padding: 7px 55px 0 0;
+    padding: 7px 0 0 0;
 }
 
 .back-button {
@@ -254,6 +254,7 @@ footer{
     width: 5%;
     height: 5%;
     opacity: 0.5;
+    filter: alpha(opacity=50);
     margin: 0 10px 0 10px;
 }
 
