@@ -89,7 +89,7 @@
     display: none;
 }
 
-.btn {
+button {
     display: none;
 }
 
@@ -107,6 +107,10 @@
 
 path:hover:before {
     fill: green;
+}
+
+#grade {
+    display: inline;!important
 }
 
 /*Scrollbar*/
