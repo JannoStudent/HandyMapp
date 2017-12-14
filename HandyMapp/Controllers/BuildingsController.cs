@@ -2,20 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleMapsAPI.NET.API.Places.Components;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandyMapp.Controllers
 {
+    [Route("home/[controller]/[action]")]
     public class BuildingsController : Controller
     {
+        public IList<PlacePrediction> PlacePredictions;
+
+        public BuildingsController()
+        {
+            PlacePredictions = new List<PlacePrediction>();
+        }
+
         public IActionResult Index()
         {
             return Redirect("/Home/Buildings/WayOfSearching");
         }
-
-        public IActionResult PlacesResult()
+        
+        [HttpPost]
+        public JsonResult SetPlacePredictions(IList<PlacePrediction> placePredictions)
         {
-            return View();
+            return Json(new
+            {
+                redirectTo = Url.Action("PlacesResult", "Buildings"),
+                returnParam = placePredictions
+            });
+        }
+
+        public IActionResult PlacesResult(IList<PlacePrediction> placePredictions)
+        {
+            return View(placePredictions);
         }
 
         public IActionResult SelectArea()

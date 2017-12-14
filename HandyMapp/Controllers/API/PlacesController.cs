@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
+using GoogleMapsAPI.NET.API.Places.Components;
 using GoogleMapsAPI.NET.API.Places.Responses;
 using HandyMapp.Data;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HandyMapp.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/Places")]
+    [Route("api/[controller]")]
     public class PlacesController : Controller
     {
         private readonly MapsAPIClient _client;
@@ -46,8 +47,8 @@ namespace HandyMapp.Controllers.API
             }
         }
 
-        [Route("GetPlacesByLatLng/{lat:double}/{lng:double}")]
-        public IEnumerable<PlaceDetailsResponse> GetPlacesByLatLng(double lat, double lng)
+        [HttpGet("ByLatLng/{lat:double}/{lng:double}")]
+        public IEnumerable<PlaceDetailsResponse> ByLatLng(double lat, double lng)
         {
             try
             {
@@ -58,6 +59,22 @@ namespace HandyMapp.Controllers.API
                 Console.WriteLine(e);
                 return null;
             }
+        }
+        
+        [HttpGet("AutoComplete/{query}")]
+        public IEnumerable<PlacePrediction> AutoComplete(string query)
+        {
+            try
+            {
+                return _client.Places.AutoComplete(input: query,
+                    location: new GeoCoordinatesLocation(52.058295, 4.4950389), language: "NL", radius: 2000).Predictions;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+
         }
 
         // POST: api/Places

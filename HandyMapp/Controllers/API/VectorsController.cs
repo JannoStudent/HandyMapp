@@ -11,7 +11,7 @@ using HandyMapp.Models.Navigation;
 namespace HandyMapp.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/Vectors")]
+    [Route("api/[controller]")]
     public class VectorsController : Controller
     {
         private readonly ApplicationDbContext _context;

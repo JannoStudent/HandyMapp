@@ -11,7 +11,7 @@ using HandyMapp.Models;
 namespace HandyMapp.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/Examples")]
+    [Route("api/[controller]")]
     public class ExamplesController : Controller
     {
         private readonly ApplicationDbContext _context;

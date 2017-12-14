@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HandyMapp.Controllers.API
 {
     [Produces("application/json")]
-    [Route("api/StreetView")]
+    [Route("api/[controller]")]
     public class StreetViewController : Controller
     {
         private readonly MapsAPIClient _client;
