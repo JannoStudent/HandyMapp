@@ -58,6 +58,11 @@ namespace HandyMapp.Controllers
             return View();
         }
 
+        public IActionResult SelectReview()
+        {
+            return View();
+        }
+
         public IActionResult WayOfSearching()
         {
             return View("~/Views/Home/Buildings/WayOfSearching.cshtml");
@@ -102,6 +107,7 @@ namespace HandyMapp.Controllers
             model.lng = Value2;
             return View("street_eval2", model);
         }
+
         public IActionResult TestAPI()
         {
             // Get client

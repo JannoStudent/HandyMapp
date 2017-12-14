@@ -2,11 +2,8 @@
 
 @{
     ViewData["Title"] = "street_eval2";
-
 }
 
-<html>
-<head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
@@ -15,14 +12,10 @@
          /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
         #content,#c1 {
-            float: left;           
         }
         #map, #pano {
-            float: both;
-            margin-left: 0px;
-            margin-top: 0px;
-            height: 300px;
-            width: 450px;
+            height: 210px;
+            width: 360px;
         }
      
          /* Optional: Makes the sample page fill the window. */
@@ -30,23 +23,126 @@
              height: 100%;
              margin: 0;
              padding: 0;
-         }
 
+         }
+         
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
-</head>
-<body>
-    <div style="width:100%">
-        <h1>Final Evaluation</h1>
-        <div id="c1">
-            <div id="map"></div>
-            <div id="pano"></div>
-        </div>
-        <div id="content" style="padding-left:5%;">
 
+<!-- JUMBOTRON -->
+<div class="jumbotron text-center jumbotron-notFront">
+    <div class="container">
+
+
+        <svg class="stepDiactivated stepVisited" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+        <a class="step-breadcrumbs" asp-controller="Home" asp-action="SelectReview" style="cursor: pointer;">
+        <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
+
+        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+        <text x="27.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">1</text>
+                </g>
+            </a>
+        </svg>
+
+        <svg class="stepDiactivated stepVisited" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+        <a class="step-breadcrumbs" asp-controller="Home" asp-action="street_eval" style="cursor: pointer;">
+        <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
+
+        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">2</text>
+                </g>
+            </a>
+        </svg>
+
+        <svg class="stepActivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+        <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
+
+        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8; stroke-width:1px">3</text>
+            </g>
+        </svg>
+
+        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+        <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle>
+        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">4</text>
+            </g>
+        </svg>
+
+    </div>
+</div>
+
+<!--Breadcrumbs-->
+<div class="input-group description-container">
+    <span class="input-group-btn">
+        <a class="btn btn-default back-button" asp-controller="home" asp-action="street_eval"><span class="glyphicon glyphicon-arrow-left"></span>BACK</a>
+    </span>
+    <p class="description-text container-fluid">Fill in you're review of the selected street:</p>
+</div>
+
+
+<div class="row">
+    <div class="street-eval-form2 col-lg-12">
+        <div id="content-address"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="street-eval-form3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="form-control" id="map"></div>
+                </div>
+                <div class="form-group">
+                    <div class="form-control" id="pano"></div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="street-eval-form4 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <h4 style="display: inline-block"><b>Rate the street: &emsp; &emsp;</b></h4>
+            </div>
+            <div class="form-group">
+                <div id="content-rating"></div>
+            </div>
+        </form>
+    </div>
+    <div class="street-eval-form5 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <h4 style="display: inline-block"><b>Obstacle type: &emsp; &emsp;</b></h4>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option>-None-</option>
+                    <option>Stairs</option>
+                    <option>Roadwork</option>
+                    <option>Damaged road</option>
+                    <option>Undefined (important to give description)</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="street-eval-form6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <a class="btn btn-block btn-success btn-lg" asp-controller="Home" asp-action="">Review Overview &ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+</div>
+    <!--Put this in next page
+    <form>
+        <div class="form-group">
+            <textarea class="form-control" id="" rows="3" placeholder="Give your comment about the street..." autofocus></textarea>
+        </div>
+    </form>
+</div>
+        -->
     <script>
         var map, latZoe, lngZoe, latLng;
        
@@ -108,11 +204,12 @@
                 }, function (responses) {
                     //window.location.hash = '#' + latLng.lat() + "," + latLng.lng();
                     if (responses && responses.length > 0) {
-                        document.getElementById("content").innerHTML = '<h2>You are evaluating the street: </h2> <h3>' + responses[0].formatted_address + '</h3></br>' +
-                           
-                            '<h3> Please rate the street on their accessibility</h3>'+
-                               ' <fieldset class="rating">'+
-                                    '<input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>'+
+                        document.getElementById("content-address").innerHTML =
+                            '<h4 style="margin:0 0;">You are evaluating the street: ' + '<span class="text-success" style="font-size:125%;">' + responses[0].formatted_address + '</span>' + '</h3>';
+
+                        document.getElementById("content-rating").innerHTML =
+                            ' <fieldset class="rating">' +
+                            '<input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>' +
                             '<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>' +
                             '<input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>' +
                             '<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>' +
@@ -122,9 +219,8 @@
                             '<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>' +
                             '<input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>' +
                             '<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>' +
-                            '</fieldset><br></br><br></br>' +
-                            '<h3>Leave a comment here:</h3><textarea rows="4" cols="80">' +
-                            'TYPE BRO' +
+                            '</fieldset>';
+                        document.getElementById("content-comment").innerHTML ='<h3>Leave a comment here:</h3><textarea rows="4" cols="80" placeholder="Type in you`re comment here...">' +
                             '</textarea >';
                     } else {
                         console.log('Sorry but Google Maps could not determine the approximate postal address of this location.');
@@ -135,10 +231,7 @@
 
         }
     </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
             async defer></script>
-    </body>
-</html>

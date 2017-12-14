@@ -39,6 +39,7 @@
 /*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
 .navbar-default {
     background-color: white;
+    margin: 0;
     .shadowStyling;
 }
 
@@ -49,7 +50,9 @@
     margin-right: 0;
 }
 
+
 /*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
+
 .glyphicon:before {
     margin-right: 5px;
 }
@@ -215,8 +218,8 @@ p .hard:hover {
     font-size: 25px;
 }
 
-.btn:hover {
-    background-color: #1370B8;
+.back-button:hover {
+    background-color: @brandcolorBlue;
 }
 
 .form-button {
@@ -250,3 +253,75 @@ p .hard:hover {
 .softHover {
     .hoverEaseChangeColor;
 }
+
+.street-eval-form {
+    background-color: #f5f5f5;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+.street-eval-form2 {
+    background-color: white;
+    border-color: #f5f5f5;
+    border-style: solid;
+    border-width: 4px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+.street-eval-form3 {
+    background-color: #f5f5f5;
+    margin-top: 0;
+    padding: 15px;
+    border-radius: 0;
+}
+
+.street-eval-form4 {
+    .street-eval-form2;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 0 15px;
+}
+
+.street-eval-form5 {
+    .street-eval-form2;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 25px 15px;
+}
+
+.street-eval-form6 {
+    .street-eval-form2;
+    background-color: #f5f5f5;
+    border-radius: 0 0 6px 6px;
+    margin-top: 0;
+    padding: 0;
+}
+
+.btn-lg, .btn-group-lg > .btn{
+       padding: 20px 16px;
+}
+
+
+/*/////////////////////////// COOKIES //////////////////////////*/
+.cc-window.cc-banner {
+    padding: 0.5em 0.8em;
+    width: 100%;
+    -ms-flex-direction: row;
+    flex-direction: row
+}
+
+/**
+    add this when fade out transition is fixed:
+
+    .cc-window.cc-banner:hover {
+    opacity: 1;
+
+    else
+
+    opacity: 0.8; //0.9 can be considered
+}
+*/
