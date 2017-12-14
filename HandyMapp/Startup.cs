@@ -73,7 +73,7 @@ namespace HandyMapp
 
                 routes.MapRoute(
                     name: "Buildings",
-                    template: "Home/{controller}/{action=Index}/{id?}");
+                    template: "Home/{controller}/{action}/{id?}");
             });
         }
     }
