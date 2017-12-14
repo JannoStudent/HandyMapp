@@ -25,6 +25,12 @@ namespace HandyMapp.Controllers.API
             _context = context;
         }
 
+        public PlacesController()
+        {
+            _client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+            _context = null;
+        }
+
         // GET: api/Places
         [HttpGet]
         public IEnumerable<string> Get()

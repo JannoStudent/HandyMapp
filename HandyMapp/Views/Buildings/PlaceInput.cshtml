@@ -1,5 +1,4 @@
-﻿
-@model IList<GoogleMapsAPI.NET.API.Places.Components.PlacePrediction>
+﻿@model IList<GoogleMapsAPI.NET.API.Places.Responses.PlaceDetailsResponse>
 
 @{
     ViewData["Title"] = "PlaceInput";
@@ -102,18 +101,6 @@
                 error: window.errorFunc
             });
         }
-
-        $('#clickme').click(function () {
-            $.ajax({
-                type: 'post',
-                url: '@Url.Action("PlacesResult","Buildings")',
-                data: { placePredictions: data },
-                success: function(data) {
-                    document.getElementById('renderbody').innerHTML = data; 
-                }
-            });
-        });
-
     </script>
 }
 
