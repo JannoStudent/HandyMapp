@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mime;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Places.Components;
-using GoogleMapsAPI.NET.API.Places.Responses;
 using HandyMapp.Data;
-using Microsoft.AspNetCore.Http;
+using HandyMapp.Models.GoogeApi;
+using ImageSharp;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 
 namespace HandyMapp.Controllers.API
 {
@@ -25,12 +30,6 @@ namespace HandyMapp.Controllers.API
             _context = context;
         }
 
-        public PlacesController()
-        {
-            _client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
-            _context = null;
-        }
-
         // GET: api/Places
         [HttpGet]
         public IEnumerable<string> Get()
@@ -40,11 +39,35 @@ namespace HandyMapp.Controllers.API
 
         // GET: api/Places/5
         [HttpGet("{query}")]
-        public PlaceDetailsResponse Get(string query)
+        public PlaceDetails Get(string query)
         {
             try
             {
-                return _client.Places.GetPlaceDetails(placeId: query);
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(new WebClient().DownloadString("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs")));
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(PlaceDetails));
+                var test = ser.ReadObject(ms) as PlaceDetails;
+                return test;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        [HttpGet("GetPhoto/{query}")]
+        public Image GetPhoto(string query)
+        {
+            try
+            {
+                //var imageString = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+                //var imageString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs";
+                //imageString = "<img src="+ imageString + " alt=\"Photo location\">";
+
+                var imageBytes = new WebClient().DownloadData("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+                var image = new Image(imageBytes);
+                var test = File(imageBytes, ".jpg");
+                return image;
             }
             catch (Exception e)
             {
@@ -54,11 +77,11 @@ namespace HandyMapp.Controllers.API
         }
 
         [HttpGet("ByLatLng/{lat:double}/{lng:double}")]
-        public IEnumerable<PlaceDetailsResponse> ByLatLng(double lat, double lng)
+        public IEnumerable<PlaceDetails> ByLatLng(double lat, double lng)
         {
             try
             {
-                return _client.Geocoding.ReverseGeocode(location: new GeoCoordinatesLocation(lat,lng),language:"NL").Results.ToList().Select(T =>_client.Places.GetPlaceDetails(T.PlaceId));
+                return _client.Geocoding.ReverseGeocode(location: new GeoCoordinatesLocation(lat, lng), language: "NL").Results.ToList().Select(T => Get(T.PlaceId));
             }
             catch (Exception e)
             {
@@ -66,7 +89,7 @@ namespace HandyMapp.Controllers.API
                 return null;
             }
         }
-        
+
         [HttpGet("AutoComplete/{query}")]
         public IEnumerable<PlacePrediction> AutoComplete(string query)
         {
@@ -89,13 +112,13 @@ namespace HandyMapp.Controllers.API
         {
 
         }
-        
+
         // PUT: api/Places/5
         [HttpPut("{query}")]
         public void Put(int query, [FromBody]string value)
         {
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{query}")]
         public void Delete(int id)

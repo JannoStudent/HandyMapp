@@ -6,16 +6,14 @@
         }
     });
     $(".PlaceResult").click(function () {
-        var rating = 5;//$("#gradeInput").val();                            /*Bernhard*/
+        var rating = $("#gradeInput").val();                            /*Bernhard*/
         var i;
         var color = "#2ecc71";
-        var object = $(this).parents(".PlaceTitle").attr("id");
-        alert(object);
         for (i = 0; i <= rating - 1; i++) {
             $(".rating > path.helft").eq(i).css("fill", color);
             $(".rating > path.midden").eq(i / 2).css("fill", color);
         };                                                              /*Bernhard*/
-    });/*
+    });
     $(".PlaceResult").click(function () {
         if ($(this).css("height") == "200px") {
             $(".PlaceResult").animate({
@@ -59,5 +57,5 @@
         }
         //var offset = $(this).offset().top;
         //$(this).parent().animate({ scrollTop: offset });
-    });*/
+    });
 });

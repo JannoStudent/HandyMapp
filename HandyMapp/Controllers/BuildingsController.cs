@@ -6,8 +6,10 @@ using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Places.Components;
 using GoogleMapsAPI.NET.API.Places.Responses;
+using GoogleMapsAPI.NET.API.Places.Results;
 using HandyMapp.Controllers.API;
 using HandyMapp.Data;
+using HandyMapp.Models.GoogeApi;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandyMapp.Controllers
@@ -15,7 +17,7 @@ namespace HandyMapp.Controllers
     [Route("home/[controller]/[action]")]
     public class BuildingsController : Controller
     {
-        private static readonly ApplicationDbContext _context;
+        private  readonly ApplicationDbContext _context;
 
         public BuildingsController(ApplicationDbContext context)
         {
@@ -34,10 +36,10 @@ namespace HandyMapp.Controllers
             return View(GetProduct(placePredictions));
         }
 
-        protected virtual List<PlaceDetailsResponse> GetProduct(IList<PlacePrediction> placePredictions)
+        protected virtual List<PlaceDetails> GetProduct(IList<PlacePrediction> placePredictions)
         {
             PlacesController placesController = new PlacesController(_context);
-            return placePredictions.Select(m => placesController.Get(m.PlaceId)).ToList(); ;
+            return placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList(); ;
         }
 
         public IActionResult SelectArea()
