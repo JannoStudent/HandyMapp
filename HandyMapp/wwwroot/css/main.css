@@ -269,26 +269,23 @@ p .hard:hover {
   border-color: #f5f5f5;
   border-style: solid;
   border-width: 4px;
-  margin-top: 30px;
   margin-bottom: 0;
   padding: 15px;
   border-radius: 6px 6px 0 0;
-  border-radius: 0;
-  margin-top: 0;
+  margin-top: 30px;
   padding: 0 15px;
+  padding-top: 5px;
 }
 .street-eval-form5 {
   background-color: white;
   border-color: #f5f5f5;
   border-style: solid;
   border-width: 4px;
-  margin-top: 30px;
   margin-bottom: 0;
   padding: 15px;
   border-radius: 6px 6px 0 0;
-  border-radius: 0;
-  margin-top: 0;
-  padding: 25px 15px;
+  margin-top: 30px;
+  padding: 25px 25px;
 }
 .street-eval-form6 {
   background-color: white;
@@ -307,6 +304,9 @@ p .hard:hover {
 .btn-lg,
 .btn-group-lg > .btn {
   padding: 20px 16px;
+}
+.form-description {
+  font-size: 1.5em;
 }
 /*/////////////////////////// COOKIES //////////////////////////*/
 .cc-window.cc-banner {

@@ -58,6 +58,11 @@ namespace HandyMapp.Controllers
             return View();
         }
 
+        public IActionResult SelectReview()
+        {
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -68,6 +73,22 @@ namespace HandyMapp.Controllers
         {
             return View();
         }
+
+        public IActionResult street_eval4()
+        {
+            return View();
+        }
+
+        public IActionResult street_eval5()
+        {
+            return View();
+        }
+
+        public IActionResult street_eval6()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult street_eval2()
         {
@@ -82,6 +103,13 @@ namespace HandyMapp.Controllers
             model.lng = Value2;
             return View("street_eval2", model);
         }
+
+        [HttpGet]
+        public IActionResult street_eval3()
+        {
+            return View();
+        }
+
 
         public IActionResult TestAPI()
         {

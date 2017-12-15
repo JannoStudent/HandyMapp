@@ -14,8 +14,8 @@
         #content,#c1 {
         }
         #map, #pano {
-            height: 210px;
-            width: 360px;
+            height: 290px;
+            width: 440px;
         }
      
          /* Optional: Makes the sample page fill the window. */
@@ -64,11 +64,27 @@
         </svg>
 
         <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle>
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">4</text>
+            <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle>
+            <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+                <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">4</text>
             </g>
         </svg>
+        
+        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+            <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle> 
+            <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+                <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">5</text>
+            </g>
+        </svg>
+
+        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+            <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle> 
+            <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
+                <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">6</text>
+            </g>
+        </svg>
+        
+
 
     </div>
 </div>
@@ -78,7 +94,7 @@
     <span class="input-group-btn">
         <a class="btn btn-default back-button" asp-controller="home" asp-action="street_eval"><span class="glyphicon glyphicon-arrow-left"></span>BACK</a>
     </span>
-    <p class="description-text container-fluid">Fill in you're review of the selected street:</p>
+    <p class="description-text container-fluid">Selected street:</p>
 </div>
 
 
@@ -90,7 +106,7 @@
 
 <div class="row">
     <div class="street-eval-form3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
+        <div class="col-lg-offset-1 col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
             <form class="form-inline">
                 <div class="form-group">
                     <div class="form-control" id="map"></div>
@@ -103,37 +119,10 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="street-eval-form4 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-        <form class="form-inline">
-            <div class="form-group">
-                <h4 style="display: inline-block"><b>Rate the street: &emsp; &emsp;</b></h4>
-            </div>
-            <div class="form-group">
-                <div id="content-rating"></div>
-            </div>
-        </form>
-    </div>
-    <div class="street-eval-form5 col-lg-6 col-md-6 col-sm-6 col-xs-6">
-        <form class="form-inline">
-            <div class="form-group">
-                <h4 style="display: inline-block"><b>Obstacle type: &emsp; &emsp;</b></h4>
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>-None-</option>
-                    <option>Stairs</option>
-                    <option>Roadwork</option>
-                    <option>Damaged road</option>
-                    <option>Undefined (important to give description)</option>
-                </select>
-            </div>
-        </form>
-    </div>
-</div>
+
 
 <div class="street-eval-form6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <a class="btn btn-block btn-success btn-lg" asp-controller="Home" asp-action="">Review Overview &ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+    <a class="btn btn-block btn-success btn-lg" asp-controller="Home" asp-action="street_eval3">Review this street&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
 </div>
     <!--Put this in next page
     <form>
@@ -159,7 +148,7 @@
                 //latLng: new google.maps.LatLng(latZoe, lngZoe),
                 center: new google.maps.LatLng(latZoe, lngZoe),
                 mapTypeId: 'hybrid',
-                zoom: 25,
+                zoom: 19,
                 zoomControl: true,
                 zoomControlOptions: {
                     style: google.maps.ZoomControlStyle.LARGE
