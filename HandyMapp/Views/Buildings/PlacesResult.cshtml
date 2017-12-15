@@ -38,16 +38,15 @@
     <div class="col-lg-4 col-md-12 col-sm-12" id="PlacesResults">
         @for (int i = 0; i < @Model.Count; i++)
         {
-            <div class="col-lg-12 col-md-12 col-sm-12 PlaceResult">
+            <div class="col-lg-12 col-md-12 col-sm-12 PlaceResult " >
                 <div class="row">
                     @if (@Model[i].result.photos != null) { 
                     <div class="ImageContainter">
                         <img src=@("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + @Model[i].result.photos[0].photo_reference + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs") />
-                    </div>
-                    }
+                    </div> }
                 </div>
-                <div class="row Placetext">
-                    <div class="col-lg-8 col-md-8 col-sm-8 PlaceTitle" id="@("PlaceTitle"+i)">
+                <div class="row Placetext" id="@("PlaceTitle"+i)">
+                    <div class="col-lg-8 col-md-8 col-sm-8 PlaceTitle" >
                         <span>@Html.DisplayTextFor(m => Model[i].result.name)</span>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 Accessibility">
@@ -55,7 +54,7 @@
                             <span class="RatingTitle">Toegankelijkheid:</span>
                         </div>
                         <div class="row">
-                            <svg viewBox="0 0 270 50" class="rating" id="rating@i">
+                            <svg viewBox="0 0 270 50" class="rating" id="@("rating"+i)">>
                                 <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
 	        C24,0.8,24.5,0.5,25,0.5V39.4z" />
                                 <path class="helft" d="M25,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L37.2,30.5l3.7,15.9
