@@ -1,23 +1,57 @@
 ﻿$(function () {
     $(':input[type="submit"]').prop('disabled', true);
     $(':input[type="text"]').keyup(function () {
-        if ($(this).val() != '') {
+        if ($(this).val() !== '') {
             $(':button[type="submit"]').prop("disabled", false);
         }
     });
     $(".PlaceResult").click(function () {
-        var rating = 5;//$("#gradeInput").val();                            /*Bernhard*/
+        var rating = 5;//Variable input                            /*Bernhard*/
         var i;
-        var color = "#2ecc71";
-        var object = $(this).parents(".PlaceTitle").attr("id");
-        alert(object);
+        var objectId = "#" + $(this).find(".rating").attr("id");
         for (i = 0; i <= rating - 1; i++) {
-            $(".rating > path.helft").eq(i).css("fill", color);
-            $(".rating > path.midden").eq(i / 2).css("fill", color);
+            $(objectId + "> path.helft").eq(i).addClass("colorSelected");
+            $(objectId + "> path.midden").eq(i / 2).addClass("colorSelected");
         };                                                              /*Bernhard*/
-    });/*
+    });
+    $("path").hover(function () {
+        var i;
+        var starClass =$(this).attr("class").split(' ')[1];
+        var starNumber = starClass.slice(4);
+        $(this).removeClass("hoverColor");
+        for (i = 0; i <= 4; i++) {
+            var starClassUnselected = ".star" + (i + 1);
+            $(starClassUnselected).removeClass("hoverColor");
+        }
+        for (i = 0; i <= starNumber - 1; i++) {
+            var starClassSelected = ".star" + (i + 1);
+            $(starClassSelected).addClass("hoverColor");
+            $("#tekst").text(starNumber);
+        }
+    });
+
+    $("path").click(function() {
+        var starClassClicked = $(this).attr("class").split(' ')[1];
+        var starNumberClicked = starClassClicked.slice(4);
+        var i;
+        for (i = 0; i <= 4; i++) {
+            var starClassUnselected = ".star" + (i + 1);
+            $(starClassUnselected).removeClass("colorSelected");
+        }
+        for (i = 0; i <= starNumberClicked - 1; i++) {
+            var starClassSelected = ".star" + (i + 1);
+            $(starClassSelected).addClass("colorSelected");
+            console.log(starClassSelected);
+        }
+    });
+
+    $("svg").mouseleave(function () {
+        $(this).find("path").removeClass("hoverColor");
+        $("#tekst").text("");
+    });
+    /*
     $(".PlaceResult").click(function () {
-        if ($(this).css("height") == "200px") {
+        if ($(this).css("height") === "200px") {
             $(".PlaceResult").animate({
                 height: '200px'
             },
