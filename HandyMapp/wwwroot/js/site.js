@@ -18,7 +18,7 @@
         var i;
         var starClass =$(this).attr("class").split(' ')[1];
         var starNumber = starClass.slice(4);
-        $(this).removeClass("hoverColor");
+        $(this).removeClass("hoverColor").css('cursor', 'pointer');;
         for (i = 0; i <= 4; i++) {
             var starClassUnselected = ".star" + (i + 1);
             $(starClassUnselected).removeClass("hoverColor");
@@ -41,7 +41,25 @@
         for (i = 0; i <= starNumberClicked - 1; i++) {
             var starClassSelected = ".star" + (i + 1);
             $(starClassSelected).addClass("colorSelected");
-            console.log(starClassSelected);
+            console.log(starNumberClicked);
+            switch (starNumberClicked) {
+                case "1": 
+                    $("#tekstDef").text("Very poor");
+                    break;
+                case "2":
+                    $("#tekstDef").text("Poor");
+                    break;
+                case "3":
+                    $("#tekstDef").text("Normal");
+                    break;
+                case "4":
+                    $("#tekstDef").text("Good");
+                    break;
+                case "5":
+                    $("#tekstDef").text("Very good");
+                    break;
+            }
+            
         }
     });
 
