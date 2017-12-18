@@ -1,20 +1,35 @@
-﻿body {
+﻿.mapLayout {
+    display: flex;
+    width: 100%;
+    height: 94.8vh;
 }
+
+    .mapLayout .jumbotron {
+        margin-top: 10px;
+    }
+
+    .mapLayout .container {
+        width: 100%;
+    }
+
 /*right side page*/
-#PlacesOnMap {
+.PlacesOnMap {
+    margin-left: -15px;
+    flex-grow: 8;
     padding: 0;
-    height: 475px;
-    box-shadow: 5px 0px 5px 1px rgba(0, 0, 0, 0.2);
+    z-index: 5;
 }
 
 /* left side page*/
-#PlacesResults {
-    height: 475px;
-    Background: #CCC;
+.PlacesResults {
+    flex-direction: column;
+    width: 25%;
+    z-index: 10;
+    height: 94.8vh;
+    position: absolute;
     border-radius: 6px 0 0 6px;
     -moz-border-radius: 6px 0 0 6px;
     -webkit-border-radius: 6px 0 0 6px;
-    padding: 10px 8px 10px 10px;
     overflow-y: scroll;
 }
 
@@ -22,71 +37,80 @@
 
 
 .PlaceResult {
+    display: flex;
+    flex-direction: column;
     background-color: white;
-    height: 200px;
-    margin-bottom: 10px;
-    border-radius: 2px;
-    padding: 10px 15px 0px 15px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-    padding: 0px;
-    overflow: hidden;
+    margin: 10px;
+    -ms-border-radius: 5px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
-    .PlaceResult:hover {
-        background-color: #DDD;
-        cursor: pointer;
+.PlaceResultButton {
+    background-color: #1370B8;
+    cursor: pointer;
+    height: 30px;
+    -ms-border-radius: 0 0 15px 15px;
+    border-radius: 0 0 15px 15px;
+}
+
+    .PlaceResultButton span {
+        margin: 5px;
+        color: white;
+        width: 100%;
+        text-align: center;
     }
 
 .ImageContainter {
-    height: 110px;
+    height: 30%;
+    -ms-border-radius: 15px;
+    border-radius: 15px 15px 0 0;
     overflow: hidden;
 }
 
-.ImageContainter img {
-    width: 100%;
-    margin-top: -25%;
-}
+    .ImageContainter img {
+        width: 100%;
+        margin-top: -10%;
+        vertical-align: middle;
+    }
 
 .Placetext {
-    height: 60px;
-    padding: 10px 10px 0 10px;
+    padding: 15px 20px 0 20px;
 }
 
 .PlaceTitle {
-    padding: 0px;
-    padding: 0px 10px 0 0px;
     overflow: hidden;
-    height: 50px;
-}
-
-.PlaceTitle span {
-    width: 100%;
-    padding: 0px;
+    padding-bottom: 10px;
     font-size: 23px;
-    line-height: 23px;
+    line-height: 28px;
 }
 
 .Accessibility {
-    height:50px;
-    padding: 0;
+    background-color: #f5f5f5;
+    display: flex;
+    padding: 5px 20px;
 }
 
 .RatingTitle {
     color: grey;
+    padding-right: 5px;
 }
 
+.RatingStars {
+    height: 20px;
+    width: 100px;
+}
+
+
 .PlaceAdress {
-    padding: 0 10px;
+    padding: 5px 20px;
     color: grey;
 }
 
 .DescriptionContainer {
     overflow: hidden;
-    height: 110px;
-    padding: 10px 10px 0 10px;
-    display: none;
+    padding: 15px 20px 0 20px;
+    height: 10px
 }
 
 button {
@@ -94,11 +118,9 @@ button {
 }
 
 .PlaceButtons {
-    padding: 15px 10px 0 10px;
+    padding: 15px 10px 20px 10px;
 }
 
-.PlaceButtons a{
-}
 
 /*STARS-------------*/
 .helft, .midden {
@@ -110,35 +132,49 @@ path:hover:before {
 }
 
 #grade {
-    display: inline;!important
+    display: inline !important;
 }
 
-.baseColor { fill: #c7c7c7; }
+.baseColor {
+    fill: #c7c7c7;
+}
+
 .hoverColor {
     fill: #6ede9c !important;
-} 
-.colorSelected { fill: #2ecc71; }
+}
+
+.colorSelected {
+    fill: #2ecc71;
+}
 
 
 /*Scrollbar*/
-#PlacesResults::-webkit-scrollbar-track
-{
+.PlacesResults::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
     background-color: #F5F5F5;
 }
 
-#PlacesResults::-webkit-scrollbar
-{
+.PlacesResults::-webkit-scrollbar {
     width: 8px;
     background-color: #F5F5F5;
+    display: none;
 }
 
-#PlacesResults::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-        background-color: #aaa;
+.PlacesResults::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #aaa;
 }
 
+.openingHours {
+    padding: 15px 0 15px;
+}
 
+.gmnoprint {
+    margin-left: 26% !important;
+}
 
+.widget-titlecard {
+    margin-left: 26% !important;
+}

@@ -11,9 +11,11 @@ using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Data;
 using HandyMapp.Models.GoogeApi;
+using HandyMapp.Models.GoogeApi.Places.AutoComplete;
 using ImageSharp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Newtonsoft.Json;
 
 namespace HandyMapp.Controllers.API
 {
@@ -26,7 +28,7 @@ namespace HandyMapp.Controllers.API
 
         public PlacesController(ApplicationDbContext context)
         {
-            _client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+            _client = new MapsAPIClient("AIzaSyDQBcQcRF9x8tC2_PBwF1OkkW5XACfu3bc");
             _context = context;
         }
 
@@ -43,31 +45,9 @@ namespace HandyMapp.Controllers.API
         {
             try
             {
-                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(new WebClient().DownloadString("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs")));
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(new WebClient().DownloadString("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + query + "&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI")));
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(PlaceDetails));
-                var test = ser.ReadObject(ms) as PlaceDetails;
-                return test;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return null;
-            }
-        }
-
-        [HttpGet("GetPhoto/{query}")]
-        public Image GetPhoto(string query)
-        {
-            try
-            {
-                //var imageString = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
-                //var imageString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs";
-                //imageString = "<img src="+ imageString + " alt=\"Photo location\">";
-
-                var imageBytes = new WebClient().DownloadData("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + query + "&key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
-                var image = new Image(imageBytes);
-                var test = File(imageBytes, ".jpg");
-                return image;
+                return ser.ReadObject(ms) as PlaceDetails;
             }
             catch (Exception e)
             {
@@ -91,12 +71,18 @@ namespace HandyMapp.Controllers.API
         }
 
         [HttpGet("AutoComplete/{query}")]
-        public IEnumerable<PlacePrediction> AutoComplete(string query)
+        public Predictions AutoComplete(string query)
         {
             try
-            {
-                return _client.Places.AutoComplete(input: query,
-                    location: new GeoCoordinatesLocation(52.058295, 4.4950389), language: "NL", radius: 2000).Predictions;
+             {
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(new WebClient()
+                    .DownloadString("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + query +
+                                    "&language=nl" +
+                                    "&location=52.058295,4.4950389" +
+                                    "&radius=4000&strictbounds" +
+                                    "&key=AIzaSyD__y27E6XwzK0tMEVezNktJb_IbyLVQWo")));
+
+                return new JsonSerializer().Deserialize<Predictions>(new JsonTextReader(new StreamReader(ms)));
             }
             catch (Exception e)
             {

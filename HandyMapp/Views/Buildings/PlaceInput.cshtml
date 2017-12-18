@@ -1,5 +1,4 @@
-﻿@model IList<GoogleMapsAPI.NET.API.Places.Responses.PlaceDetailsResponse>
-
+﻿
 @{
     ViewData["Title"] = "PlaceInput";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -37,7 +36,7 @@
     <form asp-action="PlacesResult" asp-controller="Buildings">
         <div class="form-group">
             <label class="from-to">What do you like to find?</label>
-            <input type="text" class="form-control search" placeholder="For example: Restaurant, Gemeentehuis of station.." autofocus>
+            <input type="text" class="form-control search" placeholder="For example: Restaurant, Gemeentehuis of station.." autocomplete="on" autofocus>
         </div>
         <div id="hiddenForm" style="display: none"></div>
         <div class="col-sm-12 col-md-12 col-lg-12 form-button">
@@ -51,45 +50,42 @@
 @section Scripts {
     <script type="text/javascript">
         var arrDescription = [];
-        var data = [];
 
         $(".search").keypress(function() {
             if ($(".search").val().length >= 3) {
                 fillautocomplete();
-                $(".search").autocomplete({
-                    source: arrDescription,
-                    position: { my: "left top ", at: "left+0 top+30" }
-                });
             }
         });
 
         function fillautocomplete() {
-            arrDescription = [];
-            data = [];
-
             $.ajax({
                 type: "GET",
                 url: '/api/Places/AutoComplete/' + $(".search").val(),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    data = result;
                     var form = "";
-                    for (var i = 0; i < result.length; i++) {
-                        arrDescription.push(result[i].description);
+                    arrDescription = [];
+                    for (var i = 0; i < result.predictions.length; i++) {
+                        arrDescription.push(result.predictions[i].description);
 
-                        form += '<input type="text" id="z' + i + '__Id" name="[' + i + '].Id" value="' + result[i].id + '">' +
-                            '<input type="text" id="z' + i + '__PlaceId" name="[' + i + '].PlaceId" value="' + result[i].place_id + '">' +
-                            '<input type="text" id="z' + i + '__Description" name="[' + i + '].Description" value="' + result[i].description + '">' +
-                            '<input type="text" id="z' + i + '__Reference" name="[' + i + '].Reference" value="' + result[i].reference + '"><div> result terms</div>';
-                            for (var j = 0; j < result[i].terms.length; j++) {
-                                form += '<input type="text" id="z' + i + '__Terms_' + j + '__Value" name="[' + i + '].Terms[' + j + '].Value" value="' + result[i].terms[j].value+'">' +
-                                        '<input type="text" id="z' + i + '__Terms_' + j + '__Offset" name="[' + i + '].Terms[' + j + '].Offset" value="' + result[i].terms[j].offset+'">';
+                        form += '<input type="text" id="z' + i + '__Id" name="[' + i + '].Id" value="' + result.predictions[i].id + '">' +
+                            '<input type="text" id="z' + i + '__PlaceId" name="[' + i + '].PlaceId" value="' + result.predictions[i].place_id + '">' +
+                            '<input type="text" id="z' + i + '__Description" name="[' + i + '].Description" value="' + result.predictions[i].description + '">' +
+                            '<input type="text" id="z' + i + '__Reference" name="[' + i + '].Reference" value="' + result.predictions[i].reference + '"><div> result terms</div>';
+                        for (var j = 0; j < result.predictions[i].terms.length; j++) {
+                                form += '<input type="text" id="z' + i + '__Terms_' + j + '__Value" name="[' + i + '].Terms[' + j + '].Value" value="' + result.predictions[i].terms[j].value+'">' +
+                                    '<input type="text" id="z' + i + '__Terms_' + j + '__Offset" name="[' + i + '].Terms[' + j + '].Offset" value="' + result.predictions[i].terms[j].offset+'">';
                             }
                     }
                     document.getElementById('hiddenForm').innerHTML = form;
                 },
                 error: window.errorFunc
+            }).done(function () {
+                $(".search").autocomplete({
+                    source: arrDescription,
+                    position: { my: "left top ", at: "left+0 top+40" }
+                });
             });
         }
     </script>
