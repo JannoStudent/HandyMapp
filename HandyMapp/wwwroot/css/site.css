@@ -139,27 +139,6 @@
     margin-top: 195px;
 }
 
-.frontpage_text2, .h5 {
-    margin-bottom: 0;
-    float: right;
-    font-weight: bold;
-    background-color: #1370B8;
-    color: white;
-    padding: 6px 6px 8px 6px;
-}
-
-.frontpage_text3 {
-    margin-top: 0;
-    float: right;
-    font-weight: bold;
-    background-color: #1370B8;
-    color: white;
-    padding: 8px 4px 8px 8px;
-    -ms-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
 /*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
 p .hard:hover {
     font-weight: bold;
@@ -232,16 +211,16 @@ p .hard:hover {
     border-width: 3px;
 }
 
-    .thumbnail-navigation:hover {
-        text-decoration: none;
-        background-color: #FEC20F;
-        font-weight: bold;
-        -webkit-tranHoverition: all 300ms ease;
-        -moz-transition: all 300ms ease;
-        -ms-transition: all 300ms ease;
-        -o-transition: all 300ms ease;
-        transition: all 300ms ease
-    }
+.thumbnail-navigation:hover {
+    text-decoration: none;
+    background-color: #FEC20F;
+    font-weight: bold;
+    -webkit-tranHoverition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
 
 .thumbnail-mini {
     margin-top: 40px;
@@ -262,8 +241,6 @@ p .hard:hover {
     transition: all 0.3s;
 }
 
-
-
 .thumbnail-container-frontPage {
     padding-right: 15px;
     padding-left: 15px;
@@ -272,21 +249,16 @@ p .hard:hover {
 
 /* card-img-top classes are the thumbnail images */
 .card-img-top {
-    width: 40%; /* you can use % */
+    width: 40%;
     height: auto;
     padding: 40px 0 40px 0;
     margin: 0 0 0 0;
 }
 
 .card-img-top-walkingAid {
-    width: 70%; /* you can use % */
+    width: 70%;
     height: auto;
     margin: 20px 0px 0px 0px;
-}
-
-.card-img-top-walkingAid-mini {
-    width: 50%;
-    height: auto;
 }
 
 /*////////////////////////////////////// DISCRIPTION FIELD //////////////////////////////////////*/

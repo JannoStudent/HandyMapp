@@ -1,0 +1,333 @@
+﻿/*////////////////////////////////////// COLORS AND SHADOWS //////////////////////////////////////*/
+.shadowStyling {
+    webkit-box-shadow: 0 8px 6px -6px #999;
+    moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+@brandcolorBlue: #1371B8;
+@brandcolorOrange: #FEC20F;
+
+/*////////////////////////////////////// TRANSITIONS (ANIMATIONS)//////////////////////////////////////*/
+.hoverScaleUp {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.hoverEaseChangeColor {
+    -webkit-tranHoverition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+//Needs to in thumbnails for hover transition and transform to work
+.initialThumbnailScaleAndEase {
+    -moz-transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0);
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+/*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
+.navbar-default {
+    background-color: white;
+    margin: 0;
+    .shadowStyling;
+}
+
+.brand-logo {
+    width: 70%; /* you can use % */
+    height: auto;
+    margin-top: -8px;
+    margin-right: 0;
+}
+
+
+/*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
+
+.glyphicon:before {
+    margin-right: 5px;
+}
+
+.jumbotron-notFront {
+    background-color: #1370B8;
+    color: white;
+    margin: 40px 0 0 0;
+    padding: 25px 0 25px 0;
+}
+
+.container .jumbotron, .container-fluid .jumbotron {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+/*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
+.frontpage_text {
+    float: right;
+    font-weight: bold;
+    background-color: @brandcolorBlue;
+    color: white;
+    padding: 6px 6px 8px 6px;
+    margin-top: 195px;
+}
+
+
+.row-centered {
+    margin: auto;
+}
+/*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
+p .hard:hover {
+    font-weight: bold;
+}
+
+.lowerThumbnail {
+    background-color: @brandcolorBlue;
+}
+
+.lowerThumbnail_text {
+    color: white;
+    margin-bottom: 2.5px;
+    margin-top: 5px;
+}
+
+.lowerThumbnail_text_big {
+    color: white;
+    margin-bottom: 2.5px;
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+.thumbnail-container-walkingAid{
+    padding-left: 0;
+}
+
+.thumbnail-mode {
+    margin: 40px 0 0 0;
+    border-color: @brandcolorBlue;
+    border-width: 4px;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    .initialThumbnailScaleAndEase;
+}
+
+.thumbnail-navigation {
+    margin: 40px 0 10px 0;
+    border-color: @brandcolorBlue;
+    border-width: 3px;
+}
+
+.thumbnail-navigation:hover {
+    text-decoration: none;
+    background-color: @brandcolorOrange;
+    font-weight: bold;
+    .hoverEaseChangeColor;
+}
+
+.thumbnail-mini {
+    margin-top: 40px;
+    background-color: @brandcolorOrange;
+}
+
+.hoverThumbnails:hover {
+    background-color: @brandcolorOrange;
+    font-weight: bold;
+    text-decoration: none;
+    .hoverEaseChangeColor;
+    .hoverScaleUp;
+}
+
+.thumbnail-container-frontPage {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 50px;
+}
+
+/* card-img-top classes are the thumbnail images */
+.card-img-top {
+    width: 40%;
+    height: auto;
+    padding: 40px 0 40px 0;
+    margin: 0 0 0 0;
+}
+
+.card-img-top-walkingAid {
+    width: 70%;
+    height: auto;
+    margin: 20px 0px 0px 0px;
+}
+
+.description-container {
+    margin-top: 0 0 15px 0;
+    padding: 0;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 0 0 6px 6px
+}
+
+.description-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 7px 55px 0 0;
+}
+
+.back-button {
+    padding: 10px;
+    border-radius: 0 0 0 6px;
+    border-color: #f5f5f5;
+}
+
+.back-button:hover {
+    border-color: transparent;
+    color: white;
+    .hoverEaseChangeColor;
+}
+
+/*////////////////////////////////////// OBSTACLE TABLE //////////////////////////////////////*/
+.obstaclesTile {
+    margin: 40px 0 0 -30px;
+    background-color: #F5F5F5;
+}
+
+.obstacleCheckboxes {
+    font-size: 25px;
+}
+
+/*////////////////////////////////////// FORM //////////////////////////////////////*/
+.row {
+    margin: 0;
+}
+
+.form-container {
+    margin-top: 40px;
+    padding: 0 0 0 0;
+}
+
+.from-to {
+    font-size: 25px;
+}
+
+.back-button:hover {
+    background-color: @brandcolorBlue;
+}
+
+.form-button {
+    padding: 0 0 0 0;
+}
+
+/*/////////////////////////// STEPS //////////////////////////*/
+.stepActivated {
+    width: 5%;
+    height: 5%;
+    margin: 0 10px 0 10px;
+}
+
+.stepDiactivated {
+    width: 5%;
+    height: 5%;
+    opacity: 0.5;
+    margin: 0 10px 0 10px;
+}
+
+.step-breadcrumbs:hover {
+    text-decoration: none;
+}
+
+.stepVisited:hover {
+    color: white;
+    opacity: 1;
+    .hoverEaseChangeColor;
+}
+
+.softHover {
+    .hoverEaseChangeColor;
+}
+
+.street-eval-form {
+    background-color: #f5f5f5;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+.street-eval-form2 {
+    background-color: white;
+    border-color: #f5f5f5;
+    border-style: solid;
+    border-width: 4px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+.street-eval-form3 {
+    background-color: #f5f5f5;
+    margin-top: 0;
+    padding: 15px;
+    border-radius: 0;
+}
+
+//Star-rating form
+.street-eval-form4 {
+    .street-eval-form2;
+    border-radius: 6px 6px 0 0;
+    margin-top: 30px;
+    padding: 0 15px;
+    padding-top: 5px;
+}
+
+.street-eval-form5 {
+    .street-eval-form2;
+    border-radius: 6px 6px 0 0;
+    margin-top: 30px;
+    padding: 25px 25px;
+}
+
+.street-eval-form6 {
+    .street-eval-form2;
+    background-color: #f5f5f5;
+    border-radius: 0 0 6px 6px;
+    margin-top: 0;
+    padding: 0;
+}
+
+.btn-lg, .btn-group-lg > .btn{
+       padding: 20px 16px;
+}
+
+.form-description{
+    font-size: 1.5em;
+}
+
+
+/*/////////////////////////// COOKIES //////////////////////////*/
+.cc-window.cc-banner {
+    padding: 0.5em 0.8em;
+    width: 100%;
+    -ms-flex-direction: row;
+    flex-direction: row
+}
+
+/**
+    add this when fade out transition is fixed:
+
+    .cc-window.cc-banner:hover {
+    opacity: 1;
+
+    else
+
+    opacity: 0.8; //0.9 can be considered
+}
+*/
