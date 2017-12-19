@@ -113,6 +113,13 @@ path:hover:before {
     display: inline;!important
 }
 
+.baseColor { fill: #c7c7c7; }
+.hoverColor {
+    fill: #6ede9c !important;
+} 
+.colorSelected { fill: #2ecc71; }
+
+
 /*Scrollbar*/
 #PlacesResults::-webkit-scrollbar-track
 {

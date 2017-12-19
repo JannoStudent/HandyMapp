@@ -1,0 +1,17 @@
+﻿body {
+}
+polygon {
+    fill: pink;
+    border: solid 5px #000;
+    stroke-width: 3px;
+    stroke: black;
+}
+
+#Zoetermeer {
+    fill: pink;  
+}
+
+polygon:hover {
+    fill: blue;
+    cursor: pointer;
+}
