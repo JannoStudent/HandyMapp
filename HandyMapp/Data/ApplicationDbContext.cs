@@ -13,6 +13,7 @@ namespace HandyMapp.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Example> Example { get; set; }
+
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -24,6 +25,8 @@ namespace HandyMapp.Data
         public virtual DbSet<VectorPath> VectorPaths { get; set; }
         public virtual DbSet<Obstacle> Obstacles { get; set; }
         public virtual DbSet<ReviewPlace> ReviewAddress { get; set; }
+
+        public virtual DbSet<street_eval_model> StreetEvals { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

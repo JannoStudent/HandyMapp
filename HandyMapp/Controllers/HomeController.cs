@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using HandyMapp.Models.Navigation;
+using System.Data.SqlClient;
 
 namespace HandyMapp.Controllers
 {
@@ -66,7 +67,26 @@ namespace HandyMapp.Controllers
         }
         public IActionResult street_eval()
         {
-            return View();
+            String sql = "SELECT * FROM Obstacles_Eval";
+
+            var mm = new List<street_eval_model>();
+            using (SqlConnection connect = new SqlConnection("Server=wytzejelle.nl;Database=HandyMapp;UID=HandyMapp;PWD=Handy123;"))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                connect.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var myModel = new street_eval_model();
+                    myModel.lat = rdr["lat"].ToString();
+                    myModel.lng = rdr["lng"].ToString();
+                    myModel.streetname = (string)rdr["streetname"];
+                  
+                    mm.Add(myModel);
+                }
+            }
+            return View("street_eval",mm);
         }
         [HttpGet]
         public IActionResult street_eval2()
@@ -80,7 +100,26 @@ namespace HandyMapp.Controllers
             street_eval_model model = new street_eval_model();
             model.lat = Value1;
             model.lng = Value2;
+            
             return View("street_eval2", model);
+        }
+        public IActionResult successfullEval(string Value1, string Value2, float Star, string Streetname,string Desc)
+        {
+            
+            street_eval_model model = new street_eval_model();
+            model.stars = Star;
+            model.lat = Value1;
+            model.lng = Value2;
+            model.streetname = Streetname;
+            model.description = Desc;
+
+            street_eval_model theModel = new street_eval_model(model.lat, model.lng, model.streetname, model.description, model.stars);
+            _context.StreetEvals.Add(theModel);
+
+          
+
+            //_context.SaveChanges();
+            return View("street_eval2", theModel);
         }
         public IActionResult TestAPI()
         {
