@@ -3,34 +3,13 @@
     ViewData["Title"] = "PlaceInput";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="jumbotron text-center jumbotron-notFront">
-  <div class="container">
-    <svg class="stepDiactivated" width="10%" height="10%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-<a class="step-breadcrumbs step-breadcrumbs" asp-controller="Buildings" asp-action="WayOfSearching" style="cursor: pointer;">
-<circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" /><g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-<text x="27.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">1</text>
-                </g>
-            </a>
-        </svg>
-
-    <svg class="stepActivated" width="10%" height="10%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-<a class="step-breadcrumbs">
-<circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" /><g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-<text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">2</text>
-                </g>
-            </a>
-        </svg>
-    <svg class="stepDiactivated" width="10%" height="10%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-    <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;" /><g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-    <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#FFF; stroke:#FFF; stroke-width:1px">3</text>
-      </g>
-    </svg>
-  </div>
-</div>
-<div class="description-container">
-  <p class="description-text">Type in the start and end of your route:</p>
-</div>
-<br>
+<div class="row breadcrumbRow">
+  <ul class="container breadcrumbContainer">
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Buildings" asp-action="WayOfSearching">Way of searching</a></li>
+    <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Enter adress/name</li>
+    <li class="breadcrumbHandy">Find your place</li>
+  </ul>
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>-->
 <div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
   <form>
     <div class="form-group">
