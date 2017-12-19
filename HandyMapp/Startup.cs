@@ -63,17 +63,8 @@ namespace HandyMapp
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                    name: "API Default",
-                    template: "api/{controller}/{action}/{query}");
-
-                routes.MapRoute(
-                    name: "Buildings",
-                    template: "Home/{controller}/{action}/{id?}");
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}")
+                .MapRoute(name: "API Default",template: "api/{controller}/{id?}");
             });
         }
     }
