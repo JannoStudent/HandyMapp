@@ -25,12 +25,19 @@
     transition: all 300ms ease;
 }
 
+body {
+    background-color: #e8e8e8;
+}
+
 .breadcrumbRow {
-    height: 75px;
+    margin-top:20px !important;
+    margin-bottom: 100px !important;
+}
+/*    
     background-color: #1370B8;
     width: 100%;
-    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3);
-}
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.3); */
+
 
 .breadcrumbContainer {
     display: flex;
@@ -45,11 +52,11 @@
     -webkit-flex-grow: 1;
     flex-grow: 1;
     text-align: center;
-    border-top: solid 3px #fff;
+    border-top: solid 3px #1370B8;
     height: 5px;
     display: list-item;
     position: relative;
-    color: white;
+    color: #1370B8;
     padding-top: 10px;
     font-size: 18px;
 }
@@ -64,7 +71,7 @@
 }
 
 .breadcrumbLineCurrent {
-    background: linear-gradient(90deg, #FEC20F 0, #FEC20F 54%, #fff 46%, #fff 100%);
+    background: linear-gradient(90deg, #FEC20F 0, #FEC20F 54%, #1370B8 46%, #1370B8 100%);
     height: 3.5px;
     position: absolute;
     width: 100%;
@@ -78,10 +85,10 @@
     height: 16px;
     top: -9px;
     left: 50%;
-    border: 3px solid #fff;
+    border: 3px solid #1370B8;
     border-radius: 50%;
     margin-left: -5px;
-    background-color: #1370B8;
+    background-color: #fff;
 }
 
 .breadcrumbHandy:first-child {
