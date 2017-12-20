@@ -1,0 +1,29 @@
+﻿
+/*STARS-------------*/
+.helft, .midden {
+    fill: #c7c7c7;
+}
+
+path:hover:before {
+    fill: green;
+}
+
+#grade {
+    display: inline !important;
+}
+
+.baseColor {
+    fill: #c7c7c7;
+}
+
+.hoverColor {
+    fill: #6ede9c !important;
+}
+
+.colorSelected {
+    fill: #2ecc71;
+}
+
+#tekstDef {
+    display: none;
+}
