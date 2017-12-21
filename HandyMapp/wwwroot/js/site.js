@@ -1,10 +1,10 @@
 ﻿$(function () {
-    $(':input[type="submit"]').prop('disabled', true);
-    $(':input[type="text"]').keyup(function () {
+    //$(':input[type="submit"]').prop('disabled', true);
+    /*$(':input[type="text"]').keyup(function () {
         if ($(this).val() !== '') {
             $(':button[type="submit"]').prop("disabled", false);
         }
-    });
+    });*/
     $(".PlaceResult").click(function () {
         var rating = 10;//Variable input                            /*Bernhard*/
         var i;
@@ -14,59 +14,6 @@
             $(objectId + "> path.midden").eq(i / 2).addClass("colorSelected");
         }                                                              /*Bernhard*/
         
-    });
-    $("path").hover(function () {
-        var i;
-        var starClass = $(this).attr("class").split(' ')[1];
-        var starNumber = starClass.slice(4);
-        $(this).removeClass("hoverColor").css('cursor', 'pointer');
-        for (i = 0; i <= 4; i++) {
-            var starClassUnselected = ".star" + (i + 1);
-            $(starClassUnselected).removeClass("hoverColor");
-        }
-        for (i = 0; i <= starNumber - 1; i++) {
-            var starClassSelected = ".star" + (i + 1);
-            $(starClassSelected).addClass("hoverColor");
-            $("#tekst").text(starNumber);
-        }
-    });
-
-    $("path").click(function () {
-        var starClassClicked = $(this).attr("class").split(' ')[1];
-        var starNumberClicked = starClassClicked.slice(4);
-        var i;
-        for (i = 0; i <= 4; i++) {
-            var starClassUnselected = ".star" + (i + 1);
-            $(starClassUnselected).removeClass("colorSelected");
-        }
-        for (i = 0; i <= starNumberClicked - 1; i++) {
-            var starClassSelected = ".star" + (i + 1);
-            $(starClassSelected).addClass("colorSelected");
-            console.log(starNumberClicked);
-            switch (starNumberClicked) {
-                case "1":
-                    $("#tekstDef").text("Very poor");
-                    break;
-                case "2":
-                    $("#tekstDef").text("Poor");
-                    break;
-                case "3":
-                    $("#tekstDef").text("Normal");
-                    break;
-                case "4":
-                    $("#tekstDef").text("Good");
-                    break;
-                case "5":
-                    $("#tekstDef").text("Very good");
-                    break;
-            }
-
-        }
-    });
-
-    $("svg").mouseleave(function () {
-        $(this).find("path").removeClass("hoverColor");
-        $("#tekst").text("");
     });
     /*
     $(".PlaceResult").click(function () {

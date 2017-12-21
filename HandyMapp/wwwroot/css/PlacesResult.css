@@ -1,18 +1,4 @@
-﻿.mapLayout {
-    display: flex;
-    width: 100%;
-    height: 94.8vh;
-}
-
-    .mapLayout .jumbotron {
-        margin-top: 10px;
-    }
-
-    .mapLayout .container {
-        width: 100%;
-    }
-
-/*right side page*/
+﻿/*right side page*/
 .PlacesOnMap {
     margin-left: -15px;
     flex-grow: 8;
@@ -120,33 +106,6 @@ button {
 .PlaceButtons {
     padding: 15px 10px 20px 10px;
 }
-
-
-/*STARS-------------*/
-.helft, .midden {
-    fill: #c7c7c7;
-}
-
-path:hover:before {
-    fill: green;
-}
-
-#grade {
-    display: inline !important;
-}
-
-.baseColor {
-    fill: #c7c7c7;
-}
-
-.hoverColor {
-    fill: #6ede9c !important;
-}
-
-.colorSelected {
-    fill: #2ecc71;
-}
-
 
 /*Scrollbar*/
 .PlacesResults::-webkit-scrollbar-track {

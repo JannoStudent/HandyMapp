@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\StarRating.css" />
+    <Content Remove="wwwroot\js\JavaScript.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Styles\main.less" />
   </ItemGroup>
 
