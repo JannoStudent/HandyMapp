@@ -46,6 +46,103 @@
     margin-top: -8px;
     margin-right: 0;
 }
+
+.btn-default-contact:hover {
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+body {
+    background-color: #e8e8e8;
+}
+
+.breadcrumbRow {
+    margin-top:20px !important;
+    margin-bottom: 100px !important;
+}
+
+.breadcrumbContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 23px;
+    list-style: none;
+    padding: 0 10%;
+}
+
+.breadcrumbHandy {
+    -o-flex-grow: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    text-align: center;
+    border-top: solid 3px #1370B8;
+    height: 5px;
+    display: list-item;
+    position: relative;
+    color: #1370B8;
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+    .breadcrumbHandy > a {
+        text-decoration: none !important;
+        color: inherit;
+    }
+
+.breadcrumblineVisited {
+    border-top: solid 3px #FEC20F;
+}
+
+.breadcrumbLineCurrent {
+    background: linear-gradient(90deg, #FEC20F 0, #FEC20F 54%, #1370B8 46%, #1370B8 100%);
+    height: 3.5px;
+    position: absolute;
+    width: 100%;
+    margin-top: -13px;
+}
+
+.breadcrumbHandy::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -9px;
+    left: 50%;
+    border: 3px solid #1370B8;
+    border-radius: 50%;
+    margin-left: -5px;
+    background-color: #fff;
+}
+
+.breadcrumbHandy:first-child {
+    text-align: left;
+}
+
+    .breadcrumbHandy:first-child:before {
+        left: 0;
+        margin-left: 0
+    }
+
+.breadcrumbHandy:last-child {
+    text-align: right;
+}
+
+    .breadcrumbHandy:last-child:before {
+        left: auto;
+        right: -1px;
+        margin-left: 0
+    }
+
+.currentBreadcrumb:before {
+    border: 3px solid #FEC20F !important;
+    background-color: #fec20f !important;
+}
+
+.visitedBreadcrumb:before {
+    border: 3px solid #FEC20F !important;
+}
 /*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
 .glyphicon:before {
     margin-right: 5px;
