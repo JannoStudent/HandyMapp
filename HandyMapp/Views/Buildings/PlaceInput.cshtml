@@ -10,18 +10,24 @@
     <li class="breadcrumbHandy">Find your place</li>
   </ul>
 </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>-->
-<div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-    <form asp-action="PlacesResult" asp-controller="Buildings">
-        <div class="form-group">
-            <label>What do you like to find?</label>
-            @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-12 form-button">
-            <button class="btn btn-block btn-primary btn-lg">
-                <span><span class="glyphicon glyphicon-ok-circle"></span>Route options</span>
-            </button>
-        </div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>How accessible is this road?</span>
+  </div>
+</div>
+<div class="row">
+  <div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="For example: Restaurant, Gemeentehuis of station.." autofocus>
+      </div>
+      <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 form-button">
+        <button class="btn btn-block btn-primary " type="submit" asp-controller="Buildings" asp-action="PlacesResult">
+          <span><span class="glyphicon glyphicon-ok-circle"></span>Route options</span>
+        </button>
+      </div>
     </form>
+  </div>
 </div>
 
 

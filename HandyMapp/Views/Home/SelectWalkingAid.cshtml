@@ -11,45 +11,46 @@
     <li class="breadcrumbHandy">Find your route</li>
   </ul>
 </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
-<div class="container thumbnail-container-walkingAid">
-    <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3" id="thumbnail1">
-            <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="home" asp-action="Preferences" style="cursor: pointer;">
-                <img class="card-img-top-walkingAid" src="~/img/mobilityScooter.svg" alt="">
-                <div class="caption lowerThumbnail">
-                    <h2 class="lowerThumbnail_text_big">Mobility scooter</h2>
-                    <p class="hard lowerThumbnail_text">- click to select this mode - </p>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-12 col-md-3 col-lg-3" id="thumbnail1">
-            <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="Home" asp-action="Preferences" style="cursor: pointer;">
-                <img class="card-img-top-walkingAid" src="~/img/wheelchair.svg" alt="">
-                <div class="caption lowerThumbnail">
-                    <h2 class="lowerThumbnail_text_big">Wheelchair</h2>
-                    <p class="hard lowerThumbnail_text">- click to select this mode - </p>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-12 col-md-3 col-lg-3" id="thumbnail2">
-            <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="home" asp-action="Preferences" style="cursor: pointer;">
-                <img class="svg colorFill card-img-top-walkingAid" src="~/img/walker.svg" alt="">
-                <div class="caption lowerThumbnail">
-                    <h2 class="lowerThumbnail_text_big">Walker</h2>
-                    <p class="hard lowerThumbnail_text">- click to select this mode - </p>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-12 col-md-3 col-lg-3" id="thumbnail3">
-            <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="home" asp-action="Preferences" style="cursor: pointer;">
-                <img class="svg colorFill card-img-top-walkingAid" src="~/img/walkingStick.svg" alt="">
-                <div class="caption lowerThumbnail">
-                    <h2 class="lowerThumbnail_text_big">Walking stick</h2>
-                    <p class="hard lowerThumbnail_text">- click to select this mode -</p>
-                </div>
-            </a>
-        </div>
-    </div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>Select your way of navigating</span>
+  </div>
 </div>
-
-<script>document.body.className += ' fade-out';</script>
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <div class="col-sm-12 col-md-3 col-lg-3">
+    <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="home" asp-action="Preferences" style="cursor: pointer;">
+      <img class="card-img-top-walkingAid" src="~/img/mobilityScooter.svg" alt="">
+      <div class="caption lowerThumbnail">
+        <h2 class="lowerThumbnail_text_big">Mobility scooter</h2>
+        <p class="hard lowerThumbnail_text">- click to select this mode - </p>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-12 col-md-3 col-lg-3">
+    <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="Home" asp-action="Preferences" style="cursor: pointer;">
+      <img class="card-img-top-walkingAid" src="~/img/wheelchair.svg" alt="">
+      <div class="caption lowerThumbnail">
+        <h2 class="lowerThumbnail_text_big">Wheelchair</h2>
+        <p class="hard lowerThumbnail_text">- click to select this mode - </p>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-12 col-md-3 col-lg-3">
+    <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="home" asp-action="Preferences" style="cursor: pointer;">
+      <img class="svg colorFill card-img-top-walkingAid" src="~/img/walker.svg" alt="">
+      <div class="caption lowerThumbnail">
+        <h2 class="lowerThumbnail_text_big">Walker</h2>
+        <p class="hard lowerThumbnail_text">- click to select this mode - </p>
+      </div>
+    </a>
+  </div>
+  <div class="col-sm-12 col-md-3 col-lg-3">
+    <a class="thumbnail text-center thumbnail-navigation hoverWalkingAids" asp-controller="home" asp-action="Preferences" style="cursor: pointer;">
+      <img class="svg colorFill card-img-top-walkingAid" src="~/img/walkingStick.svg" alt="">
+      <div class="caption lowerThumbnail">
+        <h2 class="lowerThumbnail_text_big">Walking stick</h2>
+        <p class="hard lowerThumbnail_text">- click to select this mode -</p>
+      </div>
+    </a>
+  </div>
+</div>

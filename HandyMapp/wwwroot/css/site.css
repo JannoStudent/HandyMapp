@@ -58,7 +58,8 @@
 }
 
 body {
-    background-color: #e8e8e8;
+    // background-color: #e8e8e8;
+    background-image: url("../img/Schermopname (1).png");
 }
 
 .breadcrumbRow {
@@ -327,7 +328,6 @@ p .hard:hover {
     font-size: 25px;
 }
 /*////////////////////////////////////// FORM //////////////////////////////////////*/
-
 .form-container {
     margin-top: 40px;
     padding: 0 0 0 0;
