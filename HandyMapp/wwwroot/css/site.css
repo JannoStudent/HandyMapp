@@ -32,8 +32,10 @@
 }
 /*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
 .navbar-default {
+    height: 5vh;
+    z-index: 100;
     background-color: white;
-    margin: 0;
+    margin-bottom: 0;
     webkit-box-shadow: 0 8px 6px -6px #999;
     moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 6px -6px #999;
@@ -56,13 +58,13 @@
 }
 
 body {
-    // background-color: #e8e8e8;
-    background-image: url("../img/Schermopname (1).png");
+    background-color: #e8e8e8;
 }
 
 .breadcrumbRow {
-    margin-top:20px !important;
-    margin-bottom: 100px !important;
+    display: flex;
+    margin-top:20px;
+    margin-bottom: 100px;
 }
 
 .breadcrumbContainer {
@@ -98,7 +100,7 @@ body {
 
 .breadcrumbLineCurrent {
     background: linear-gradient(90deg, #FEC20F 0, #FEC20F 54%, #1370B8 46%, #1370B8 100%);
-    height: 3.5px;
+    height: 3px;
     position: absolute;
     width: 100%;
     margin-top: -13px;
@@ -166,11 +168,11 @@ body {
 .handyContainer {
     background-color: white;
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1);
-    height: 93vh;
+    height: 94.8vh;
 }
 /*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
 .frontpage_text {
-    text-align: center;
+    text-align: right;
     font-weight: bold;
     background-color: #1371B8;
     color: white;
@@ -314,6 +316,7 @@ p .hard:hover {
         -o-transition: all 300ms ease;
         transition: all 300ms ease;
     }
+
 /*////////////////////////////////////// OBSTACLE TABLE //////////////////////////////////////*/
 .obstaclesTile {
     margin: 40px 0 0 -30px;
@@ -324,6 +327,7 @@ p .hard:hover {
     font-size: 25px;
 }
 /*////////////////////////////////////// FORM //////////////////////////////////////*/
+
 .form-container {
     margin-top: 40px;
     padding: 0 0 0 0;
@@ -468,9 +472,66 @@ p .hard:hover {
 }
 */
 
-.pageTitle {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
+input {
+    font-size: 22px !important;
+    padding: 10px;
+    color: black;
 }
+
+.autocomplete {
+    display: flex;
+    flex-direction: column;
+}
+
+.autocomplete input {
+    margin: 15px;
+    border: 1px solid #b4b4b4;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.autocomplete input:focus {
+    outline: none;
+}
+
+.form-control {
+    height: 40px;
+}
+
+.mapLayout {
+    display: flex !important;
+    width: 100%;
+}
+
+.mapBackground {
+    background-image: url("../img/zoetermeerMap.PNG");
+    background-repeat: no-repeat;
+}
+
+.mapLayout .breadcrumbRow {
+    width: 75%;
+    margin: 10px 20px 20px 20px;
+    padding-bottom: 20px;
+    z-index: 20;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 1px #b2b2b2;
+    box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.mapLayout #map {
+    position: absolute;
+    width: 100vw;
+    height: 94.8vh;
+}
+
+.mapLayout .breadcrumbContainer {
+    padding: 0 4%;
+}
+
+.gmnoprint {
+    margin-top: 90px !important;
+    margin-left: 26% !important;
+    display: none !important;
+}
+

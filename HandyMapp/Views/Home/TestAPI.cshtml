@@ -30,12 +30,145 @@
 </div>
 
 <script>
-    function initMap() {
-        var map = new window.google.maps.Map(document.getElementById('map'),
+function initMap() {
+    var map = new window.google.maps.Map(document.getElementById('map'),
             {
                 center: { lat: 52.058295, lng: 4.4950389 },
-                zoom: 13
+                zoom: 13,
+                styles: [
+                  {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#cddebe"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "landscape.natural.terrain",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#a9adaf"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "poi",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#e1c78e"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "poi.medical",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#f7bbff"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#b7dc8d"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                      {
+                        "color": "#81878b"
+                      },
+                      {
+                        "weight": 0.5
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#f4f28c"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                      {
+                        "color": "#ebe72c"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#f59d78"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                      {
+                        "color": "#f06b33"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#f06b33"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                      {
+                        "color": "#ca470f"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#b8bcbe"
+                      }
+                    ]
+                  },
+                  {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                      {
+                        "color": "#7aa9ef"
+                      }
+                    ]
+                  }
+                ]
             });
+
+
 
         var markersArray = [];
         var geocoder = new window.google.maps.Geocoder;
@@ -61,7 +194,7 @@
         function geocodeLatLng(latLng) {
             $.ajax({
                 type: "GET",
-                url: '@Url.Action("GetPlacesByGeo", "Places")/' + latLng,
+                url: '@Url.Action("ByLatLng", "Places")/' + latLng,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(data) {
@@ -174,13 +307,14 @@
                 arrDescription = [];
                 $.ajax({
                     type: "GET",
-                    url: '@Url.Action("Get", "PlacesAutoComplete")/' + $(".search").val(),
+                    url: '@Url.Action("AutoComplete", "Places")/' + $(".search").val(),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data) {
                         console.log(data);
                         data.forEach(function(element) {
-                            arrDescription.push(element.description + element.placeId);
+                            arrDescription.push(element.description + element.placeId);                            
+                            
                         });
                     },
                     error: window.errorFunc

@@ -6,8 +6,9 @@
     "jquery": "3.2.1",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "jquery-ajax-unobtrusive": "v3.2.4",
-    "jquery-ui": "jquery.ui#1.12.1"
+    "jquery-ui": "1.12.1",
+    "jquery-ui-boostrap": "1.0.0",
+    "jquery.unobtrusive-ajax" : "3.2.3" 
   },
   "resolutions": {
     "jquery": "3.2.1",

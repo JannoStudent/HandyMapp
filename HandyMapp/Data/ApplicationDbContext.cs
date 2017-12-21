@@ -25,8 +25,7 @@ namespace HandyMapp.Data
         public virtual DbSet<Obstacle> Obstacles { get; set; }
         public virtual DbSet<ReviewPlace> ReviewAddress { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
         {
         }
 
@@ -155,9 +154,6 @@ namespace HandyMapp.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VectorPath_Vector1");
             });
-
         }
-
-
     }
 }
