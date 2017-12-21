@@ -1,6 +1,8 @@
 ﻿/*right side page*/
 .PlacesOnMap {
-    margin-left: -15px;
+    position: inherit !important;
+    margin-left: -25%;
+    display: flex;
     flex-grow: 8;
     padding: 0;
     z-index: 5;
@@ -12,7 +14,6 @@
     width: 25%;
     z-index: 10;
     height: 94.8vh;
-    position: absolute;
     border-radius: 6px 0 0 6px;
     -moz-border-radius: 6px 0 0 6px;
     -webkit-border-radius: 6px 0 0 6px;
@@ -29,6 +30,7 @@
     margin: 10px;
     -ms-border-radius: 5px;
     border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px #b2b2b2;
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -128,10 +130,6 @@ button {
 
 .openingHours {
     padding: 15px 0 15px;
-}
-
-.gmnoprint {
-    margin-left: 26% !important;
 }
 
 .widget-titlecard {
