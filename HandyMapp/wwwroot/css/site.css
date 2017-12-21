@@ -323,10 +323,6 @@ p .hard:hover {
     font-size: 25px;
 }
 /*////////////////////////////////////// FORM //////////////////////////////////////*/
-.row {
-    margin: 0;
-}
-
 .form-container {
     margin-top: 40px;
     padding: 0 0 0 0;
