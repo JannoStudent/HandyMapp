@@ -473,3 +473,29 @@ p .hard:hover {
     opacity: 0.8; //0.9 can be considered
 }
 */
+
+input {
+    font-size: 22px !important;
+    padding: 10px;
+    color: black;
+}
+
+.autocomplete {
+    display: flex;
+    flex-direction: column;
+}
+
+.autocomplete input {
+    margin: 15px;
+    border: 1px solid #b4b4b4;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.autocomplete input:focus {
+    outline: none;
+}
+
+.form-control {
+    height: 40px;
+}

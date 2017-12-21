@@ -4,6 +4,13 @@
     ViewData["Title"] = "PlacesResult";
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
+<div class="row breadcrumbRow">
+    <ul class="container breadcrumbContainer">
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Buildings" asp-action="WayOfSearching">Way of searching</a></li>
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Buildings" asp-action="PlaceInput">Enter adress/name</a></li>
+        <li class="breadcrumbHandy currentBreadcrumb breadcrumblineVisited">Find your place</li>
+    </ul>
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
 <div class="PlacesResults">
     @Html.Partial("~/Views/PartialView/CardListPlaceDetails.cshtml")
 </div>
