@@ -33,13 +33,8 @@ namespace HandyMapp.Controllers
 
         public IActionResult PlacesResult(IList<PlacePrediction> placePredictions)
         {
-            return View(GetProduct(placePredictions));
-        }
-
-        protected virtual List<PlaceDetails> GetProduct(IList<PlacePrediction> placePredictions)
-        {
             PlacesController placesController = new PlacesController(_context);
-            return placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList(); ;
+            return View(placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList());
         }
 
         public IActionResult SelectArea()

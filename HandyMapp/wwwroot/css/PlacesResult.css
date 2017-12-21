@@ -178,3 +178,24 @@ path:hover:before {
 .widget-titlecard {
     margin-left: 26% !important;
 }
+
+.searchfield {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 10px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 1px #b2b2b2;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+    .searchfield label {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+        background-color: rgb(19, 112, 183);
+        padding: 15px;
+        color: #f5f5f5;
+    }
+
+    

@@ -1,0 +1,52 @@
+﻿@model IList<HandyMapp.Models.GoogeApi.PlaceDetails>
+
+@{
+    ViewData["Title"] = "PlacesResult";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+
+<div class="PlacesResults">
+    <div class="searchfield">
+        <label>Search:</label>
+        @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
+
+    </div>
+    <div id="reloadAjax">
+        @Html.Partial("~/Views/PartialView/CardListPlaceDetails.cshtml")
+    </div>
+</div>
+
+<div class="PlacesOnMap" id="map"></div>
+
+@section Style {
+    <link rel="stylesheet" href="~/css/PlacesResult.css" />
+}
+
+@section Scripts {
+    <script src="~/js/Map.js"></script>
+    <script async defer
+            type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u38FnWXefa5sf7k--4Tp5hFhYcyvE08&libraries=places&callback=initMap">
+    </script>
+    <script>
+        $(".search").keypress(function(e) {
+            if ($(".search").val().length >= 3) {
+                if (e.which === 13){
+                    var val = $('#search').val();
+                    $.ajax({
+                            type: 'post',
+                            url: '@Url.Action("SearchPlaces", "ReviewPlaces")',
+                            data: { searchstext: val }
+                        })
+                        .done(function(partialViewResult) {
+                            $("#reloadAjax").html(partialViewResult);
+                        });
+                }
+            }
+        });
+    </script>
+}
+
+
+
+
+

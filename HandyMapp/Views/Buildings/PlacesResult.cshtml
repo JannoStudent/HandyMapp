@@ -1,111 +1,11 @@
-﻿@using ImageSharp
-@model IList<HandyMapp.Models.GoogeApi.PlaceDetails>
+﻿@model IList<HandyMapp.Models.GoogeApi.PlaceDetails>
 
 @{
     ViewData["Title"] = "PlacesResult";
     Layout = "~/Views/Shared/_MapLayout.cshtml";
 }
-
 <div class="PlacesResults">
-    @for (int i = 0; i < @Model.Count; i++)
-            {
-        <div class="PlaceResult">
-            @if (@Model[i].result.photos != null)
-            {
-                <div class="ImageContainter">
-                    <img src=@("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + @Model[i].result.photos[0].photo_reference + "&key=AIzaSyCOcGjmfFC3Px3l0eL37UohY8dqB_wGPPE") />
-                </div>
-            }
-            <div class="Placetext" id="@("PlaceTitle"+i)">
-                <div class="PlaceTitle">
-                    @Html.DisplayTextFor(m => Model[i].result.name)
-                </div>
-            </div>
-            <div class="Accessibility">
-                <div>
-                    <span class="RatingTitle">Toegankelijkheid:</span>
-                </div>
-                <div class="RatingStars">
-                    <svg viewBox="0 0 270 50" class="rating" id="@("rating" + i)">
-                        >
-                        <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
-	        C24,0.8,24.5,0.5,25,0.5V39.4z" />
-                        <path class="helft" d="M25,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L37.2,30.5l3.7,15.9
-	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
-                        <path class="midden" d="M23.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39L25,39.4l-1.5,0.9L23.8,1.3z" />
-                        <path class="helft" d="M80,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L55.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
-	        C79,0.8,79.5,0.5,80,0.5V39.4z" />
-                        <path class="helft" d="M80,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L92.2,30.5l3.7,15.9
-	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
-                        <path class="midden" d="M78.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39L80,39.4l-1.5,0.9L78.8,1.3z" />
-                        <path class="helft" d="M135,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
-	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
-                        <path class="helft" d="M135,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
-	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
-                        <path class="midden" d="M133.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L133.8,1.3z" />
-                        <path class="helft" d="M190,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
-	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
-                        <path class="helft" d="M190,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
-	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
-                        <path class="midden" d="M188.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L188.8,1.3z" />
-                        <path class="helft" d="M245,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
-	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
-                        <path class="helft" d="M245,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
-	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
-                        <path class="midden" d="M243.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L243.8,1.3z" />
-                    </svg>
-                </div>
-            </div>
-            <span class="PlaceAdress">@Html.DisplayTextFor(m => Model[i].result.formatted_address)</span>
-            <div class="DescriptionContainer">
-                <!-- max 40 words-->
-                @if (@Model[i].result.website != null)
-                {
-                    <span>Website: <a href="@(Model[i].result.website )">@Html.DisplayTextFor(m => Model[i].result.website)</a></span><br />
-                }
-                @if (@Model[i].result.international_phone_number != null)
-                {
-                    <span>Tel: <a href="@("tel:" + Model[i].result.international_phone_number)">@Html.DisplayTextFor(m => Model[i].result.international_phone_number)</a></span><br />
-                }
-                @if (@Model[i].result.rating > 0)
-                {
-                    <span>Google Rating: @Html.DisplayTextFor(m => Model[i].result.rating)</span><br />
-                }
-                @if (@Model[i].result.opening_hours != null)
-                {
-                    <div class="openingHours">
-                        <strong>Opening hours: </strong><br />
-                        @foreach (var time in @Model[i].result.opening_hours.weekday_text)
-                        {
-                            <span>@time</span><br />
-                        }
-                    </div>
-                }
-            </div>
-            <div class="row PlaceButtons">
-                <form method="post">
-                    <div style="display: none">
-                        <input asp-for="@Model[i].result.place_id" />
-                        <input asp-for="@Model[i].result.formatted_phone_number" />
-                        <input asp-for="@Model[i].result.geometry.location.lat" id="lat" />
-                        <input asp-for="@Model[i].result.geometry.location.lng" id="lng" />
-                        <input asp-for="@Model[i].result.website" />
-                        <input asp-for="@Model[i].result.adr_address" />
-                        <input asp-for="@Model[i].result.photos" />
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12">
-                        <button class="btn btn-primary btn-block btn-large" href="#"><span class="glyphicon glyphicon-globe"></span>Plan a route</button>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12">
-                        <button class="btn btn-primary btn-block btn-large" asp-controller="Buildings" asp-action="PlacesResult"><span class="glyphicon glyphicon-road"></span>Plan a route</button>
-                    </div>
-                </form>
-            </div>
-            <div class="PlaceResultButton">
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </div>
-        </div>
-    }
+    @Html.Partial("~/Views/PartialView/CardListPlaceDetails.cshtml")
 </div>
 <div class="PlacesOnMap" id="map">
     @*
