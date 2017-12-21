@@ -1,28 +1,56 @@
-﻿/*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
-.navbar-default {
-    background-color: white;
+﻿/*////////////////////////////////////// COLORS AND SHADOWS //////////////////////////////////////*/
+.shadowStyling {
+    webkit-box-shadow: 0 8px 6px -6px #999;
+    moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+/*////////////////////////////////////// TRANSITIONS (ANIMATIONS)//////////////////////////////////////*/
+.hoverScaleUp {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
+.hoverEaseChangeColor {
+    -webkit-tranHoverition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+
+.initialThumbnailScaleAndEase {
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+/*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
 .navbar-default {
-    margin-bottom: 0;
+    background-color: white;
+    margin: 0;
     webkit-box-shadow: 0 8px 6px -6px #999;
     moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 6px -6px #999;
 }
 
 .brand-logo {
-    width: 70%; /* you can use % */
+    width: 70%;
+    /* you can use % */
     height: auto;
     margin-top: -8px;
     margin-right: 0;
 }
-
 /*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
 .glyphicon:before {
     margin-right: 5px;
 }
 
-/*////////////////////////////////////// JUMBOTRON (excluding INDEX) //////////////////////////////////////*/
 .jumbotron-notFront {
     background-color: #1370B8;
     color: white;
@@ -30,7 +58,8 @@
     padding: 25px 0 25px 0;
 }
 
-.container .jumbotron, .container-fluid .jumbotron {
+.container .jumbotron,
+.container-fluid .jumbotron {
     padding-right: 15px;
     padding-left: 15px;
     border-radius: 6px 6px 0 0;
@@ -39,19 +68,22 @@
 .frontpage_text {
     float: right;
     font-weight: bold;
-    background-color: #1370B8;
+    background-color: #1371B8;
     color: white;
     padding: 6px 6px 8px 6px;
     margin-top: 195px;
 }
 
+.row-centered {
+    margin: auto;
+}
 /*////////////////////////////////////// THUMBNAILS //////////////////////////////////////*/
 p .hard:hover {
     font-weight: bold;
 }
 
 .lowerThumbnail {
-    background-color: #1370B8;
+    background-color: #1371B8;
 }
 
 .lowerThumbnail_text {
@@ -67,44 +99,21 @@ p .hard:hover {
     font-size: 30px;
 }
 
-.thumbnail-container-walkingAid{
+.thumbnail-container-walkingAid {
     padding-left: 0;
-}
-
-#thumbnail1{
-    padding-left:0;
-    padding-right:30px;
-}
-
-#thumbnail2 {
-    padding-left: 0;
-    padding-right: 30px;
-}
-
-.thumbnail3 {
-    padding-left: 0;
-    padding-right: 30px;
-}
-
-
-.transition {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
 }
 
 .thumbnail-mode {
     margin: 40px 0 0 0;
-    border-color: #1370B8;
+    border-color: #1371B8;
     border-width: 4px;
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    -moz-transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-    -ms-transform: scale(1.0);
-    transform: scale(1.0);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
     -ms-transition: all 0.4s;
     -o-transition: all 0.4s;
     -webkit-transition: all 0.4s;
@@ -113,20 +122,23 @@ p .hard:hover {
 
 .thumbnail-navigation {
     margin: 40px 0 10px 0;
-    border-color: #1370B8;
-    border-width: 3px;
+    border-color: #1371B8;
+    border-width: 4px;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }
 
-.thumbnail-navigation:hover {
-    text-decoration: none;
-    background-color: #FEC20F;
-    font-weight: bold;
-    -webkit-tranHoverition: all 300ms ease;
-    -moz-transition: all 300ms ease;
-    -ms-transition: all 300ms ease;
-    -o-transition: all 300ms ease;
-    transition: all 300ms ease;
-}
+    .thumbnail-navigation:hover {
+        text-decoration: none;
+        background-color: #FEC20F;
+        font-weight: bold;
+        -webkit-tranHoverition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        -ms-transition: all 300ms ease;
+        -o-transition: all 300ms ease;
+        transition: all 300ms ease;
+    }
 
 .thumbnail-mini {
     margin-top: 40px;
@@ -137,14 +149,15 @@ p .hard:hover {
     background-color: #FEC20F;
     font-weight: bold;
     text-decoration: none;
+    -webkit-tranHoverition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     -ms-transform: scale(1.1);
     transform: scale(1.1);
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
 }
 
 .thumbnail-container-frontPage {
@@ -152,7 +165,6 @@ p .hard:hover {
     padding-left: 15px;
     margin-bottom: 50px;
 }
-
 /* card-img-top classes are the thumbnail images */
 .card-img-top {
     width: 40%;
@@ -162,43 +174,42 @@ p .hard:hover {
 }
 
 .card-img-top-walkingAid {
-    width: 70%;
+    width: 80%;
     height: auto;
-    margin: 20px 0px 0px 0px;
+    margin: 40px 0px 40px 0px;
 }
 
-/*////////////////////////////////////// DISCRIPTION FIELD //////////////////////////////////////*/
 .description-container {
+    margin-top: 0 0 15px 0;
     padding: 0;
     list-style: none;
     background-color: #f5f5f5;
-    border-radius: 0 0 6px 6px
+    border-radius: 0 0 6px 6px;
 }
 
-.description-text{
+.description-text {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 0;
     text-align: center;
-    padding: 7px 0 0 0;
+    padding: 7px 55px 0 0;
 }
 
 .back-button {
     padding: 10px;
     border-radius: 0 0 0 6px;
-    border-color :#f5f5f5; 
+    border-color: #f5f5f5;
 }
 
-.back-button:hover{
-    border-color: transparent;
-    color: white;
-    -webkit-tranHoverition: all 300ms ease;
-    -moz-transition: all 300ms ease;
-    -ms-transition: all 300ms ease;
-    -o-transition: all 300ms ease;
-    transition: all 300ms ease;
-}
-
+    .back-button:hover {
+        border-color: transparent;
+        color: white;
+        -webkit-tranHoverition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        -ms-transition: all 300ms ease;
+        -o-transition: all 300ms ease;
+        transition: all 300ms ease;
+    }
 /*////////////////////////////////////// OBSTACLE TABLE //////////////////////////////////////*/
 .obstaclesTile {
     margin: 40px 0 0 -30px;
@@ -208,41 +219,27 @@ p .hard:hover {
 .obstacleCheckboxes {
     font-size: 25px;
 }
-
-/*////////////////////////////////////// TEST //////////////////////////////////////*/
+/*////////////////////////////////////// FORM //////////////////////////////////////*/
 .row {
     margin: 0;
 }
 
-/*////////////////////////////////////// RANDOM //////////////////////////////////////*/
-/*
-footer{
-    background-color: transparent;
-    border-color: lightgray;
-    border-bottom: none;
-    height: 20px;
-    position: fixed;
-}
-*/
-
-.form-container{
+.form-container {
     margin-top: 40px;
     padding: 0 0 0 0;
 }
 
-.from-to{
+.from-to {
     font-size: 25px;
 }
 
-.btn:hover {
-    background-color: #1370B8;
+.back-button:hover {
+    background-color: #1371B8;
 }
 
-.form-button{
+.form-button {
     padding: 0 0 0 0;
 }
-
-
 /*/////////////////////////// STEPS //////////////////////////*/
 .stepActivated {
     width: 5%;
@@ -254,7 +251,6 @@ footer{
     width: 5%;
     height: 5%;
     opacity: 0.5;
-    filter: alpha(opacity=50);
     margin: 0 10px 0 10px;
 }
 
@@ -279,3 +275,95 @@ footer{
     -o-transition: all 300ms ease;
     transition: all 300ms ease;
 }
+
+.street-eval-form {
+    background-color: #f5f5f5;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+.street-eval-form2 {
+    background-color: white;
+    border-color: #f5f5f5;
+    border-style: solid;
+    border-width: 4px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+}
+
+.street-eval-form3 {
+    background-color: #f5f5f5;
+    margin-top: 0;
+    padding: 15px;
+    border-radius: 0;
+}
+
+.street-eval-form4 {
+    background-color: white;
+    border-color: #f5f5f5;
+    border-style: solid;
+    border-width: 4px;
+    margin-bottom: 0;
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+    margin-top: 30px;
+    padding: 0 15px;
+    padding-top: 5px;
+}
+
+.street-eval-form5 {
+    background-color: white;
+    border-color: #f5f5f5;
+    border-style: solid;
+    border-width: 4px;
+    margin-bottom: 0;
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+    margin-top: 30px;
+    padding: 25px 25px;
+}
+
+.street-eval-form6 {
+    background-color: white;
+    border-color: #f5f5f5;
+    border-style: solid;
+    border-width: 4px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding: 15px;
+    border-radius: 6px 6px 0 0;
+    background-color: #f5f5f5;
+    border-radius: 0 0 6px 6px;
+    margin-top: 0;
+    padding: 0;
+}
+
+.btn-lg,
+.btn-group-lg > .btn {
+    padding: 20px 16px;
+}
+
+.form-description {
+    font-size: 1.5em;
+}
+/*/////////////////////////// COOKIES //////////////////////////*/
+.cc-window.cc-banner {
+    padding: 0.5em 0.8em;
+    width: 100%;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+/**
+    add this when fade out transition is fixed:
+
+    .cc-window.cc-banner:hover {
+    opacity: 1;
+
+    else
+
+    opacity: 0.8; //0.9 can be considered
+}
+*/
