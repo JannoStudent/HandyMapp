@@ -24,6 +24,17 @@ path:hover:before {
     fill: #2ecc71;
 }
 
+/*///////////TEKST DISPLAY/////////////*/
+
 #tekstDef {
     display: none;
 }
+
+.tekstContainer {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 20px;
+    height: 40px;
+    margin-bottom: 50px;
+}
+
