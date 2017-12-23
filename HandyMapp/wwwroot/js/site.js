@@ -100,6 +100,14 @@ function fillautocomplete() {
     });
 }
 
+////////////////////////////////////////////DISABLE BUTTON////////////////////
+$('#placeInputSubmit').click(function() {
+    if ($('#search').val("")) {
+        alert("hallo");
+    }
+});
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 /*
 window.addEventListener("load", function () {
