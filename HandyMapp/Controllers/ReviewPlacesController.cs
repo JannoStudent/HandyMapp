@@ -23,6 +23,21 @@ namespace HandyMapp.Controllers
             return View();
         }
 
+        public IActionResult SelectBuilding()
+        {
+            return View();
+        }
+
+        public IActionResult ReviewStarBuilding()
+        {
+            return View();
+        }
+
+        public IActionResult ReviewDetailsBuilding()
+        {
+            return View();
+        }
+
         public IActionResult SearchPlaces(string searchstext)
         {
             PlacesController placesController = new PlacesController(_context);
