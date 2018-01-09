@@ -1,7 +1,12 @@
 ﻿body {
-    background: url('/img/1842compress.jpg') no-repeat center center;
+    background: url('/img/1842compress.jpg') no-repeat center center !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover !important;
+}
+
+.handyContainer {
+    background-color: transparent !important;
+    box-shadow: none !important;
 }

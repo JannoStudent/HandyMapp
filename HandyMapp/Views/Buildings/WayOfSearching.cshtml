@@ -10,31 +10,28 @@
     <li class="breadcrumbHandy">Find your place</li>
   </ul>
 </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>-->
-<div class="col-sm-12 col-md-3 col-lg-3">
-  <div class="container thumbnail-container-frontPage">
-    <div class="row">
-      <div class="col-sm-12 col-md-2 col-lg-2 thumbnail3">
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>How do you want to find an accessible place?</span>
+  </div>
+</div>
+<div class="row col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+  <div class="col-sm-12 col-md-6 col-lg-6">
+    <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Buildings" asp-action="PlaceInput" style="cursor: pointer;">
+      <img class="card-img-top" src="~/img/Searchbar.svg" alt="">
+      <div class="caption lowerThumbnail">
+        <h3 class="lowerThumbnail_text_big">Search by name</h3>
+        <p class="hard lowerThumbnail_text">- click to select this route - </p>
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-4 thumbnail3">
-        <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Buildings" asp-action="PlaceInput" style="cursor: pointer;">
-          <img class="card-img-top" src="~/img/Searchbar.svg" alt="">
-          <div class="caption lowerThumbnail">
-            <h3 class="lowerThumbnail_text_big">Searchfield</h3>
-            <p class="hard lowerThumbnail_text">- click to select this route - </p>
-          </div>
-        </a>
+    </a>
+  </div>
+  <div class="col-sm-12 col-md-6 col-lg-6">
+    <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Buildings" asp-action="SelectArea" style="cursor: pointer;">
+      <img class="card-img-top" src="~/img/map_v2.svg" alt="">
+      <div class="caption lowerThumbnail">
+        <h3 class="lowerThumbnail_text_big">Select on map</h3>
+        <p class="hard lowerThumbnail_text">- click to select this route - </p>
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-4">
-        <a class="thumbnail thumbnail-mode hoverThumbnails text-center" asp-controller="Buildings" asp-action="SelectArea" style="cursor: pointer;">
-          <img class="card-img-top" src="~/img/map_v2.svg" alt="">
-          <div class="caption lowerThumbnail">
-            <h3 class="lowerThumbnail_text_big">Discover accessible places on the map</h3>
-            <p class="hard lowerThumbnail_text">- click to select this route - </p>
-          </div>
-        </a>
-      </div>
-      <div class="col-sm-12 col-md-2 col-lg-2 thumbnail3">
-      </div>
-    </div>
+    </a>
   </div>
 </div>

@@ -2,56 +2,80 @@
 
 @{
     ViewData["Title"] = "street_eval2";
-
 }
 
-<html>
-<head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="~/css/start_rating.css" />
-    <style>
-         /* Always set the map height explicitly to define the size of the div
+<title>Simple Map</title>
+<meta name="viewport" content="initial-scale=1.0">
+<meta charset="utf-8">
+<link rel="stylesheet" href="~/css/start_rating.css" />
+<style>
+  /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
-        #content,#c1 {
-            float: left;           
-        }
-        #map, #pano {
-            float: both;
-            margin-left: 0px;
-            margin-top: 0px;
-            height: 300px;
-            width: 450px;
-        }
-     
-         /* Optional: Makes the sample page fill the window. */
-         html, body {
-             height: 100%;
-             margin: 0;
-             padding: 0;
-         }
+  #content, #c1 {
+  }
 
+  #map, #pano {
+    height: 290px;
+    width: 440px;
+  }
 
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
-</head>
-<body>
-    <div style="width:100%">
-        <h1>Final Evaluation</h1>
-       
-        <div id="c1">
-            <div id="map"></div>
-            <div id="pano"></div>
-        </div>
-        <div id="content" style="padding-left:5%;">
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
 
-        </div>
+<div class="row breadcrumbRow">
+  <ul class="container breadcrumbContainer">
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
+    <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Select adress/building</li>
+    <li class="breadcrumbHandy">Enter your review</li>
+    <li class="breadcrumbHandy">Finish your review</li>
+  </ul>
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>Is this the right street?</span>
+  </div>
+</div>
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <div class="street-eval-form2 col-lg-12">
+    <div id="content-address"></div>
+  </div>
+</div>
+<div class="street-eval-form3 row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <form>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <div class="form-control" id="map"></div>
     </div>
-    <script>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <div class="form-control" id="pano"></div>
+    </div>
+  </form>
+</div>
+<div class="street-eval-form6 row col-sm-offset-3 col-sm-6 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <a class="btn btn-block btn-danger btn-lg" asp-controller="Home" asp-action="street_eval">No, try again&ensp;<span class="glyphicon glyphicon-repeat"></span></a>
+  </div>
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <a class="btn btn-block btn-success btn-lg" asp-controller="Home" asp-action="street_eval3">Yes, continue&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+  </div>
+</div>
+<!--Put this in next page
+    <form>
+        <div class="form-group">
+            <textarea class="form-control" id="" rows="3" placeholder="Give your comment about the street..." autofocus></textarea>
+        </div>
+    </form>
+</div>
+        -->
+<script>
         var map, latZoe, lngZoe, latLng;
 
-        var star;
+
         function initMap() {
             var geocoder = new google.maps.Geocoder();
             //zoetermeer coords
@@ -64,7 +88,7 @@
                 //latLng: new google.maps.LatLng(latZoe, lngZoe),
                 center: new google.maps.LatLng(latZoe, lngZoe),
                 mapTypeId: 'hybrid',
-                zoom: 25,
+                zoom: 19,
                 zoomControl: true,
                 zoomControlOptions: {
                     style: google.maps.ZoomControlStyle.LARGE
@@ -109,58 +133,34 @@
                 }, function (responses) {
                     //window.location.hash = '#' + latLng.lat() + "," + latLng.lng();
                     if (responses && responses.length > 0) {
-                        document.getElementById("content").innerHTML = '<h2>You are evaluating the street: </h2> <h3>' + responses[0].formatted_address + '</h3></br>' +
-                            '<form method="post" action="@Url.Action("successfullEval", "Home")">' +
-                            '<h3> Please rate the street on their accessibility</h3>' +
+                        document.getElementById("content-address").innerHTML =
+                            '<h4 style="margin:0 0;"><span class="text-success" style="font-size:125%;">' + responses[0].formatted_address + '</span>' + '</h3>';
+
+                        document.getElementById("content-rating").innerHTML =
                             ' <fieldset class="rating">' +
-                            '<input type="radio" id="star5" name="rating" value="5" onclick="getRatingByClick(5)"/><label class="full" for="star5" title="Awesome - 5 stars"></label>' +
-                            '<input type="radio" id="star4half" name="rating" value="4 and a half" onclick="getRatingByClick(4.5)"/><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>' +
-                            '<input type="radio" id="star4" name="rating" value="4" onclick="getRatingByClick(4)"/><label class="full" for="star4" title="Pretty good - 4 stars"></label>' +
-                            '<input type="radio" id="star3half" name="rating" value="3 and a half"onclick="getRatingByClick(3.5)" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>' +
-                            '<input type="radio" id="star3" name="rating" value="3"onclick="getRatingByClick(3)" /><label class="full" for="star3" title="Meh - 3 stars"></label>' +
-                            '<input type="radio" id="star2half" name="rating" value="2 and a half"onclick="getRatingByClick(2.5)" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>' +
-                            '<input type="radio" id="star2" name="rating" value="2" onclick="getRatingByClick(2)"/><label class="full" for="star2" title="Kinda bad - 2 stars"></label>' +
-                            '<input type="radio" id="star1half" name="rating" value="1 and a half" onclick="getRatingByClick(1.5)"/><label class="half" for="star1half" title="Meh - 1.5 stars"></label>' +
-                            '<input type="radio" id="star1" name="rating" value="1" onclick="getRatingByClick(1)"/><label class="full" for="star1" title="Sucks big time - 1 star"></label>' +
-                            '<input type="radio" id="starhalf" name="rating" value="half" onclick="getRatingByClick(0.5)"/><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>' +
-                            '</fieldset><br></br><br></br>' +
-                            '<h3>Leave a comment here:</h3><textarea id="textA" rows="4" name = "Desc" cols="80" value="ss">' +
-                            'TYPE BRO' +
-                            '</textarea ><br></br>' +
-                            '<input style="visibility: hidden" name="Value1" type="text" value="@Model.lat">' +
-                            '<input style="visibility: hidden" name="Value2" type="text" value="@Model.lng">' +
-                            '<input style="visibility: hidden" name="Streetname" type="text" value="' + responses[0].formatted_address+'">' +
-                            '<input style="visibility: hidden" id ="starR" name="Star" type="text" value="" onchange="getRatingByClick(this.value)">' +
-                            '<button type="submit" name="RR" value="4">asdasd</button>' +
-                            '</form>';
-
-
+                            '<input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>' +
+                            '<input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>' +
+                            '<input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>' +
+                            '<input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>' +
+                            '<input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>' +
+                            '<input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>' +
+                            '<input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>' +
+                            '<input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>' +
+                            '<input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>' +
+                            '<input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>' +
+                            '</fieldset>';
+                        document.getElementById("content-comment").innerHTML ='<h3>Leave a comment here:</h3><textarea rows="4" cols="80" placeholder="Type in you`re comment here...">' +
+                            '</textarea >';
                     } else {
                         console.log('Sorry but Google Maps could not determine the approximate postal address of this location.');
                     }
                 });
             }
 
-            window.onload = function getDesc() {
-                var desc = document.getElementById("textA").nodeValue();
-                return desc;
-            }
-        }
 
-        function getRatingByClick(rating) {
-            star = rating;
-            document.getElementById("starR").value = star;
         }
-
-        function gibaus() {
-            alert(star);
-        }
-
-    </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
-            async defer></script>
-    </body>
-</html>
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
+        async defer></script>

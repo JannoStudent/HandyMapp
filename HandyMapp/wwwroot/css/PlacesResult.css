@@ -1,20 +1,8 @@
-﻿.mapLayout {
-    display: flex;
-    width: 100%;
-    height: 94.8vh;
-}
-
-    .mapLayout .jumbotron {
-        margin-top: 10px;
-    }
-
-    .mapLayout .container {
-        width: 100%;
-    }
-
-/*right side page*/
+﻿/*right side page*/
 .PlacesOnMap {
-    margin-left: -15px;
+    position: relative !important;
+    margin-left: -25%;
+    display: flex;
     flex-grow: 8;
     padding: 0;
     z-index: 5;
@@ -25,8 +13,7 @@
     flex-direction: column;
     width: 25%;
     z-index: 10;
-    height: 94.8vh;
-    position: absolute;
+    height: 93.8vh;
     border-radius: 6px 0 0 6px;
     -moz-border-radius: 6px 0 0 6px;
     -webkit-border-radius: 6px 0 0 6px;
@@ -43,6 +30,7 @@
     margin: 10px;
     -ms-border-radius: 5px;
     border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px #b2b2b2;
     box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -121,33 +109,6 @@ button {
     padding: 15px 10px 20px 10px;
 }
 
-
-/*STARS-------------*/
-.helft, .midden {
-    fill: #c7c7c7;
-}
-
-path:hover:before {
-    fill: green;
-}
-
-#grade {
-    display: inline !important;
-}
-
-.baseColor {
-    fill: #c7c7c7;
-}
-
-.hoverColor {
-    fill: #6ede9c !important;
-}
-
-.colorSelected {
-    fill: #2ecc71;
-}
-
-
 /*Scrollbar*/
 .PlacesResults::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -171,10 +132,27 @@ path:hover:before {
     padding: 15px 0 15px;
 }
 
-.gmnoprint {
-    margin-left: 26% !important;
-}
-
 .widget-titlecard {
     margin-left: 26% !important;
 }
+
+.searchfield {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 10px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 1px #b2b2b2;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+    .searchfield label {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+        background-color: rgb(19, 112, 183);
+        padding: 15px;
+        color: #f5f5f5;
+    }
+
+    

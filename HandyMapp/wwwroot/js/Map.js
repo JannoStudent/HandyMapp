@@ -141,7 +141,6 @@ function initMap() {
         });
 
     map.addListener('zoom_changed', function () {
-        console.log(map.getZoom());
         if (map.getZoom() > 15) {
             map.setMapTypeId('roadmap');
         } else {
@@ -175,6 +174,3 @@ function clearMarkers() {
     markers.length = 0;
 }
 
-$(window).resize(function () {
-    $(".PlaceResult").reload();
-});
