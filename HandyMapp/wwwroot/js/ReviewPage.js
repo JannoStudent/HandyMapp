@@ -13,14 +13,16 @@ var QuestionCounter = 0;
 $("#further").click(function () {
     $("#EndReview").fadeOut("slow");
     $("#EndReview").remove();
-    $("#DetailsButtons").fadeIn("slow");
-    $("#DetailsQuestions").fadeOut("fast");
     $("#DetailsQuestions").text(questions[QuestionCounter]);
-    $("#DetailsQuestions").fadeIn("fast");
+    $("#DetailsButtons, #DetailsQuestions, #DetailsQuestionsNumber").fadeIn("slow");
 });
 
 $("#DetailsButtons > div").click(function () {
-    QuestionCounter += 1;
-    console.log(QuestionCounter);
-    $("#DetailsQuestions").text(questions[QuestionCounter]);
+    if (QuestionCounter < 5) {
+        QuestionCounter += 1;
+        $("#DetailsQuestions").text(questions[QuestionCounter]);
+        $("#DetailsQuestionsNumber").text(QuestionCounter + 1 + "/6");
+    }else {
+        window.location.replace("http://localhost:55742/ReviewPlaces/ThankYouBuilding");
+    }
 });

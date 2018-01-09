@@ -2,6 +2,12 @@
     margin-top: 150px;
 }
 
-#DetailsButtons {
+#DetailsButtons, #DetailsQuestionsNumber {
     display: none;
+}
+
+#DetailsQuestionsNumber {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
 }
