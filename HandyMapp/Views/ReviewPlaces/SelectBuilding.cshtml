@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Review";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row breadcrumbRow">
+  <ul class="container breadcrumbContainer">
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
+    <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Select adress/building</li>
+    <li class="breadcrumbHandy">Enter your review</li>
+    <li class="breadcrumbHandy">Finish your review</li>
+  </ul>
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>Enter the name</span>
+  </div>
+</div>
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <div class="form-group col-lg-4">
+    <input type="text" class="form-control" name="searchfield" id="searchfield" placeholder="Type in the address you want to review..." autofocus>
+  </div>
+</div>
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <div class="street-eval-form6 col-lg-4 col-lg-offset-4 col-md-3 col-md-offset-6 col-sm-3 col-sm-offset-6">
+    <!--<input type="submit" class="btn btn-block btn-success btn-lg" value="Next" asp-controller="Home" asp-action="street_eval4" />-->
+    <a class="btn btn-block btn-success btn-lg" asp-controller="ReviewPlaces" asp-action="ReviewStarBuilding">Rate&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+  </div>
+</div>

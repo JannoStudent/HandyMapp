@@ -4,66 +4,67 @@
     ViewData["Title"] = "street_eval2";
 }
 
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="~/css/start_rating.css" />
-    <style>
-         /* Always set the map height explicitly to define the size of the div
+<title>Simple Map</title>
+<meta name="viewport" content="initial-scale=1.0">
+<meta charset="utf-8">
+<link rel="stylesheet" href="~/css/start_rating.css" />
+<style>
+  /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
-        #content,#c1 {
-        }
-        #map, #pano {
-            height: 290px;
-            width: 440px;
-        }
-     
-         /* Optional: Makes the sample page fill the window. */
-         html, body {
-             height: 100%;
-             margin: 0;
-             padding: 0;
+  #content, #c1 {
+  }
 
-         }
-         
+  #map, #pano {
+    height: 290px;
+    width: 440px;
+  }
 
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
 
 <div class="row breadcrumbRow">
   <ul class="container breadcrumbContainer">
-    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choise</a></li>
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
     <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Select adress/building</li>
     <li class="breadcrumbHandy">Enter your review</li>
     <li class="breadcrumbHandy">Finish your review</li>
   </ul>
-</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb--><div class="row">
-    <div class="street-eval-form2 col-lg-12">
-        <div id="content-address"></div>
-    </div>
-</div>
-
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
 <div class="row">
-    <div class="street-eval-form3 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="col-lg-offset-1 col-md-offset-2 col-sm-offset-3 col-xs-offset-3">
-            <form class="form-inline">
-                <div class="form-group">
-                    <div class="form-control" id="map"></div>
-                </div>
-                <div class="form-group">
-                    <div class="form-control" id="pano"></div>
-                </div>
-            </form>
-        </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>Is this the right street?</span>
+  </div>
+</div>
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <div class="street-eval-form2 col-lg-12">
+    <div id="content-address"></div>
+  </div>
+</div>
+<div class="street-eval-form3 row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  <form>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <div class="form-control" id="map"></div>
     </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+      <div class="form-control" id="pano"></div>
+    </div>
+  </form>
 </div>
-
-
-
-<div class="street-eval-form6 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <a class="btn btn-block btn-success btn-lg" asp-controller="Home" asp-action="street_eval3">Review this street&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+<div class="street-eval-form6 row col-sm-offset-3 col-sm-6 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <a class="btn btn-block btn-danger btn-lg" asp-controller="Home" asp-action="street_eval">No, try again&ensp;<span class="glyphicon glyphicon-repeat"></span></a>
+  </div>
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <a class="btn btn-block btn-success btn-lg" asp-controller="Home" asp-action="street_eval3">Yes, continue&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+  </div>
 </div>
-    <!--Put this in next page
+<!--Put this in next page
     <form>
         <div class="form-group">
             <textarea class="form-control" id="" rows="3" placeholder="Give your comment about the street..." autofocus></textarea>
@@ -71,10 +72,10 @@
     </form>
 </div>
         -->
-    <script>
+<script>
         var map, latZoe, lngZoe, latLng;
-       
-     
+
+
         function initMap() {
             var geocoder = new google.maps.Geocoder();
             //zoetermeer coords
@@ -133,7 +134,7 @@
                     //window.location.hash = '#' + latLng.lat() + "," + latLng.lng();
                     if (responses && responses.length > 0) {
                         document.getElementById("content-address").innerHTML =
-                            '<h4 style="margin:0 0;">You are evaluating the street: ' + '<span class="text-success" style="font-size:125%;">' + responses[0].formatted_address + '</span>' + '</h3>';
+                            '<h4 style="margin:0 0;"><span class="text-success" style="font-size:125%;">' + responses[0].formatted_address + '</span>' + '</h3>';
 
                         document.getElementById("content-rating").innerHTML =
                             ' <fieldset class="rating">' +
@@ -155,11 +156,11 @@
                     }
                 });
             }
-           
+
 
         }
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
-            async defer></script>
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap"
+        async defer></script>
