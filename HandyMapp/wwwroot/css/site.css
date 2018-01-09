@@ -1,5 +1,6 @@
 ﻿body {
     font-size: 225%;
+    background-color: #e8e8e8;
 }
 
 /*////////////////////////////////////// COLORS AND SHADOWS //////////////////////////////////////*/
@@ -59,10 +60,6 @@
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
     transition: all 300ms ease;
-}
-
-body {
-    background-color: #e8e8e8;
 }
 
 .breadcrumbRow {
