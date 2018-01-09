@@ -20,7 +20,7 @@ $("#further").click(function () {
 });
 
 $("#DetailsButtons > div").click(function () {
-    $("#DetailsQuestions").text(questions[QuestionCounter]);
     QuestionCounter += 1;
     console.log(QuestionCounter);
+    $("#DetailsQuestions").text(questions[QuestionCounter]);
 });
