@@ -17,12 +17,12 @@
 </div>
 <div class="row">
   <div class="container form-container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-    <form>
+    <form method="post" asp-action="PlacesResult" asp-controller="Buildings">
       <div class="form-group">
           @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
       </div>
       <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 form-button">
-        <button class="btn btn-block btn-primary " type="submit" asp-controller="Buildings" asp-action="PlacesResult">
+        <button class="btn btn-block btn-primary " type="submit">
           <span><span class="glyphicon glyphicon-ok-circle"></span>Route options</span>
         </button>
       </div>

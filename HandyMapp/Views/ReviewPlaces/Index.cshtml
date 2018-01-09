@@ -30,7 +30,7 @@
     <script>
         $(".search").keypress(function(e) {
             if ($(".search").val().length >= 3) {
-                if (e.which === 13){
+                if (e.which === 13) {
                     var val = $('#search').val();
                     $.ajax({
                             type: 'post',
@@ -39,6 +39,39 @@
                         })
                         .done(function(partialViewResult) {
                             $("#reloadAjax").html(partialViewResult);
+
+                            $(".PlaceResultButton").click(function() {
+                                var description = $(this).parent('div.PlaceResult').children('div.DescriptionContainer');
+                                var imageContainter = $(this).parent('div.PlaceResult').children('div.ImageContainter');
+                                var image = $(this).parent('div.PlaceResult').children('div.ImageContainter').children('img');
+
+                                $(this).find('span').toggleClass('glyphicon-chevron-down').toggleClass('glyphicon-chevron-up');
+
+                                if (description.css("height") === "15px") {
+                                    var curHeight = description.height();
+                                    var autoHeight = description.css('height', 'auto').height() + 20;
+                                    description.height(curHeight).animate({
+                                        height: autoHeight
+                                    });
+                                    imageContainter.animate({
+                                        height: (imageContainter.height() * 1.20)
+                                    });
+                                    image.animate({
+                                        marginTop: (image.height() * 0.00)
+                                    });
+
+                                } else {
+                                    description.animate({
+                                        height: '15px'
+                                    });
+                                    imageContainter.animate({
+                                        height: (imageContainter.height() * 0.80)
+                                    });
+                                    image.animate({
+                                        marginTop: -(image.height() * 0.10)
+                                    });
+                                }
+                            });
                         });
                 }
             }

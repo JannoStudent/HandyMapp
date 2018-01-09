@@ -60,7 +60,7 @@ $(".search").keypress(function (e) {
     if ($(".search").val().length >= 3) {
         fillautocomplete();
         if (e.which === 13) {
-            $("input:text").val(arrDescription[0]);
+            //$("input:text").val(arrDescription[0]);
             $(".ui-autocomplete").css("display", "none");
         }
     }
