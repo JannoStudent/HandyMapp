@@ -1,6 +1,6 @@
 ﻿var questions = [
     "Are there ramps beside the stairs?",
-    "Are there dorpels?",
+    "Are there threshold?",
     "Are there elevators?",
     "Are there wheelchair accessible toilets?",
     "Are hallways wide enough for wheelchairs?",
@@ -22,7 +22,10 @@ $("#DetailsButtons > div").click(function () {
         QuestionCounter += 1;
         $("#DetailsQuestions").text(questions[QuestionCounter]);
         $("#DetailsQuestionsNumber").text(QuestionCounter + 1 + "/6");
-    }else {
+        $('#answers').append('<tr><td>' + QuestionCounter +'</td><td>'+ $(this).attr("id") +'</tr>');
+    } else {
+        QuestionCounter += 1;
+        $('#answers').append('<tr><td>' + QuestionCounter + '</td><td>' + $(this).attr("id") + '</tr>');
         window.location.replace("http://localhost:55742/ReviewPlaces/ThankYouBuilding");
     }
 });
