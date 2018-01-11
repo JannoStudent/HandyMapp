@@ -46,18 +46,23 @@
     box-shadow: 0 8px 6px -6px #999;
 }
 
+.navbar-toggle {
+    position: absolute !important;
+    right: 1% !important;
+}
+
 .navbar-text {
-    font-size: 0.6em;
+    font-size: 0.7em;
     margin: 0;
     padding: 0;
+    max-width:8.2em;
 }
 
 .brand-logo {
-    width: 80%;
+    width: 70%;
     /* you can use % */
     height: auto;
-    margin-top: -12px;
-    margin-right: 0;
+    margin: 5 0;
 }
 
 .btn-default-contact:hover {
@@ -152,6 +157,10 @@
 
 .visitedBreadcrumb:before {
     border: 3px solid #FEC20F !important;
+}
+
+.glyphicon-earphone {
+    color: #1370B8;
 }
 /*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
 .glyphicon:before {
@@ -295,14 +304,15 @@ p .hard:hover {
 }
 
 .img-navbar {
-    width: 40%;
+    width: 20%;
     height: auto;
     margin: 0 0.2em 0 0;
-    max-width: 25px;
+    max-width: 20px;
+    padding-right: 0;
 }
 
 .brand-brand {
-    margin-right: 0;
+    padding: 0
 }
 
 .card-img-top-walkingAid {
@@ -312,7 +322,7 @@ p .hard:hover {
 }
 
 .description-container {
-    margin-top: 0 0 15px 0;
+    margin: 0 0 15px 0;
     padding: 0;
     list-style: none;
     background-color: #f5f5f5;

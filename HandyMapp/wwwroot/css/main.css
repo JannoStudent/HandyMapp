@@ -40,8 +40,7 @@
   width: 70%;
   /* you can use % */
   height: auto;
-  margin-top: -8px;
-  margin-right: 0;
+  margin: 0;
 }
 /*////////////////////////////////////// GLYPHICON //////////////////////////////////////*/
 .glyphicon:before {
