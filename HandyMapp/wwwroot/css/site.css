@@ -583,3 +583,11 @@ input {
     font-size: 80%;
 }
 
+@media (max-width: 768px) {
+    .handyContainer {
+        width: 100%;
+    }
+    .breadcrumbContainer {
+        width: 90%;
+    }
+}
