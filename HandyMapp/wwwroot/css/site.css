@@ -46,6 +46,11 @@
     box-shadow: 0 8px 6px -6px #999;
 }
 
+.navbar-toggle {
+    position: absolute !important;
+    right: 1% !important;
+}
+
 .brand-logo {
     width: 80%;
     /* you can use % */
