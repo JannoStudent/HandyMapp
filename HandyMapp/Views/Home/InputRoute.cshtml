@@ -20,17 +20,16 @@
     <form>
         <div class="form-group">
             <label class="from-to">From:</label>
-            <input type="text" class="form-control" placeholder="Type in the address of your start location..." autofocus>
+            @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
         </div>
-        <br>
         <div class="form-group">
             <label class="from-to">To:</label>
-            <input type="email" class="form-control" placeholder="Type in the address of your destination...">
+            @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-12 form-button">
             <span style="color:white;"> Input for the route...</span>
-            <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
+            <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions" method="post"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
         </div>
     </form>
 </div>

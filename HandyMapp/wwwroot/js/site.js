@@ -1,4 +1,4 @@
-﻿$(function() {
+﻿$(function () {
     //$(':input[type="submit"]').prop('disabled', true);
     /*$(':input[type="text"]').keyup(function () {
         if ($(this).val() !== '') {
@@ -6,7 +6,7 @@
         }
     });*/
 
-    $(".PlaceResult").click(function() {
+    $(".PlaceResult").click(function () {
         var rating = 10; //Variable input                            /*Bernhard*/
         var i;
         var objectId = "#" + $(this).find(".rating").attr("id");
@@ -18,7 +18,7 @@
     });
 });
 
-$(".PlaceResultButton").click(function() {
+$(".PlaceResultButton").click(function () {
     var description = $(this).parent('div.PlaceResult').children('div.DescriptionContainer');
     var imageContainter = $(this).parent('div.PlaceResult').children('div.ImageContainter');
     var image = $(this).parent('div.PlaceResult').children('div.ImageContainter').children('img');
@@ -57,21 +57,18 @@ $(".PlaceResultButton").click(function() {
 var arrDescription = [];
 
 $(".search").keypress(function (e) {
-    if ($(".search").val().length >= 3) {
-        fillautocomplete();
-        if (e.which === 13) {
-            //$("input:text").val(arrDescription[0]);
-            $(".ui-autocomplete").css("display", "none");
-        }
+    fillautocomplete($(this));
+    if (e.which === 13) {
+        $(".ui-autocomplete").css("display", "none");
     }
 });
 
 
 
-function fillautocomplete() {
+function fillautocomplete(input) {
     $.ajax({
         type: "GET",
-        url: '/api/Places/AutoComplete/' + $(".search").val(),
+        url: '/api/Places/AutoComplete/' + input.val(),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
@@ -79,7 +76,6 @@ function fillautocomplete() {
             arrDescription = [];
             for (var i = 0; i < result.predictions.length; i++) {
                 arrDescription.push(result.predictions[i].description);
-
                 form += '<input type="text" id="z' + i + '__Id" name="[' + i + '].Id" value="' + result.predictions[i].id + '">' +
                     '<input type="text" id="z' + i + '__PlaceId" name="[' + i + '].PlaceId" value="' + result.predictions[i].place_id + '">' +
                     '<input type="text" id="z' + i + '__Description" name="[' + i + '].Description" value="' + result.predictions[i].description + '">' +
@@ -93,7 +89,7 @@ function fillautocomplete() {
         },
         error: window.errorFunc
     }).done(function () {
-        $(".search").autocomplete({
+        input.autocomplete({
             source: arrDescription,
             position: { my: "left top ", at: "left+0 top+50" }
         });
@@ -101,7 +97,7 @@ function fillautocomplete() {
 }
 
 ////////////////////////////////////////////DISABLE BUTTON////////////////////
-$('#placeInputSubmit').click(function() {
+$('#placeInputSubmit').click(function () {
     if ($('#search').val("")) {
         alert("hallo");
     }

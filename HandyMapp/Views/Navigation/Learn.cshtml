@@ -1,0 +1,270 @@
+﻿@model HandyMapp.Models.Navigation.VectorViewItem
+
+@{
+    ViewData["Title"] = "Learn";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+
+<div id="map"></div>
+<div class="NavigationBlock" style="">
+    <form>
+        <input id="start" value="start" />
+        <input id="end" value="end" />
+        <button id="button" class="btn btn-default" type="button">Go</button>
+    </form>
+</div>
+
+
+
+
+@section Style {
+    <link rel="stylesheet" href="~/css/Navigation.css" />
+}
+
+@section Scripts {
+    @*<script src="~/js/MapLearn.js"></script>*@
+    <script>
+        var map;
+        var markers = [];
+
+        var startLat;
+        var startLng;
+
+        var endLat;
+        var endLng;
+
+        function initMap() {
+            map = new window.google.maps.Map(document.getElementById('map'),
+                {
+                    center: { lat: 52.058295, lng: 4.4950389 },
+                    zoom: 13,
+                    mapTypeId: 'satellite',
+                    styles: [
+                        {
+                            "featureType": "landscape.natural",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#cddebe"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "landscape.natural.terrain",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#a9adaf"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#e1c78e"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi.medical",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f7bbff"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi.park",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#b7dc8d"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#81878b"
+                                },
+                                {
+                                    "weight": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f4f28c"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#ebe72c"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f59d78"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#f06b33"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway.controlled_access",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f06b33"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway.controlled_access",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#ca470f"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "transit.line",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#b8bcbe"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "water",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#7aa9ef"
+                                }
+                            ]
+                        }
+                    ]
+                });
+
+            map.addListener('zoom_changed',
+                function() {
+                    if (map.getZoom() > 15) {
+                        map.setMapTypeId('satellite');
+                    } else {
+                        map.setMapTypeId('terrain');
+                    }
+
+                });
+
+            google.maps.event.addListener(map,
+                'click',
+                function(event) {
+                    if (markers.length >= 2) {
+                        clearMarkers();
+                        $("#start").val("");
+                        $("#end").val("");
+                    }
+                    placeMarker(event.latLng);
+                });
+
+            function placeMarker(location) {
+                markers.push(new window.google.maps.Marker({
+                    position: location,
+                    map: map
+                }));
+                $("#start").val(markers[0].getPosition());
+                startLat = markers[0].getPosition().lat();
+                startLng = markers[0].getPosition().lng();
+                if (markers[1]) {
+                    $("#end").val(markers[1].getPosition());
+                    endLat = markers[1].getPosition().lat();
+                    endLng = markers[1].getPosition().lng();
+                }
+            }
+            @*
+    var vect = @Html.Raw(Json.Serialize(Model.VectorPoints));
+
+        vect.forEach(function(vec) {
+        var marker = new window.google.maps.Marker({
+            position: { lat: vec.latitude, lng: vec.longitude },
+            icon: '@Url.Content("~/img/marker.png")'
+        });
+        marker.setMap(map);
+    });*@
+
+            var locations = @Html.Raw(Json.Serialize(Model.Locations));
+
+            for (var i = 0; i < locations.length; i += 2) {
+
+                var line = new window.google.maps.Polyline({
+                    path: [{ lat: locations[i].lat, lng: locations[i].lng},
+                        { lat: locations[i+1].lat, lng: locations[i+1].lng}],
+                    geodesic: true,
+                    strokeColor:'#FF0000',
+                    strokeOpacity:1.0,
+                    strokeWeight:2
+            });
+
+        line.setMap(map);
+        }
+   
+        }
+
+        function clearMarkers() {
+            markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers.length = 0;
+        }
+
+        $("#button").click(function() {
+
+            console.log($("#start").val());
+
+            if (markers.length === 2) {
+                $.ajax({
+                    type: 'post',
+                    url: '/Navigation/LearnAlgorithm',
+                    data: { startLat: startLat, startLng: startLng, endLat: endLat, endLng: endLng },
+                    success: function(result) {
+
+                    },
+                    error: window.errorFunc
+                }).done(function() {
+
+                });
+            }
+        });
+    </script>
+
+    <script async defer
+            type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u38FnWXefa5sf7k--4Tp5hFhYcyvE08&libraries=places&callback=initMap">
+    </script>
+}
+

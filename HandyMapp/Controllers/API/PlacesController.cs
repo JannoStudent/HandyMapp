@@ -12,6 +12,7 @@ using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Data;
 using HandyMapp.Models.GoogeApi;
 using HandyMapp.Models.GoogeApi.Places.AutoComplete;
+using HandyMapp.Models.GoogeApi.Places.Details;
 using ImageSharp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
