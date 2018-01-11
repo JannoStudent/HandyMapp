@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Controllers.API;
 using HandyMapp.Data;
 using HandyMapp.Models.GoogeApi;
@@ -28,9 +29,10 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-        public IActionResult ReviewStarBuilding()
+        public IActionResult ReviewStarBuilding(IList<PlacePrediction> placePredictions)
         {
-            return View();
+            PlacesController placesController = new PlacesController(_context);
+            return View(placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList());
         }
 
         public IActionResult ReviewDetailsBuilding()

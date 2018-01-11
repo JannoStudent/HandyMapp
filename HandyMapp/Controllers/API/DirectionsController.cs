@@ -23,6 +23,7 @@ namespace HandyMapp.Controllers.API
         public Predictions ByLocation(Location start, Location end)
         {
             string s = "https://maps.googleapis.com/maps/api/directions/json?origin=" + start.lat + "," + start.lng +
+                "&alternatives=true" +
                 "&destination=" + end.lat + "," + end.lng +
                 "&mode=walking&language=nl&unit=metric&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI";
 
