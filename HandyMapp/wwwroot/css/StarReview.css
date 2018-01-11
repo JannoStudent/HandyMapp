@@ -38,3 +38,24 @@ path:hover:before {
     margin-bottom: 50px;
 }
 
+/*/////////////////////////////// MEDIA QUERIES //////////////////////*/
+
+@media (max-width: 970px) {
+    #pass, #passToggleSmall {
+        display: none;
+    }
+
+    #passToggle {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    #pass, #passToggle {
+        display: none;
+    }
+
+    #passToggleSmall {
+        display: block;
+    }
+}
