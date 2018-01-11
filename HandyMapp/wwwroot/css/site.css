@@ -326,6 +326,7 @@ p .hard:hover {
     padding: 0;
     list-style: none;
     background-color: #f5f5f5;
+    -ms-border-radius: 0 0 6px 6px;
     border-radius: 0 0 6px 6px;
 }
 
@@ -485,7 +486,7 @@ p .hard:hover {
 }
 
 .form-description {
-    font-size: 1.5em;
+    font-size: 22px !important;
 }
 /*/////////////////////////// COOKIES //////////////////////////*/
 .cc-window.cc-banner {
@@ -579,3 +580,4 @@ input {
 .btn {
     font-size: 100%;
 }
+
