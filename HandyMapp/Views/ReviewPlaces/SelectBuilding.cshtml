@@ -17,13 +17,15 @@
     <span>Enter the name</span>
   </div>
 </div>
-<div class="row col-sm-offset-1 col-sm-10 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-  <div class="form-group">
-    <input type="text" class="form-control" name="searchfield" id="searchfield" placeholder="Type in the address you want to review..." autofocus>
-  </div>
-</div>
-<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-  <div class="street-eval-form6 col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
-    <a class="btn btn-block btn-success btn-lg" asp-controller="ReviewPlaces" asp-action="ReviewStarBuilding">Rate building&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+<div class="row">
+  <div class="container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+    <form method="post" asp-action="PlacesResult" asp-controller="Buildings">
+      <div class="form-group">
+        @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
+      </div>
+      <div class="street-eval-form6 col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
+        <a class="btn btn-block btn-primary btn-lg" asp-controller="ReviewPlaces" asp-action="ReviewStarBuilding">Rate building&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+      </div>
+    </form>
   </div>
 </div>
