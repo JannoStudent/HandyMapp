@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Controllers
@@ -48,8 +49,11 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-        public IActionResult RouteOptions()
+        [HttpPost]
+        public IActionResult RouteOptions(IList<PlacePrediction> startLocation, IList<PlacePrediction> endLocation)
         {
+            string test = startLocation[0].Description;
+            string test2 = endLocation[0].Description;
             return View();
         }
 

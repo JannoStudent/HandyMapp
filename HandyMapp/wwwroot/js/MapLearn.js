@@ -1,6 +1,12 @@
 ﻿var map;
 var markers = [];
 
+var startLat;
+var startLng;
+
+var endLat;
+var endLng;
+
 function initMap() {
     map = new window.google.maps.Map(document.getElementById('map'),
         {
@@ -146,25 +152,37 @@ function initMap() {
         } else {
             map.setMapTypeId('terrain');
         }
+
     });
+
+    google.maps.event.addListener(map, 'click', function (event) {
+        if (markers.length >= 2) {
+            clearMarkers();
+            $("#start").val("");
+            $("#end").val("");
+        }
+        placeMarker(event.latLng);
+    });
+
+    function placeMarker(location) {
+        markers.push(new window.google.maps.Marker({
+            position: location,
+            map: map
+        }));
+        $("#start").val(markers[0].getPosition());
+        startLat = markers[0].getPosition().lat();
+        startLng = markers[0].getPosition().lng();
+        if (markers[1]){
+            $("#end").val(markers[1].getPosition());
+            endLat = markers[1].getPosition().lat();
+            endLng = markers[1].getPosition().lng();
+        }
+    }
+
+    var Vectors = @Html.Raw(Json.Serialize(Model));
+
+    console.log(Vectors);
 }
-
-$(".PlaceResult").click(function () {
-    //Wytze//
-    clearMarkers();
-    var lat = $(this).find("#lat").val();
-    var lng = $(this).find("#lng").val();
-    var latlng = new window.google.maps.LatLng( parseFloat(lat), parseFloat(lng) );
-
-    markers.push(new window.google.maps.Marker({
-        position: latlng,
-        map: map,
-        icon: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/64/map-marker-icon.png'
-    }));
-    
-    map.setCenter(latlng);
-    map.setZoom(16);
-});
 
 function clearMarkers() {
     markers.forEach(function (marker) {
@@ -173,3 +191,21 @@ function clearMarkers() {
     markers.length = 0;
 }
 
+$("#button").click(function () {
+
+    console.log($("#start").val());
+
+    if (markers.length === 2) {
+        $.ajax({
+            type: 'post',
+            url: '/Navigation/LearnAlgorithm',
+            data: { startLat: startLat, startLng: startLng, endLat: endLat, endLng: endLng },
+            success: function (result) {
+
+            },
+            error: window.errorFunc
+        }).done(function () {
+
+        });
+    }
+});

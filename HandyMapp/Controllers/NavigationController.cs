@@ -8,7 +8,11 @@ using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Directions.Enums;
 using GoogleMapsAPI.NET.API.Directions.Results;
+using HandyMapp.Controllers.API;
 using HandyMapp.Data;
+using HandyMapp.Models.GoogeApi;
+using HandyMapp.Models.GoogeApi.Directions;
+using HandyMapp.Models.GoogeApi.Places.Details;
 using HandyMapp.Models.Navigation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
@@ -31,6 +35,98 @@ namespace HandyMapp.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Learn()
+        {
+            List<Vector> vectors = _context.Vectors.ToList();
+            List<VectorPath> vectorPaths = _context.VectorPaths.ToList();
+
+            List<Location> paths = new List<Location>();
+            foreach (var vectorPath in vectorPaths)
+            {
+                
+                paths.Add(new Location() {lat = (double )vectors.Find(x => x.Id == vectorPath.VectorId1).Latitude, lng = (double) vectors.Find(x => x.Id == vectorPath.VectorId1).Longitude });
+                paths.Add(new Location() {lat = (double )vectors.Find(x => x.Id == vectorPath.VectorId2).Latitude, lng = (double) vectors.Find(x => x.Id == vectorPath.VectorId2).Longitude });
+            }
+           
+
+            return View(new VectorViewItem(){ VectorPoints = vectors, Locations = paths });
+        }
+
+        [HttpPost]
+        public async void LearnAlgorithm(double startLat, double startLng, double endLat, double endLng)
+        {
+            DirectionsController directionController = new DirectionsController();
+
+            //var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+            //var directionsResult = client.Directions.GetDirections(origin: new GeoCoordinatesLocation(startLat, startLng), destination: new GeoCoordinatesLocation(endLat, endLng), mode: TransportationModeEnum.Walking, waypoints: null, alternatives: true, avoid: null, language: "dutch", units: UnitSystemEnum.Metric, region: null, departureTime: DateTime.Now, arrivalTime: null, optimizeWaypoints: true, transitMode: null, transitRoutingPreference: TransitRoutingPreferenceEnum.LessWalking, trafficModel: TrafficModelEnum.BestGuess);
+
+            Route[] routes = directionController.ByLocation(new Location() { lat = startLat, lng = startLng }, new Location() { lat = endLat, lng = endLng }).Routes;
+
+            foreach (var route in routes)
+            {
+                foreach (var leg in route.Legs)
+                {
+                    foreach (var step in leg.Steps)
+                    {
+                        Vector parent = new Vector(step.StartLocation.Lat, step.StartLocation.Lng);
+                        Vector child = new Vector(step.EndLocation.Lat, step.EndLocation.Lng);
+                        VectorPath vectorPath1 = new VectorPath(step.Distance.Value)
+                        {
+                            VectorId1Navigation = parent,
+                            VectorId2Navigation = child
+                        };
+                        VectorPath vectorPath2 = new VectorPath(step.Distance.Value)
+                        {
+                            VectorId1Navigation = child,
+                            VectorId2Navigation = parent
+                        };
+
+                        if (!_context.Vectors.Any(x => x.Latitude == step.StartLocation.Lat && x.Longitude == step.StartLocation.Lng))
+                        {
+                            _context.Vectors.Add(parent);
+                            _context.VectorPaths.Add(vectorPath1);
+                            _context.SaveChanges();
+                        }
+
+                        if (!_context.Vectors.Any(x =>
+                            x.Latitude == step.EndLocation.Lat && x.Longitude == step.EndLocation.Lng))
+                        {
+                            _context.Vectors.Add(child);
+                            _context.VectorPaths.Add(vectorPath2);
+                            _context.SaveChanges();
+                        }
+
+                        parent = _context.Vectors.First(x =>
+                            x.Latitude == step.StartLocation.Lat &&
+                            x.Longitude == step.StartLocation.Lng);
+                        child = _context.Vectors.First(x =>
+                            x.Latitude == step.EndLocation.Lat &&
+                            x.Longitude == step.EndLocation.Lng);
+
+                        if (!_context.VectorPaths.Any(x => x.VectorId1 == parent.Id && x.VectorId2 == child.Id))
+                        {
+                            vectorPath1 = new VectorPath(step.Distance.Value)
+                            {
+                                VectorId1Navigation = parent,
+                                VectorId2Navigation = child
+                            };
+                            _context.VectorPaths.Add(vectorPath1);
+                        }
+                        if (!_context.VectorPaths.Any(x => x.VectorId1 == child.Id && x.VectorId2 == parent.Id))
+                        {
+                            vectorPath2 = new VectorPath(step.Distance.Value)
+                            {
+                                VectorId1Navigation = child,
+                                VectorId2Navigation = parent
+                            };
+                            _context.VectorPaths.Add(vectorPath2);
+                        }
+                    }
+                }
+            }
+            _context.SaveChanges();
         }
 
         [HttpPost]

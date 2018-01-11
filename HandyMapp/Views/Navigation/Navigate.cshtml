@@ -3,7 +3,32 @@
     ViewData["Title"] = "Navigate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Navigate</h2>
+<div id="map"></div>
+<div class="NavigationBlock" style="">
+    <form>
+        @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
+        @Html.Partial("~/Views/PartialView/_AutoComplete.cshtml")
+    </form>
+</div>
 
 
 
+
+@section Style {
+    <link rel="stylesheet" href="~/css/Navigation.css" />
+}
+
+@section Scripts {
+    <script src="~/js/Map.js"></script>
+    <script async defer
+            type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u38FnWXefa5sf7k--4Tp5hFhYcyvE08&libraries=places&callback=initMap">
+    </script>
+    <script>
+        function placeMarker(location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+}

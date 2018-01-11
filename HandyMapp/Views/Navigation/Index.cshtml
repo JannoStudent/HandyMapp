@@ -75,16 +75,11 @@
 
             flightPath2.setMap(map);
         </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&callback=initMap">
-        </script>
 }
 else
 {
     <script>
-            // This example requires the Places library. Include the libraries=places
-            // parameter when you first load the API. For example:
-            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
 
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
@@ -160,7 +155,9 @@ else
                     });
             }
     </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&libraries=places&callback=initMap"
-                async defer>
+        
+    }
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs&libraries=places&callback=initMap"
+            async defer>
         </script>
-}
