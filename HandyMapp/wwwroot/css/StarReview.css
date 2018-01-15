@@ -17,11 +17,11 @@ path:hover:before {
 }
 
 .hoverColor {
-    fill: #6ede9c !important;
+    fill: #ffe085 !important;
 }
 
 .colorSelected {
-    fill: #2ecc71;
+    fill: #FEC20F;
 }
 
 /*///////////TEKST DISPLAY/////////////*/
@@ -33,9 +33,12 @@ path:hover:before {
 .tekstContainer {
     text-align: center;
     font-size: 22px;
-    margin-top: 20px;
     height: 40px;
     margin-bottom: 50px;
+}
+
+#street-eval-form2-1 {
+    padding: 0;
 }
 
 /*/////////////////////////////// MEDIA QUERIES //////////////////////*/
