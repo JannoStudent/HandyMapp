@@ -274,7 +274,7 @@
       html_infowindow += '<b>Postal Address:</b> </br>' + address;
       //html_infowindow += '<b>placeID: </b> ' + placeId;
       html_infowindow += '<br><small>' + '<i class="ti ti-location-pin"></i> Latitude: ' + latLng.lat().toString().substr(0, 10) + ' &nbsp; Longitude: ' + latLng.lng().toString().substr(0, 10) + '</small><br>';
-      html_eval_text += '<b><span style="font-size:150%;">Selected Street:</b> </br>' + address + '</span>';
+      html_eval_text += '<b class="clearfix"><span style="font-size:80%;"> Selected Address </b>' + '<h4 class="text-success"style="margin:0; font-size:70%;">' + address + '</h4>' + '</span>';
       html_eval_button += '<form method="POST" id=\"sampleForm\" action="\street_eval2\" controller="\Home\">' +
 
         '<input style=\"visibility: hidden; position: absolute;\" name=\"Value1\" type=\"text\" value="' + mylat + '">' +
@@ -933,28 +933,30 @@
     <span style="font-size:200%">Enter text or mark a street on the map </span>
 </div>
 -->
-<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-  <div class="form-group col-lg-4">
-    <input type="text" class="form-control" name="searchfield" id="searchfield" placeholder="Type in the address you want to review..." autofocus>
-  </div>
-  <div class="form-group col-lg-4">
-    <div id="info_to_street" style=" height:100%;  width:100%;" value=""></div>
-  </div>
-  <div class="form-group col-lg-4">
-    <div class="button-confirm" id="info_to_street_confirm" style="padding-top: 10px;" value=""></div>
-  </div>
-  <!--
-  <div class="col-sm-12 col-md-12 col-lg-12 form-button">
-      <span style="color:white;"> Input for the route...</span>
-      <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
-  </div>
-      -->
-</div>
-<!--<input type="hidden" name="placeinfo" id="placeinfo" />
-  <input type="submit" style="margin-top:1%; width:30%; height:50px;" value="Search" /><br />
-</form>-->
-<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-  <div id="map_canvas" style="width:100%; height: 360px"></div>
+
+<!--///////////////////////////////// LAYOUT ///////////////////////////////////////////////////-->
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 street-eval-form2">
+    <div class="form-inline">
+        <div class="input-group pull-left col-lg-5 col-sm-12 col-xs-12 clearfix" style="padding: 10px 30px 15px 0;">
+            <input style="min-height: 50px;"type="text" class="form-control" name="searchfield" id="searchfield" placeholder="Type in the address you want to review..." autofocus>
+        </div>
+        <div class="col-lg-5 col-sm-12 col-xs-12" style="min-width: 300px; max-width: 30px; max-height: 80px;">
+            <div id="info_to_street" style="height: 100%; width: 100%;" value=""></div>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-xs-12 pull-right" style="padding: 0; min-width: 200px;">
+            <div class="button-confirm" id="info_to_street_confirm" style="padding: 0 0 15px 0;" value=""></div>
+        </div>
+   </div>
+    <!--
+    <div class="col-sm-12 col-md-12 col-lg-12 form-button">
+        <span style="color:white;"> Input for the route...</span>
+        <a class="btn btn-block btn-primary btn-lg" asp-controller="Home" asp-action="RouteOptions"><span class="glyphicon glyphicon-ok-circle"></span>Route options</a>
+    </div>
+    -->
+    <!--<input type="hidden" name="placeinfo" id="placeinfo"/>
+    <input type="submit" style="margin-top:1%; width:30%; height:50px;" value="Search"/><br/>
+    </form>-->
+    <div id="map_canvas" style="width: 100%; height: 390px"></div>
 </div>
 <!--
 <div class="floating" id="toggle">–</div>
