@@ -7,22 +7,6 @@
             $(objectId + "> path.helft").eq(i).addClass("colorSelected");
             $(objectId + "> path.midden").eq(i / 2).addClass("colorSelected");
         } 
-
-        $("form > input").keyup(function () {
-
-            var empty = false;
-            $('form > input').each(function () {
-                if ($(this).val() === '') {
-                    empty = true;
-                }
-            });
-
-            if (empty) {
-                $("#submitButton").attr("disabled", "disabled");
-            } else {
-                $('#submitButton').removeAttr('disabled'); 
-            }
-        });
     });
 });
 
