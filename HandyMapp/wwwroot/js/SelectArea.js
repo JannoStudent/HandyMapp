@@ -8,8 +8,8 @@ $("g").click(function () {
     $("#wijk").parent().animate({ borderColor: "#1370B8" });
     $(".wijkStroke").removeClass("AreaClicked");
     $(this).find("polygon").addClass("AreaClicked");
-    $("#SelectArea").fadeOut("fast");
-    $("#SelectArea").fadeIn();
+    $("#SelectArea, #WijkTitle").fadeOut("fast");
+    $("#SelectArea, #WijkTitle").fadeIn();
 });
 
 
