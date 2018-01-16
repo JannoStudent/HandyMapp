@@ -49,6 +49,10 @@
         text-align: center;
     }
 
+    .PlaceResultButton:hover {
+        background-color: #204d74;
+    }
+
 .ImageContainter {
     height: 30%;
     -ms-border-radius: 15px;
@@ -154,5 +158,3 @@ button {
         padding: 15px;
         color: #f5f5f5;
     }
-
-    
