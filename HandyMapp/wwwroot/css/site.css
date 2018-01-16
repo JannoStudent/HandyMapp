@@ -52,7 +52,7 @@
 }
 
 .navbar-text {
-    font-size: 0.7em;
+    font-size: 18px;
     margin: 0;
     padding: 0;
     max-width:8.2em;
@@ -583,3 +583,17 @@ input {
     font-size: 80%;
 }
 
+@media (max-width: 1000px) {
+    .img-navbar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .handyContainer {
+        width: 100%;
+    }
+    .breadcrumbContainer {
+        width: 90%;
+    }
+}

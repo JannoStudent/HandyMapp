@@ -15,6 +15,10 @@
 /*/////////////////////////////// MEDIA QUERIES //////////////////////*/
 
 @media (max-width: 970px) {
+    html {
+        width: 100%;
+    }
+
     .handyContainer {
         width: 100%;
     }
