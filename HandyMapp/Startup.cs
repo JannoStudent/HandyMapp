@@ -40,7 +40,10 @@ namespace HandyMapp
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
             services.AddNodeServices();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +63,11 @@ namespace HandyMapp
             app.UseStaticFiles();
 
             app.UseAuthentication();
+            // IMPORTANT: This session call MUST go before UseMvc()
+            app.UseSession();
 
+            // Add MVC to the request pipeline.
+          
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}")

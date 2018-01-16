@@ -42,9 +42,21 @@ $("path").click(function () {
         var starClassSelected = ".star" + (i + 1);
         $(starClassSelected).addClass("colorSelected");
         $("#tekstDef").attr("value", starNumberClicked);
+        //alert(starNumberClicked);
+        setMyrating(starNumberClicked);  
     }
 });
+var rating;
+function setMyrating(starNumberClicked) {
+    rating = starNumberClicked;
+    $("#myrating").val(""+rating);
+    //alert("setted: "+rating);   
+}
+function getMyrating() {
+   // alert("getted: " + rating);
+    return rating;
 
+}
 $("svg").mouseleave(function () {
     $(this).find("path").removeClass("hoverColor");
     var starGrade = $("#tekstDef").val();

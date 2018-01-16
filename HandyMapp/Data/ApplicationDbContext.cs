@@ -26,7 +26,7 @@ namespace HandyMapp.Data
         public virtual DbSet<Obstacle> Obstacles { get; set; }
         public virtual DbSet<ReviewPlace> ReviewAddress { get; set; }
 
-        public virtual DbSet<street_eval_model> StreetEvals { get; set; }
+        public virtual DbSet<street_eval_model> StreetEvalModels { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
