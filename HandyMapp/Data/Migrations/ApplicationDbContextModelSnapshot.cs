@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace HandyMapp.Data.Migrations
@@ -18,10 +16,10 @@ namespace HandyMapp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
+                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.Address", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -66,7 +64,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.City", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -83,7 +81,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.Country", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -100,7 +98,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.PostCode", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.PostCode", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -115,7 +113,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("PostCodes");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.Province", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.Province", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -132,7 +130,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Provinces");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.Street", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.Street", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -145,72 +143,27 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Streets");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("HandyMapp.Models.Example", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.AddressModels.ReviewPlace", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Count");
+                    b.Property<int?>("AddressId");
 
-                    b.Property<string>("Name");
+                    b.Property<int?>("AdressId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Rating");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Example");
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("ReviewPlace");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.Navigation.Obstacle", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Navigation.Obstacle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -232,7 +185,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Obstacles");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.Navigation.Vector", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Navigation.Vector", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -248,7 +201,7 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("Vectors");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.Navigation.VectorPath", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Navigation.VectorPath", b =>
                 {
                     b.Property<int>("VectorId1");
 
@@ -263,32 +216,37 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("VectorPaths");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.street_eval_model", b =>
+            modelBuilder.Entity("HandyMapp.Models.ApplicationUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("aid");
 
-                    b.Property<string>("description");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.Property<string>("lat");
 
-                    b.Property<string>("lng");
+            modelBuilder.Entity("HandyMapp.Models.Example", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("obst_type");
+                    b.Property<int>("Count");
 
-                    b.Property<string>("rating");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("StreetEvalModels");
+                    b.ToTable("Example");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -302,9 +260,7 @@ namespace HandyMapp.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -375,6 +331,8 @@ namespace HandyMapp.Data.Migrations
 
                     b.HasIndex("RoleId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("AspNetUserRoles");
                 });
 
@@ -393,50 +351,57 @@ namespace HandyMapp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.AddressModels.Address", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Addresmoddels.Address", b =>
                 {
-                    b.HasOne("HandyMapp.Models.AddressModels.City", "City")
+                    b.HasOne("Handy_Mapp.Models.Addresmoddels.City", "City")
                         .WithMany("Address")
                         .HasForeignKey("CityId")
                         .HasConstraintName("FK_Address_City");
 
-                    b.HasOne("HandyMapp.Models.AddressModels.Country", "Country")
+                    b.HasOne("Handy_Mapp.Models.Addresmoddels.Country", "Country")
                         .WithMany("Address")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK_Address_Country");
 
-                    b.HasOne("HandyMapp.Models.AddressModels.PostCode", "PostCode")
+                    b.HasOne("Handy_Mapp.Models.Addresmoddels.PostCode", "PostCode")
                         .WithMany("Address")
                         .HasForeignKey("PostCodeId")
                         .HasConstraintName("FK_Address_PostCode");
 
-                    b.HasOne("HandyMapp.Models.AddressModels.Province", "Province")
+                    b.HasOne("Handy_Mapp.Models.Addresmoddels.Province", "Province")
                         .WithMany("Address")
                         .HasForeignKey("ProvinceId")
                         .HasConstraintName("FK_Address_Province");
 
-                    b.HasOne("HandyMapp.Models.AddressModels.Street", "Street")
+                    b.HasOne("Handy_Mapp.Models.Addresmoddels.Street", "Street")
                         .WithMany("Address")
                         .HasForeignKey("StreetId")
                         .HasConstraintName("FK_Address_Street");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.Navigation.Obstacle", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.AddressModels.ReviewPlace", b =>
                 {
-                    b.HasOne("HandyMapp.Models.Navigation.Vector", "Vector")
+                    b.HasOne("Handy_Mapp.Models.Addresmoddels.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+                });
+
+            modelBuilder.Entity("Handy_Mapp.Models.Navigation.Obstacle", b =>
+                {
+                    b.HasOne("Handy_Mapp.Models.Navigation.Vector", "Vector")
                         .WithMany("Obstacle")
                         .HasForeignKey("VectorId")
                         .HasConstraintName("FK_Obstacle_Vector");
                 });
 
-            modelBuilder.Entity("HandyMapp.Models.Navigation.VectorPath", b =>
+            modelBuilder.Entity("Handy_Mapp.Models.Navigation.VectorPath", b =>
                 {
-                    b.HasOne("HandyMapp.Models.Navigation.Vector", "VectorId1Navigation")
+                    b.HasOne("Handy_Mapp.Models.Navigation.Vector", "VectorId1Navigation")
                         .WithMany("VectorPathVectorId1Navigation")
                         .HasForeignKey("VectorId1")
                         .HasConstraintName("FK_VectorPath_Vector");
 
-                    b.HasOne("HandyMapp.Models.Navigation.Vector", "VectorId2Navigation")
+                    b.HasOne("Handy_Mapp.Models.Navigation.Vector", "VectorId2Navigation")
                         .WithMany("VectorPathVectorId2Navigation")
                         .HasForeignKey("VectorId2")
                         .HasConstraintName("FK_VectorPath_Vector1");
@@ -445,7 +410,7 @@ namespace HandyMapp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                        .WithMany()
+                        .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -453,7 +418,7 @@ namespace HandyMapp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("HandyMapp.Models.ApplicationUser")
-                        .WithMany()
+                        .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -461,7 +426,7 @@ namespace HandyMapp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("HandyMapp.Models.ApplicationUser")
-                        .WithMany()
+                        .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -469,20 +434,12 @@ namespace HandyMapp.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
-                        .WithMany()
+                        .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HandyMapp.Models.ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("HandyMapp.Models.ApplicationUser")
-                        .WithMany()
+                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
