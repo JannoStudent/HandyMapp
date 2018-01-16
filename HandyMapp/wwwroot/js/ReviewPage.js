@@ -33,5 +33,5 @@ $("#DetailsButtons > div").click(function () {
 });
 
 $("#searchReviewBuilding").click(function() {
-    $(".PlacesReviewResults").css("background-color","#f3f3f3");
-})
+    $(".PlacesReviewResults").css("background-color", "#f3f3f3");
+});
