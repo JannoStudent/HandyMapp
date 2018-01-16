@@ -55,8 +55,6 @@ $(".search").keypress(function (e) {
     }
 });
 
-
-
 function fillautocomplete(input) {
     $.ajax({
         type: "GET",
@@ -77,7 +75,7 @@ function fillautocomplete(input) {
                         '<input type="text" id="z' + i + '__Terms_' + j + '__Offset" name="[' + i + '].Terms[' + j + '].Offset" value="' + result.predictions[i].terms[j].offset + '">';
                 }
             }
-            document.getElementById('hiddenForm').innerHTML = form;
+            input.closest('.autocomplete').find('#hiddenForm').html(form);
         },
         error: window.errorFunc
     }).done(function () {

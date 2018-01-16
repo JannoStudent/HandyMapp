@@ -23,7 +23,8 @@ namespace HandyMapp.Data
         public virtual DbSet<Vector> Vectors { get; set; }
         public virtual DbSet<VectorPath> VectorPaths { get; set; }
         public virtual DbSet<Obstacle> Obstacles { get; set; }
-        public virtual DbSet<ReviewPlace> ReviewAddress { get; set; }
+
+        public virtual DbSet<street_eval_model> StreetEvalModels { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
         {

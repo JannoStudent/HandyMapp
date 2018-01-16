@@ -22,14 +22,15 @@ namespace HandyMapp.Controllers.API
         [HttpGet("ByLocation")]
         public Predictions ByLocation(Location start, Location end)
         {
-            string s = "https://maps.googleapis.com/maps/api/directions/json?origin=" + start.lat + "," + start.lng +
-                "&alternatives=true" +
-                "&destination=" + end.lat + "," + end.lng +
-                "&mode=walking&language=nl&unit=metric&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI";
-
             try
             {
-                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(new WebClient().DownloadString("https://maps.googleapis.com/maps/api/directions/json?origin=" + start.lat + "," + start.lng + "&destination=" + end.lat + "," + end.lng + "&mode=walking&language=nl&unit=metric&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI")));
+                MemoryStream ms = new MemoryStream(
+                    Encoding.UTF8.GetBytes(
+                        new WebClient().DownloadString(
+                            "https://maps.googleapis.com/maps/api/directions/json?origin=" + start.lat + "," + start.lng +
+                            "&destination=" + end.lat + "," + end.lng +
+                            "&alternatives=true" +
+                            "&mode=walking&language=nl&unit=metric&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI")));
                 return new JsonSerializer().Deserialize<Predictions>(new JsonTextReader(new StreamReader(ms)));
             }
             catch (Exception e)
@@ -39,7 +40,27 @@ namespace HandyMapp.Controllers.API
             }
         }
 
-
+        [HttpGet("ByPlaceId/{start}/{end}")]
+        public Predictions ByPlaceId(string start, string end)
+        {
+            try
+            {
+                MemoryStream ms = new MemoryStream(
+                    Encoding.UTF8.GetBytes(
+                        new WebClient()
+                        .DownloadString(
+                            "https://maps.googleapis.com/maps/api/directions/json?origin=place_id:" + start +
+                            "&destination=place_id:" + end +
+                            "&alternatives=true" +
+                            "&mode=walking&language=nl&unit=metric&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI")));
+                return new JsonSerializer().Deserialize<Predictions>(new JsonTextReader(new StreamReader(ms)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
 
     }
 }
