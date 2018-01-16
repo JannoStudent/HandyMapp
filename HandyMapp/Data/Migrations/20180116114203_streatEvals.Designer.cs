@@ -12,8 +12,8 @@ using System;
 namespace HandyMapp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180112140444_allModels")]
-    partial class allModels
+    [Migration("20180116114203_streatEvals")]
+    partial class streatEvals
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -273,9 +273,9 @@ namespace HandyMapp.Data.Migrations
 
                     b.Property<string>("description");
 
-                    b.Property<string>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<string>("lng");
+                    b.Property<double>("lng");
 
                     b.Property<string>("obst_type");
 

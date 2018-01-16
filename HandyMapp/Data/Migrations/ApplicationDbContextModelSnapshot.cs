@@ -272,9 +272,9 @@ namespace HandyMapp.Data.Migrations
 
                     b.Property<string>("description");
 
-                    b.Property<string>("lat");
+                    b.Property<double>("lat");
 
-                    b.Property<string>("lng");
+                    b.Property<double>("lng");
 
                     b.Property<string>("obst_type");
 
