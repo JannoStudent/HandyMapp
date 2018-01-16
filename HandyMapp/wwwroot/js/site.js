@@ -1,20 +1,28 @@
 ﻿$(function () {
-    //$(':input[type="submit"]').prop('disabled', true);
-    /*$(':input[type="text"]').keyup(function () {
-        if ($(this).val() !== '') {
-            $(':button[type="submit"]').prop("disabled", false);
-        }
-    });*/
-
     $(".PlaceResult").click(function () {
-        var rating = 10; //Variable input                            /*Bernhard*/
+        var rating = 10; //Variable input                          
         var i;
         var objectId = "#" + $(this).find(".rating").attr("id");
         for (i = 0; i <= rating - 1; i++) {
             $(objectId + "> path.helft").eq(i).addClass("colorSelected");
             $(objectId + "> path.midden").eq(i / 2).addClass("colorSelected");
-        } /*Bernhard*/
+        } 
 
+        $("form > input").keyup(function () {
+
+            var empty = false;
+            $('form > input').each(function () {
+                if ($(this).val() === '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $("#submitButton").attr("disabled", "disabled");
+            } else {
+                $('#submitButton').removeAttr('disabled'); 
+            }
+        });
     });
 });
 
@@ -105,6 +113,9 @@ $('#placeInputSubmit').click(function () {
 
 
 ///////////////////////////////////////////////////////////////////////////////////
+
+
+
 /*
 window.addEventListener("load", function () {
     window.cookieconsent.initialise({

@@ -1,5 +1,7 @@
-﻿body {
+﻿#SelectArea {
+    display: none;
 }
+
 polygon {
     fill: #f1f1f1;
     border: solid 5px #000;
@@ -12,9 +14,17 @@ polygon:hover {
     cursor: pointer;
 }
 
+.AreaClicked {
+    fill: yellow !important;
+}
+
+.AreaDeselected {
+    fill: #f1f1f1;
+}
+
 #AreaName {
     width: 100%;
-    height: 100px;
+    height: 100%;
     margin: 40px 0;
     border: solid #1370B8 4px;
     -ms-border-radius: 4px;
