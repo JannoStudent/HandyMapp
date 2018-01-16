@@ -1,0 +1,259 @@
+﻿@model HandyMapp.Models.Directions.Predictions
+
+@{
+    ViewData["Title"] = "DisplayRoute";
+    Layout = "~/Views/Shared/_MapLayout.cshtml";
+}
+
+<div id="floating-panel" style="margin-top: 150px; z-index: 40">
+    <b>Start: </b>
+    <select id="start">
+        <option value="chicago, il">Chicago</option>
+        <option value="st louis, mo">St Louis</option>
+        <option value="joplin, mo">Joplin, MO</option>
+        <option value="oklahoma city, ok">Oklahoma City</option>
+        <option value="amarillo, tx">Amarillo</option>
+        <option value="gallup, nm">Gallup, NM</option>
+        <option value="flagstaff, az">Flagstaff, AZ</option>
+        <option value="winona, az">Winona</option>
+        <option value="kingman, az">Kingman</option>
+        <option value="barstow, ca">Barstow</option>
+        <option value="san bernardino, ca">San Bernardino</option>
+        <option value="los angeles, ca">Los Angeles</option>
+    </select>
+    <b>End: </b>
+    <select id="end">
+        <option value="chicago, il">Chicago</option>
+        <option value="st louis, mo">St Louis</option>
+        <option value="joplin, mo">Joplin, MO</option>
+        <option value="oklahoma city, ok">Oklahoma City</option>
+        <option value="amarillo, tx">Amarillo</option>
+        <option value="gallup, nm">Gallup, NM</option>
+        <option value="flagstaff, az">Flagstaff, AZ</option>
+        <option value="winona, az">Winona</option>
+        <option value="kingman, az">Kingman</option>
+        <option value="barstow, ca">Barstow</option>
+        <option value="san bernardino, ca">San Bernardino</option>
+        <option value="los angeles, ca">Los Angeles</option>
+    </select>
+</div>
+<div id="map"></div>
+
+@section Style {
+    <link rel="stylesheet" href="~/css/PlacesResult.css" />
+}
+
+@section Scripts {
+    @*<script src="~/js/MapDirections.js"></script>*@
+    <script>
+        var map;
+        var directionsDisplay;
+        var directionsService;
+
+        function initMap() {
+            map = new window.google.maps.Map(document.getElementById('map'),
+                {
+                    center: { lat: 52.058295, lng: 4.4950389 },
+                    zoom: 13,
+                    mapTypeId: 'terrain',
+                    styles: [
+                        {
+                            "featureType": "landscape.natural",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#cddebe"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "landscape.natural.terrain",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#a9adaf"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#e1c78e"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi.medical",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f7bbff"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "poi.park",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#b7dc8d"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#81878b"
+                                },
+                                {
+                                    "weight": 0.5
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f4f28c"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.arterial",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#ebe72c"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f59d78"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#f06b33"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway.controlled_access",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#f06b33"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "road.highway.controlled_access",
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                {
+                                    "color": "#ca470f"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "transit.line",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#b8bcbe"
+                                }
+                            ]
+                        },
+                        {
+                            "featureType": "water",
+                            "elementType": "geometry",
+                            "stylers": [
+                                {
+                                    "color": "#7aa9ef"
+                                }
+                            ]
+                        }
+                    ]
+                });
+            /*
+            map.addListener('zoom_changed', function () {
+                if (map.getZoom() > 15) {
+                    map.setMapTypeId('roadmap');
+                } else {
+                    map.setMapTypeId('terrain');
+                }
+            });*/
+
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.travelMode('WALKING');
+
+            var response = @Html.Raw(Json.Serialize(Model));
+            var origin = @Html.Raw(Json.Serialize(Model.GeocodedWaypoints[0].PlaceId));
+            var destination = @Html.Raw(Json.Serialize(Model.GeocodedWaypoints[1].PlaceId));
+
+            console.log(response);
+
+            directionsDisplay.setDirections(response);
+
+            directionsDisplay.setMap(map);
+
+            var onChangeHandler = function() {
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            };
+
+            document.getElementById('start').addEventListener('change', onChangeHandler);
+            document.getElementById('end').addEventListener('change', onChangeHandler);
+            
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                directionsService.route({
+                    origin: origin,
+                    destination: destination,
+                        travelMode: 'WALKING'
+                    },
+                    function(response, status) {
+                        if (status === 'OK') {
+                            console.log(response);
+                            directionsDisplay.setDirections(response);
+                        } else {
+                            window.alert('Directions request failed due to ' + status);
+                        }
+                    });
+            }
+        }
+
+        function calcRoute() {
+            var start = document.getElementById('start').value;
+            var end = document.getElementById('end').value;
+            var request = {
+                origin: start,
+                destination: end,
+                travelMode: 'DRIVING'
+            };
+            directionsService.route(request,
+                function(result, status) {
+                    if (status == 'OK') {
+                        directionsDisplay.setDirections(result);
+                    }
+                });
+        }
+    </script>
+    <script async defer
+            type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-u38FnWXefa5sf7k--4Tp5hFhYcyvE08&libraries=places&callback=initMap">
+    </script>
+}
+
