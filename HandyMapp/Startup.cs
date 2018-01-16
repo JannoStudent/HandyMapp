@@ -41,6 +41,12 @@ namespace HandyMapp
 
             services.AddMvc();
             services.AddNodeServices();
+
+            //Add Sessions
+            services.AddMvc()
+                .AddSessionStateTempDataProvider();
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +62,8 @@ namespace HandyMapp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSession();
 
             app.UseStaticFiles();
 

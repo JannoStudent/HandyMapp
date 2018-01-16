@@ -7,6 +7,6 @@ namespace HandyMapp.Models.Navigation
 {
     public enum MobilityType
     {
-        Scooter, Weelchair, Walker, Cane
+        Undefined,Scooter, Wheelchair, Walker, WalkingStick
     }
 }

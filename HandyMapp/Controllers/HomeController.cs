@@ -34,34 +34,6 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-        public IActionResult Preferences()
-        {
-            return View();
-        }
-
-        public IActionResult SelectWalkingAid()
-        {
-            return View();
-        }
-
-        public IActionResult InputRoute()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult RouteOptions(IList<PlacePrediction> startLocation, IList<PlacePrediction> endLocation)
-        {
-            string test = startLocation[0].Description;
-            string test2 = endLocation[0].Description;
-            return View();
-        }
-
-        public IActionResult RouteOnMap()
-        {
-            return View();
-        }
-
         public IActionResult SelectReview()
         {
             return View();

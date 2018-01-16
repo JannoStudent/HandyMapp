@@ -8,23 +8,31 @@ using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Directions.Enums;
 using GoogleMapsAPI.NET.API.Directions.Results;
+using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Controllers.API;
 using HandyMapp.Data;
+using HandyMapp.Models;
 using HandyMapp.Models.GoogeApi;
 using HandyMapp.Models.GoogeApi.Directions;
+using HandyMapp.Models.GoogeApi.Places.AutoComplete;
 using HandyMapp.Models.GoogeApi.Places.Details;
 using HandyMapp.Models.Navigation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite.Internal.ApacheModRewrite;
 using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 using StackExchange.Redis;
+using Predictions = HandyMapp.Models.Directions.Predictions;
 
 namespace HandyMapp.Controllers
 {
     public class NavigationController : Controller
     {
-        private List<Vector> _route;
-        private Vector _start, _end;
-        private List<Node> _openList, _closedList;
+        //Neded for the navigation algorithm
+        //private List<Vector> _route;
+        //private Vector _start, _end;
+        //private List<Node> _openList, _closedList;
+
         private readonly ApplicationDbContext _context;
 
         public NavigationController(ApplicationDbContext context)
@@ -34,9 +42,85 @@ namespace HandyMapp.Controllers
 
         public IActionResult Index()
         {
+            return Redirect("SelectWalkingAid");
+        }
+
+        public IActionResult Preferences(string walkingAid)
+        {
+            HttpContext.Session.Set<MobilityType>("MobilityType", (MobilityType)Enum.Parse(typeof(MobilityType), walkingAid));
             return View();
         }
 
+        public IActionResult SelectWalkingAid()
+        {
+            return View();
+        }
+
+        public IActionResult InputRoute(string error)
+        {
+            if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.Undefined)
+            {
+                return Redirect("SelectWalkingAid");
+            }
+            ViewBag.Error = error;
+            return View();
+        }
+
+        public IActionResult RouteOptions()
+        {
+            return Redirect("InputRoute");
+        }
+
+        [HttpPost]
+        public IActionResult RouteOptions(string search1, string search2)
+        {
+            if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.Undefined)
+            {
+                return Redirect("SelectWalkingAid");
+            }
+            if (string.IsNullOrEmpty(search1) || string.IsNullOrEmpty(search2))
+            {
+                return Redirect("InputRoute?error=Please give a Start and end location!");
+            }
+
+            PlacesController placesController = new PlacesController(_context);
+            DirectionsController directionsController = new DirectionsController(); ;
+            Predictions predictions = null;
+
+            try
+            {
+                predictions = directionsController.ByPlaceId(placesController.AutoComplete(search1).Result[0].PlaceId,
+                    placesController.AutoComplete(search2).Result[0].PlaceId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return Redirect("InputRoute?error=Couldn't find the Start or End location!");
+            }
+
+
+            return View(predictions);
+        }
+
+        public IActionResult RouteOnMap()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public IActionResult DisplayRoute(Predictions predictions)
+        {
+            return View(predictions);
+        }
+
+
+
+
+        /*
+         * Learn algorithm to create vectors
+         *          
         public IActionResult Learn()
         {
             List<Vector> vectors = _context.Vectors.ToList();
@@ -45,23 +129,17 @@ namespace HandyMapp.Controllers
             List<Location> paths = new List<Location>();
             foreach (var vectorPath in vectorPaths)
             {
-                
                 paths.Add(new Location() {lat = (double )vectors.Find(x => x.Id == vectorPath.VectorId1).Latitude, lng = (double) vectors.Find(x => x.Id == vectorPath.VectorId1).Longitude });
                 paths.Add(new Location() {lat = (double )vectors.Find(x => x.Id == vectorPath.VectorId2).Latitude, lng = (double) vectors.Find(x => x.Id == vectorPath.VectorId2).Longitude });
             }
-           
 
             return View(new VectorViewItem(){ VectorPoints = vectors, Locations = paths });
         }
-
+        
         [HttpPost]
         public async void LearnAlgorithm(double startLat, double startLng, double endLat, double endLng)
         {
             DirectionsController directionController = new DirectionsController();
-
-            //var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
-            //var directionsResult = client.Directions.GetDirections(origin: new GeoCoordinatesLocation(startLat, startLng), destination: new GeoCoordinatesLocation(endLat, endLng), mode: TransportationModeEnum.Walking, waypoints: null, alternatives: true, avoid: null, language: "dutch", units: UnitSystemEnum.Metric, region: null, departureTime: DateTime.Now, arrivalTime: null, optimizeWaypoints: true, transitMode: null, transitRoutingPreference: TransitRoutingPreferenceEnum.LessWalking, trafficModel: TrafficModelEnum.BestGuess);
-
             Route[] routes = directionController.ByLocation(new Location() { lat = startLat, lng = startLng }, new Location() { lat = endLat, lng = endLng }).Routes;
 
             foreach (var route in routes)
@@ -128,7 +206,6 @@ namespace HandyMapp.Controllers
             }
             _context.SaveChanges();
         }
-
         [HttpPost]
         public IActionResult ShowRoute(string from, string to)
         {
@@ -205,8 +282,11 @@ namespace HandyMapp.Controllers
             _context.SaveChanges();
 
             return View(directionsResult);
-        }
-        
+        }*/
+
+        /*
+         * Navigation Algorithm based on A*
+         * 
         public IActionResult Navigate()
         {
             Calculate(_context.Vectors.First(x => x.Id == 27), _context.Vectors.First(x => x.Id == 1));
@@ -288,6 +368,6 @@ namespace HandyMapp.Controllers
         private bool TerreinList(List<Node> list, Vector vector)
         {
             return list.Any(n => n.Vector.Id == vector.Id);
-        }
+        }*/
     }
 }
