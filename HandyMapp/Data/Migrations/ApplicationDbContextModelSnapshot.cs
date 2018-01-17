@@ -280,6 +280,8 @@ namespace HandyMapp.Data.Migrations
 
                     b.Property<string>("rating");
 
+                    b.Property<string>("streetname");
+
                     b.HasKey("Id");
 
                     b.ToTable("StreetEvalModels");

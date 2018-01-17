@@ -12,8 +12,8 @@ using System;
 namespace HandyMapp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180112140444_allModels")]
-    partial class allModels
+    [Migration("20180116143501_streetEvals")]
+    partial class streetEvals
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

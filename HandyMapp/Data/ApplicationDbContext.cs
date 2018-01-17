@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HandyMapp.Models;
 using HandyMapp.Models.Navigation;
@@ -13,6 +9,7 @@ namespace HandyMapp.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Example> Example { get; set; }
+
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -25,8 +22,10 @@ namespace HandyMapp.Data
         public virtual DbSet<Obstacle> Obstacles { get; set; }
 
         public virtual DbSet<street_eval_model> StreetEvalModels { get; set; }
+        
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
         }
 
@@ -155,6 +154,9 @@ namespace HandyMapp.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VectorPath_Vector1");
             });
+
         }
+
+
     }
 }
