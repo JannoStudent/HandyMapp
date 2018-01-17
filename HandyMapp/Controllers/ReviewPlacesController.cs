@@ -64,10 +64,11 @@ namespace HandyMapp.Controllers
             return View();
         }
 
+        /*
         public IActionResult SearchPlaces(string searchstext)
         {
             PlacesController placesController = new PlacesController(_context);
             return PartialView("~/Views/PartialView/CardListPlaceDetails.cshtml",placesController.AutoComplete(searchstext).Result.Select(x => placesController.Get(x.PlaceId)).ToList());
-        }
+        }*/
     }
 }
