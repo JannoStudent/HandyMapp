@@ -598,6 +598,13 @@ input {
         height: auto;
     }
 }
+/*
+@media (min-width: 1080px) {
+    .lowerThumbnail{
+        min-height: 120px;
+    }
+}
+    */
 
 @media (max-width: 768px) {
     .handyContainer {
@@ -605,5 +612,21 @@ input {
     }
     .breadcrumbContainer {
         width: 90%;
+    }
+}
+
+@media (max-width: 760px) {
+    .handyContainer {
+        width: 100%;
+    }
+    .breadcrumbContainer {
+        width: 90%;
+    }
+    .img-navbar {
+        display: inline;
+    }
+
+    .navbar-collapse {
+        background-color: white;
     }
 }
