@@ -61,6 +61,11 @@ namespace HandyMapp.Controllers
             PlaceDetails placeDetails = placesController.Get(PlaceId);
             List<ReviewBuilding> buildings =_context.ReviewBuildings.Where(m => m.PlaceId.Equals(placeDetails.result.place_id)).ToList();
             DisplayReviewBuilding reviewBuilding = new DisplayReviewBuilding(){PlaceDetails = placeDetails, ReviewBuildings = buildings};
+            reviewBuilding.AvrageRatting = 4;
+            reviewBuilding.ScooterRatting = 4;
+            reviewBuilding.WheelchairRatting = 4;
+            reviewBuilding.WalkerRatting = 4;
+            reviewBuilding.WalkingStickRatting = 4;
             return View(reviewBuilding);
         }
 
