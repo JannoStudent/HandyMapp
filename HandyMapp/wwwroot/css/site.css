@@ -1,6 +1,8 @@
-﻿body {
-    font-size: 180%;
+﻿body, html {
+    font-size: 110%;
     background-color: #e8e8e8;
+    height: 100%;
+    margin: 0;
 }
 
 /*////////////////////////////////////// COLORS AND SHADOWS //////////////////////////////////////*/
@@ -37,7 +39,7 @@
 }
 /*////////////////////////////////////// NAVBAR //////////////////////////////////////*/
 .navbar-default {
-    height: 6vh;
+    height: 6%;
     z-index: 100;
     background-color: white;
     margin-bottom: 0;
@@ -71,10 +73,6 @@
     -ms-transition: all 300ms ease;
     -o-transition: all 300ms ease;
     transition: all 300ms ease;
-}
-
-body {
-    background-color: #e8e8e8;
 }
 
 .breadcrumbRow {
@@ -116,7 +114,7 @@ body {
 
 .breadcrumbLineCurrent {
     background: linear-gradient(90deg, #FEC20F 0, #FEC20F 54%, #1370B8 46%, #1370B8 100%);
-    height: 3.5px;
+    height: 3px;
     position: absolute;
     width: 100%;
     margin-top: -13px;
@@ -190,7 +188,7 @@ body {
     flex-direction: column;
     background-color: white;
     box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1);
-    height: 92.8vh;
+    height: 94%;
 }
 /*////////////////////////////////////// TEXT INDEX //////////////////////////////////////*/
 .frontpage_text {
@@ -545,7 +543,11 @@ input {
 
 .mapBackground {
     background-image: url("../img/zoetermeerMap.PNG");
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: cover !important
 }
 
 .mapLayout .breadcrumbRow {
@@ -562,7 +564,7 @@ input {
 .mapLayout #map {
     position: absolute;
     width: 100vw;
-    height: 92.8vh;
+    height: 93.5%;
 }
 
 .mapLayout .breadcrumbContainer {
@@ -589,6 +591,10 @@ input {
 @media (max-width: 1000px) {
     .img-navbar {
         display: none;
+    }
+
+    body, html {
+        height: auto;
     }
 }
 

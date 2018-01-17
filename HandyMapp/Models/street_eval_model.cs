@@ -10,8 +10,8 @@ namespace HandyMapp.Models
     {
         public int Id { get; set; }
         public string aid { get; set; }
-        public double lat { get; set; }
-        public double lng { get; set; }
+        public string lat { get; set; }
+        public string lng { get; set; }
         //public string streetname { get; set; }
         public string rating { get; set; }
         public string obst_type { get; set; }
@@ -22,7 +22,7 @@ namespace HandyMapp.Models
 
         }
 
-        public street_eval_model(string aid, double lat, double lng, string rating, string description, string obst_type)
+        public street_eval_model(string aid, string lat, string lng, string rating, string description, string obst_type)
         {
             this.aid = aid;
             this.lat = lat;
