@@ -66,15 +66,19 @@
         vertical-align: middle;
     }
 
-.Placetext {
-    padding: 15px 20px 0 20px;
-}
-
 .PlaceTitle {
     overflow: hidden;
     padding-bottom: 10px;
     font-size: 23px;
     line-height: 28px;
+    margin-top: 5px;
+    color: white;
+}
+
+.Placetext {
+    padding: 15px 20px 0 20px;
+    background-color: #1370b8;
+    border-radius: 9px 9px 0 0;
 }
 
 .Accessibility {
@@ -93,9 +97,8 @@
     width: 100px;
 }
 
-
 .PlaceAdress {
-    padding: 5px 20px;
+    padding: 15px 20px 0 20px;
     color: grey;
 }
 
@@ -111,6 +114,10 @@ button {
 
 .PlaceButtons {
     padding: 15px 10px 20px 10px;
+}
+
+.placeDescription {
+    padding: 5px 15px 5px 20px;
 }
 
 /*Scrollbar*/

@@ -88,13 +88,10 @@ function fillautocomplete(input) {
     });
 }
 
-////////////////////////////////////////////DISABLE BUTTON////////////////////
-$('#placeInputSubmit').click(function () {
-    if ($('#search').val("")) {
-        alert("hallo");
-    }
-});
 
+$(".RouteDescriptionButton").click(function () {
+        $(this).closest(".placeDescription").find(".routeDescription").slideToggle();
+});
 
 ///////////////////////////////////////////////////////////////////////////////////
 
