@@ -29,7 +29,7 @@
             @Html.HiddenFor(m => m.PlaceId)
             @Html.HiddenFor(m => m.Rating)
             @Html.HiddenFor(m => m.Description)
-            <button class="btn btn-block btn-danger btn-lg">No, thank you&ensp;<span class="glyphicon glyphicon-home"></span></button>
+            <button type="submit" class="btn btn-block btn-danger btn-lg">No, thank you&ensp;<span class="glyphicon glyphicon-home"></span></button>
         </form>
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6" id="further">
@@ -37,10 +37,10 @@
     </div>
 </div>
 <div class="row col-sm-offset-3 col-sm-6 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" id="DetailsButtons">
-    <div class="col-sm-4 col-md-4 col-lg-4" id="no">
+    <div class="col-sm-4 col-md-4 col-lg-4" id="No">
         <a class="btn btn-block btn-danger btn-lg">No&ensp;<span class="glyphicon glyphicon-remove"></span></a>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4" id="pass">
+    <div class="col-sm-4 col-md-4 col-lg-4" id="Pass">
         <a class="btn btn-block btn-default btn-lg">I don't know</a>
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4" id="passToggle">
@@ -49,12 +49,24 @@
     <div class="col-sm-4 col-md-4 col-lg-4" id="passToggleSmall">
         <a class="btn btn-block btn-default btn-lg">Pass&ensp;<span class="glyphicon glyphicon-minus"></span></a>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4" id="yes">
+    <div class="col-sm-4 col-md-4 col-lg-4" id="Yes">
         <a class="btn btn-block btn-success btn-lg">Yes&ensp;<span class="glyphicon glyphicon-ok"></span></a>
     </div>
 </div>
+<form id="form" asp-controller="ReviewPlaces" asp-action="ThankYouBuilding">
+    @Html.HiddenFor(m => m.PlaceId)
+    @Html.HiddenFor(m => m.Rating)
+    @Html.HiddenFor(m => m.Description)
 
-<table id="answers"></table>
+    @Html.HiddenFor(m => m.AccessibleToilets)
+    @Html.HiddenFor(m => m.HallwaysWide)
+    @Html.HiddenFor(m => m.Ramps)
+    @Html.HiddenFor(m => m.Elevators)
+    @Html.HiddenFor(m => m.LooseTilesOrFloormats)
+    @Html.HiddenFor(m => m.Threshold)
+    <span id="answers"></span>
+</form>
+
 
 @section Style {
     <link rel="stylesheet" href="~/css/ReviewPlaces.css" />

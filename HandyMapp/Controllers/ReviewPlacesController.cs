@@ -25,7 +25,7 @@ namespace HandyMapp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("SelectBuilding");
         }
 
         public IActionResult SelectBuilding(string error)
@@ -35,10 +35,10 @@ namespace HandyMapp.Controllers
         }
 
         //step 1
-        public IActionResult ReviewStarBuilding(IList<PlacePrediction> placePredictions)
+        public IActionResult ReviewStarBuilding(IList<PlaceDetails> placePredictions)
         {
             PlacesController placesController = new PlacesController(_context);
-            List<PlaceDetails> placeDetailses = placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList();
+            List<PlaceDetails> placeDetailses = placePredictions.Select(m => placesController.Get(m.result.place_id)).Where(m => m != null).ToList();
 
             if (placeDetailses.Count <= 0)
             {
@@ -65,6 +65,7 @@ namespace HandyMapp.Controllers
         //step 4
         public IActionResult ThankYouBuilding(ReviewBuilding reviewBuilding)
         {
+            reviewBuilding.MobilityType = HttpContext.Session.Get<MobilityType>("MobilityType");
             _context.ReviewBuildings.Add(reviewBuilding);
             _context.SaveChanges();
             return View();
@@ -72,7 +73,7 @@ namespace HandyMapp.Controllers
         public IActionResult SearchPlaces(string searchstext)
         {
             PlacesController placesController = new PlacesController(_context);
-            return PartialView("~/Views/PartialView/CardListPlaceDetails.cshtml",placesController.AutoComplete(searchstext).Result.Select(x => placesController.Get(x.PlaceId)).ToList());
+            return PartialView("~/Views/PartialView/CardListPlaceDetails.cshtml", placesController.AutoComplete(searchstext).Result.Select(x => placesController.Get(x.PlaceId)).ToList());
         }
     }
 }
