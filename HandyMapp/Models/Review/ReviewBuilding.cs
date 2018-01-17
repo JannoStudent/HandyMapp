@@ -8,9 +8,14 @@ namespace HandyMapp.Models.Review
 {
     public class ReviewBuilding
     {
-        public PlaceDetails PlaceDetails { get; set; }
+        public string PlaceId { get; set; }
         public int Rating { get; set; }
         public string Description { get; set; }
-
+        public string Ramps { get; set; }
+        public string Threshold { get; set; }
+        public string Elevators { get; set; }
+        public string AccessibleToilets { get; set; }
+        public string HallwaysWide { get; set; }
+        public string LooseTilesOrFloormats { get; set; }
     }
 }
