@@ -10,6 +10,7 @@ using HandyMapp.Controllers.API;
 using HandyMapp.Models.GoogeApi;
 using System.Linq;
 using System.Globalization;
+using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Controllers
 {
@@ -26,17 +27,12 @@ namespace HandyMapp.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult street_eval(string walkingAid)
+        public IActionResult street_eval()
         {
-            street_eval_model model = new street_eval_model();
-            model.aid = walkingAid;
-
-            HttpContext.Session.SetString("aid", JsonConvert.SerializeObject(walkingAid));
             List<street_eval_model> list = _context.StreetEvalModels.ToList();
             return View("street_eval", list);
-
         }
+       
         street_eval_model model;
         public IActionResult street_eval2()
         {
@@ -88,7 +84,7 @@ namespace HandyMapp.Controllers
         public IActionResult street_eval5(string Obst_description, string selectedObst_type)
         {
             street_eval_model model = new street_eval_model();
-            model.aid = HttpContext.Session.GetString("aid");
+            model.aid = HttpContext.Session.Get<MobilityType>("MobilityType");
             model.lat = HttpContext.Session.Get<String>("lat");
             model.lng = HttpContext.Session.Get<String>("lng");
             model.streetname = HttpContext.Session.GetString("streetname");
