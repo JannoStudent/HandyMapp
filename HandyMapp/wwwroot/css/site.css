@@ -251,6 +251,7 @@ p .hard:hover {
 
 .thumbnail-select {
     margin: 40px 0 10px 0;
+    min-width: 210px;
     border-color: #1371B8;
     border-width: 4px;
     padding-right: 0;
