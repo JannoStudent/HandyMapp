@@ -12,6 +12,24 @@
 
   <ItemGroup>
     <Content Include="Styles\main.less" />
+    <Content Include="Views\Street_eval_\mapIcons\icon_benches.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Street_eval_\mapIcons\icon_elevator.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Street_eval_\mapIcons\icon_narrow_entrances.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Street_eval_\mapIcons\icon_roadwork.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Street_eval_\mapIcons\icon_stairs.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Views\Street_eval_\mapIcons\icon_steep_slopes.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 
