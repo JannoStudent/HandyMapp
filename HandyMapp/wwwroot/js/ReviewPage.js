@@ -8,7 +8,9 @@
 ];
 var QuestionCounter = 0;
 
+/*////////////////////////////////AUTOCOMPLETE////////////////// */
 
+/*/////////////////////////////// DISPLAY NEXT QUESTION REVIEW///*/
 
 $("#further").click(function () {
     $("#EndReview").fadeOut("slow");
@@ -28,4 +30,8 @@ $("#DetailsButtons > div").click(function () {
         $('#answers').append('<tr><td>' + QuestionCounter + '</td><td>' + $(this).attr("id") + '</tr>');
         window.location.replace("http://localhost:55742/ReviewPlaces/ThankYouBuilding");
     }
+});
+
+$("#searchReviewBuilding").click(function() {
+    $(".PlacesReviewResults").css("background-color", "#f3f3f3");
 });

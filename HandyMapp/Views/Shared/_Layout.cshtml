@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HandyMapp</title>
+  <title>@ViewData["Title"] - HandyMapp</title>
+  <link rel="shortcut icon" type="image/x-icon" href="~/img/WebsiteIcon.ico" />
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/all.css" />
@@ -18,28 +19,28 @@
     @RenderSection("Style", required: false)
 </head>
 <body class="mapBackground">
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <a class="navbar-brand" asp-controller="Home" asp-action="">
-                <img class="brand-logo" src="~/img/handyMapp_icon_webpage_FULL.svg" alt="">
-            </a>
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="">
+                    <img class="brand-logo" src="~/img/handyMapp_icon_webpage_FULL.svg" alt="">
+                </a>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
 
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="menuToggle" >
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="menuToggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="navbar-text" asp-controller="Buildings" asp-action="WayOfSearching" class="btn-default-contact" role="button"><img class="img-navbar"src="~/img/map.svg" alt="">Ontdek</a></li>
+                    <li><a class="navbar-text" asp-controller="Buildings" asp-action="WayOfSearching" class="btn-default-contact" role="button"><img class="img-navbar"src="~/img/map.svg" alt="">Discover</a></li>
                     <li><a class="navbar-text" asp-controller="Navigation" asp-action="SelectWalkingAid" class="btn-default-contact" role="button"><img class="img-navbar"src="~/img/navigation.svg" alt="">Route</a></li>
-                    <li style="margin-right:1em;"><a class="navbar-text" asp-controller="Home" asp-action="SelectReview" class="btn-default-contact" role="button"><img class="img-navbar"src="~/img/Review.svg" alt=""> Beeordeel</a></li>
+                    <li style="margin-right:1em;"><a class="navbar-text" asp-controller="Home" asp-action="SelectReview" class="btn-default-contact" role="button"><img class="img-navbar"src="~/img/Review.svg" alt="">Review</a></li>
                     <li><a class="navbar-text" asp-controller="Home" asp-action="Contact" role="button"><span class="glyphicon glyphicon-earphone"></span>Contact</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->

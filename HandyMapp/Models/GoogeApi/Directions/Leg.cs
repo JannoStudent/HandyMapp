@@ -18,13 +18,13 @@ namespace HandyMapp.Models.GoogeApi.Directions
         public string EndAddress { get; set; }
 
         [JsonProperty("end_location")]
-        public Northeast EndLocation { get; set; }
+        public LatLng EndLocation { get; set; }
 
         [JsonProperty("start_address")]
         public string StartAddress { get; set; }
 
         [JsonProperty("start_location")]
-        public Northeast StartLocation { get; set; }
+        public LatLng StartLocation { get; set; }
 
         [JsonProperty("steps")]
         public Step[] Steps { get; set; }

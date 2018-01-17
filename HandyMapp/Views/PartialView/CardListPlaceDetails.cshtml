@@ -5,19 +5,13 @@
   for (int i = 0; i < @Model.Count; i++)
   {
         <div class="PlaceReviewResult ">
-          @if (@Model[i].result.photos != null)
-          {
-              <div class="ImageReviewContainter">
-                <img src=@("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + @Model[i].result.photos[0].photo_reference + "&key=AIzaSyAlvCDCInzIY4nkZMM5iZLkF8VZagEO8QY") />
-              </div>
-          }
           <div class="Placetext" id="@(" PlaceTitle" + i)">
-            <div class="PlaceTitle">
+            <div class="PlaceReviewTitle">
               @Html.DisplayTextFor(m => Model[i].result.name)
             </div>
           </div>
-          <div class="PlaceAdress">@Html.DisplayTextFor(m => Model[i].result.formatted_address)</div>
-          <a asp-controller="Home" asp-action="ReviewStarBuilding">
+          <div class="PlaceReviewAdress">@Html.DisplayTextFor(m => Model[i].result.formatted_address)</div>
+          <a asp-controller="ReviewPlaces" asp-action="ReviewStarBuilding">
             <div class="PlaceResultButton" style="text-align: center; padding: 5px; height: 35px; ">
               <span style="display: inline;">Review</span><span class="glyphicon glyphicon-pencil" style="display: inline;"></span>
             </div>

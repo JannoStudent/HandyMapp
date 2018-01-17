@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using HandyMapp.Models;
 using HandyMapp.Models.Navigation;
 using HandyMapp.Models.AddressModels;
+using HandyMapp.Models.Review;
 
 namespace HandyMapp.Data
 {
@@ -19,9 +20,9 @@ namespace HandyMapp.Data
 
         public virtual DbSet<Vector> Vectors { get; set; }
         public virtual DbSet<VectorPath> VectorPaths { get; set; }
-        public virtual DbSet<Obstacle> Obstacles { get; set; }
 
         public virtual DbSet<street_eval_model> StreetEvalModels { get; set; }
+        public virtual DbSet<ReviewBuilding> ReviewBuildings { get; set; }
         
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

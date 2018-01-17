@@ -7,22 +7,6 @@
             $(objectId + "> path.helft").eq(i).addClass("colorSelected");
             $(objectId + "> path.midden").eq(i / 2).addClass("colorSelected");
         } 
-
-        $("form > input").keyup(function () {
-
-            var empty = false;
-            $('form > input').each(function () {
-                if ($(this).val() === '') {
-                    empty = true;
-                }
-            });
-
-            if (empty) {
-                $("#submitButton").attr("disabled", "disabled");
-            } else {
-                $('#submitButton').removeAttr('disabled'); 
-            }
-        });
     });
 });
 
@@ -65,7 +49,9 @@ $(".PlaceResultButton").click(function () {
 var arrDescription = [];
 
 $(".search").keypress(function (e) {
-    fillautocomplete($(this));
+    if ($(this).val().length > 2) {
+        fillautocomplete($(this));
+    }
     if (e.which === 13) {
         $(".ui-autocomplete").css("display", "none");
     }

@@ -1,7 +1,7 @@
 ﻿/*right side page*/
 .PlacesOnMap {
     position: relative !important;
-    margin-left: -30%;
+    margin-left: -25%;
     display: flex;
     flex-grow: 8;
     padding: 0;
@@ -11,7 +11,7 @@
 /* left side page*/
 .PlacesResults {
     flex-direction: column;
-    width: 30%;
+    width: 25%;
     z-index: 10;
     height: 92.8vh;
     border-radius: 6px 0 0 6px;

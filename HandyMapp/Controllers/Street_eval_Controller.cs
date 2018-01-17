@@ -10,6 +10,7 @@ using HandyMapp.Controllers.API;
 using HandyMapp.Models.GoogeApi;
 using System.Linq;
 using System.Globalization;
+using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Controllers
 {
@@ -26,73 +27,73 @@ namespace HandyMapp.Controllers
         {
             return View();
         }
+
+        public IActionResult street_eval()
+        {
+            street_eval_model model = new street_eval_model();
+            model.aid = HttpContext.Session.Get<MobilityType>("MobilityType").ToString();
+            HttpContext.Session.SetString("aid", HttpContext.Session.Get<MobilityType>("MobilityType").ToString());
+
+            List<street_eval_model> list = _context.StreetEvalModels.ToList();
+            return View("street_eval", list);
+        }
+
         [HttpPost]
         public IActionResult street_eval(string walkingAid)
         {
             street_eval_model model = new street_eval_model();
             model.aid = walkingAid;
-
             HttpContext.Session.SetString("aid", JsonConvert.SerializeObject(walkingAid));
-            List<street_eval_model> list = _context.StreetEvalModels.ToList();
-            return View("street_eval", list);
 
+            List<street_eval_model> list = _context.StreetEvalModels.ToList();
+            return View("street_eval",list);
         }
         street_eval_model model;
-        public IActionResult street_eval2()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult street_eval2(string lat, string lng, string streetname)
+        public IActionResult street_eval2(string Value1, string Value2)
         {
             model = new street_eval_model();
-            if (string.IsNullOrEmpty(lat) && string.IsNullOrEmpty(lng) && string.IsNullOrEmpty(streetname))
-            {
-                lat = HttpContext.Session.GetString("lat");
-                lng = HttpContext.Session.GetString("lng");
-                streetname = HttpContext.Session.GetString("streetname");
-            }
-            else
-            {
-                model.lat = lat;
-                model.lng = lng;
-                model.streetname = streetname;
-                HttpContext.Session.SetString("lat", lat);
-                HttpContext.Session.Set<String>("lng", lng);
-                HttpContext.Session.Set<String>("streetname", streetname);
-            }
+            model.lat = Value1;
+            model.lng = Value2;
+
+            HttpContext.Session.SetString("lat", Value1);
+            HttpContext.Session.SetString("lng", Value2);
             return View("street_eval2", model);
         }
-
+        
         public IActionResult street_eval3()
         {
-
+            /*PlacesController placesC = new PlacesController(_context);
+            model = new street_eval_model();
+            string temp1 = HttpContext.Session.GetString("lat").ToString();
+            string temp2 = HttpContext.Session.GetString("lng").ToString();
+            double varlat = Convert.ToDouble(temp1);
+            double varlng = Convert.ToDouble(temp2);
+            List<PlaceDetails> bb = placesC.ByLatLng(varlat,varlng).ToList();
+            string mystreet = bb[0].result.formatted_address;
+            model.streetname = mystreet;
+            HttpContext.Session.SetString("mystreet", JsonConvert.SerializeObject(mystreet));*/
             return View();
         }
-        [HttpGet]
-        public IActionResult street_eval3(street_eval_model model)
+        /*public IActionResult street_eval4()
         {
-
-            return View("street_eval3", model);
-        }
-
+            return View();
+        }*/
         street_eval_model model4;
-        [HttpPost]
         public IActionResult street_eval4(string myrating)
         {
             model4 = new street_eval_model();
             model4.rating = myrating;
             HttpContext.Session.SetString("rating", JsonConvert.SerializeObject(myrating));
+
             return View("street_eval4", model4);
         }
         public IActionResult street_eval5(string Obst_description, string selectedObst_type)
         {
             street_eval_model model4 = new street_eval_model();
             model4.aid = HttpContext.Session.GetString("aid");
-            model4.lat = HttpContext.Session.Get<String>("lat");
-            model4.lng = HttpContext.Session.Get<String>("lng");
-            model4.streetname = HttpContext.Session.GetString("streetname");
+            model4.lat = HttpContext.Session.GetString("lat");
+            model4.lng = HttpContext.Session.GetString("lng");
             model4.rating = HttpContext.Session.GetString("rating");
             model4.description = Obst_description;
             model4.obst_type = selectedObst_type;
@@ -100,20 +101,34 @@ namespace HandyMapp.Controllers
             {
                 street_eval_model theModel = new street_eval_model()
                 {
-                    aid = model4.aid,
-                    lat = model4.lat,
-                    lng = model4.lng,
-                    streetname = model4.streetname,
-                    rating = model4.rating,
-                    description = model4.description,
-                    obst_type = model4.obst_type
+                    lat = model4.lat, lng = model4.lng, rating =model4.rating,description= model4.description,obst_type =  model4.obst_type
                 };
                 _context.StreetEvalModels.Add(theModel);
                 _context.SaveChanges();
                 HttpContext.Session.Clear();
                 model4 = new street_eval_model();
-            }
+            }      
             return View("street_eval5");
         }
+
+
+        /*public IActionResult successfullEval(string Value1, string Value2, string rating, string Streetname, string Desc)
+        {
+
+            street_eval_model model = new street_eval_model();
+            model.rating = rating;
+            model.lat = Value1;
+            model.lng = Value2;
+            model.streetname = Streetname;
+            model.description = Desc;
+
+//street_eval_model theModel = new street_eval_model(model.lat, model.lng, model.streetname, model.description, model.rating);
+           // _context.StreetEvals.Add(theModel);
+
+
+
+            //_context.SaveChanges();
+            //return View("street_eval2", theModel);
+        }*/
     }
 }

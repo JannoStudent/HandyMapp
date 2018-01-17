@@ -15,7 +15,7 @@ namespace HandyMapp.Models.GoogeApi.Directions
         public Distance Duration { get; set; }
 
         [JsonProperty("end_location")]
-        public Northeast EndLocation { get; set; }
+        public LatLng EndLocation { get; set; }
 
         [JsonProperty("html_instructions")]
         public string HtmlInstructions { get; set; }
@@ -24,7 +24,7 @@ namespace HandyMapp.Models.GoogeApi.Directions
         public Polyline Polyline { get; set; }
 
         [JsonProperty("start_location")]
-        public Northeast StartLocation { get; set; }
+        public LatLng StartLocation { get; set; }
 
         [JsonProperty("travel_mode")]
         public string TravelMode { get; set; }
