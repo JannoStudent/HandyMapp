@@ -43,6 +43,8 @@ namespace HandyMapp.Controllers
             {
                 return Redirect("SelectBuilding?error=No Place was fount!");
             }
+            
+
             return View();
         }
 
