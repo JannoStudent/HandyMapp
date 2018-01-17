@@ -2,111 +2,103 @@
 @using GoogleMapsAPI.NET.API.Directions.Results
 @using HandyMapp.Models.GoogeApi.Directions
 @model GoogleMapsAPI.NET.API.Directions.Responses.GetDirectionsResponse
-
 @{
     ViewData["Title"] = "RouteOptions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="row breadcrumbRow">
-    <ul class="container breadcrumbContainer">
-        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="SelectWalkingAid">Way of navigating</a></li>
-        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="Preferences">Selecting preferences</a></li>
-        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="InputRoute">Enter adress</a></li>
-        <li class="breadcrumbHandy currentBreadcrumb breadcrumblineVisited">Find your route</li>
-    </ul>
+  <ul class="container breadcrumbContainer">
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="SelectWalkingAid">Way of navigating</a></li>
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="Preferences">Selecting preferences</a></li>
+    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="InputRoute">Enter adress</a></li>
+    <li class="breadcrumbHandy currentBreadcrumb breadcrumblineVisited">Find your route</li>
+  </ul>
 </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
-        <span>Select your route</span>
-    </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+    <span>Select your route</span>
+  </div>
 </div>
 <div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+  @for (int i = 0; i < @Model.Routes.Count; i++)
+  {
+      <form method="post" style="cursor: pointer;">
 
-    @for (int i = 0; i < @Model.Routes.Count; i++)
-    {
-        <form method="post" style="cursor: pointer;">
-            
-            @for (int ii = 0; ii < @Model.GeocodedWaypoints.Count; ii++)
-            {
-                @Html.HiddenFor(m => m.GeocodedWaypoints[ii].PlaceId)
-                @Html.HiddenFor(m => m.GeocodedWaypoints[ii].GeocoderStatus)
-                for (int j = 0; j < @Model.GeocodedWaypoints[ii].Types.Count; j++)
+        @for (int ii = 0; ii < @Model.GeocodedWaypoints.Count; ii++)
+        {
+            @Html.HiddenFor(m => m.GeocodedWaypoints[ii].PlaceId)
+            @Html.HiddenFor(m => m.GeocodedWaypoints[ii].GeocoderStatus)
+          for (int j = 0; j < @Model.GeocodedWaypoints[ii].Types.Count; j++)
+          {
+                @Html.HiddenFor(m => m.GeocodedWaypoints[ii].Types[j])
+          }
+        }
+        @for (int ii = 0; ii < @Model.Routes[i].OverviewPath.Count; ii++)
+        {
+            <input name="Routes[0].OverviewPath[@ii].Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].OverviewPath[ii].Latitude)">
+            <input name="Routes[0].OverviewPath[@ii].Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].OverviewPath[ii].Longitude)">
+        }
+        @Html.HiddenFor(m => m.Status)
+        <input name="Routes[0].Summary" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Summary)">
+        <input name="Routes[0].Copyrights" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Bounds)">
+        <input name="Routes[0].OverviewPolyline.EncodedPoints" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].OverviewPolyline.EncodedPoints)">
+        @for (int ii = 0; ii < @Model.Routes[i].Warnings.Count; ii++)
+        {
+            <input name="Routes[0].Warnings[@ii].Warnings" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Warnings[ii])">
+        }
+        @for (int ii = 0; ii < @Model.Routes[i].WaypointOrder.Count; ii++)
+        {
+            <input name="Routes[0].WaypointOrder[@ii]" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].WaypointOrder[ii])">
+        }
+        <div class="col-sm-12 col-md-4 col-lg-4 thumbnail-mode thumbnail">
+          <div class="caption lowerThumbnail text-center">
+            <h3 class="lowerThumbnail_text_big">Route @(i + 1)</h3>
+            <button class="btn btn-default" asp-controller="Navigation" asp-action="DisplayRoute" type="submit">- click to select this route - </button>
+          </div>
+          <b>@Html.DisplayTextFor(m => @Model.Routes[i].Summary)</b>
+          <br />
+          @for (int j = 0; j < @Model.Routes[i].Legs.Count; j++)
                 {
-                    @Html.HiddenFor(m => m.GeocodedWaypoints[ii].Types[j])
-                }
-            }
+              <input name="Routes[0].Legs[@j].Distance.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance.Text)">
+              <input name="Routes[0].Legs[@j].Distance.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance.Value)">
+              <input name="Routes[0].Legs[@j].Duration.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration.Text)">
+              <input name="Routes[0].Legs[@j].Duration.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration.Value)">
+              <input name="Routes[0].Legs[@j].StartAddress" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].StartAddress)">
+              <input name="Routes[0].Legs[@j].EndAddress" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].EndAddress)">
+              <input name="Routes[0].Legs[@j].StartLocation.Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].StartLocation.Latitude)">
+              <input name="Routes[0].Legs[@j].StartLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].StartLocation.Longitude)">
+              <input name="Routes[0].Legs[@j].EndLocation.Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].EndLocation.Latitude)">
+              <input name="Routes[0].Legs[@j].EndLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].EndLocation.Longitude)">
 
-            @for (int ii = 0; ii < @Model.Routes[i].OverviewPath.Count; ii++)
-            {
-                <input name="Routes[0].OverviewPath[@ii].Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].OverviewPath[ii].Latitude)">
-                <input name="Routes[0].OverviewPath[@ii].Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].OverviewPath[ii].Longitude)">
-            }
-            @Html.HiddenFor(m => m.Status)
-
-            <input name="Routes[0].Summary" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Summary)">
-            <input name="Routes[0].Copyrights" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Bounds)">
-            <input name="Routes[0].OverviewPolyline.EncodedPoints" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].OverviewPolyline.EncodedPoints)">
-            @for (int ii = 0; ii < @Model.Routes[i].Warnings.Count; ii++)
-            {
-                <input name="Routes[0].Warnings[@ii].Warnings" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Warnings[ii])">
-            }
-            @for (int ii = 0; ii < @Model.Routes[i].WaypointOrder.Count; ii++)
-            {
-                <input name="Routes[0].WaypointOrder[@ii]" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].WaypointOrder[ii])">
-            }
-
-            <div class="col-sm-12 col-md-4 col-lg-4 thumbnail-mode thumbnail">
-                <div class="caption lowerThumbnail text-center">
-                    <h3 class="lowerThumbnail_text_big">Route @(i + 1)</h3>
-                    <button class="btn btn-default" asp-controller="Navigation" asp-action="DisplayRoute" type="submit">- click to select this route - </button>
-                </div>
-
-                <b>@Html.DisplayTextFor(m => @Model.Routes[i].Summary)</b>
-                <br />
-                @for (int j = 0; j < @Model.Routes[i].Legs.Count; j++)
-                {
-                    <input name="Routes[0].Legs[@j].Distance.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance.Text)">
-                    <input name="Routes[0].Legs[@j].Distance.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance.Value)">
-                    <input name="Routes[0].Legs[@j].Duration.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration.Text)">
-                    <input name="Routes[0].Legs[@j].Duration.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration.Value)">
-                    <input name="Routes[0].Legs[@j].StartAddress" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].StartAddress)">
-                    <input name="Routes[0].Legs[@j].EndAddress" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].EndAddress)">
-                    <input name="Routes[0].Legs[@j].StartLocation.Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].StartLocation.Latitude)">
-                    <input name="Routes[0].Legs[@j].StartLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].StartLocation.Longitude)">
-                    <input name="Routes[0].Legs[@j].EndLocation.Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].EndLocation.Latitude)">
-                    <input name="Routes[0].Legs[@j].EndLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].EndLocation.Longitude)">
-
-                    <span>Reistijd: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration.Text)</span><br />
+              <span>Reistijd: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration.Text)</span><br />
                     <span>Afstand: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance.Text)</span>
                     <hr />
 
-                    for (int k = 0; k < @Model.Routes[i].Legs[j].Steps.Count; k++)
-                    {
-                        <input name="Routes[0].Legs[@j].Steps[@k].HTMLInstructions" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].HTMLInstructions)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].Distance.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance.Text)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].Distance.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance.Value)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].Duration.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration.Text)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].Duration.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration.Value)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].StartLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].StartLocation.Longitude)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].StartLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].StartLocation.Longitude)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].EndLocation.Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].EndLocation.Latitude)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].EndLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].EndLocation.Longitude)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].TransitDetails" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].TransitDetails)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].Polyline" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Polyline)">
-                        <input name="Routes[0].Legs[@j].Steps[@k].TravelMode" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].TravelMode)">                       
+            for (int k = 0; k < @Model.Routes[i].Legs[j].Steps.Count; k++)
+            {
+                  <input name="Routes[0].Legs[@j].Steps[@k].HTMLInstructions" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].HTMLInstructions)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].Distance.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance.Text)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].Distance.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance.Value)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].Duration.Text" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration.Text)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].Duration.Value" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration.Value)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].StartLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].StartLocation.Longitude)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].StartLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].StartLocation.Longitude)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].EndLocation.Latitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].EndLocation.Latitude)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].EndLocation.Longitude" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].EndLocation.Longitude)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].TransitDetails" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].TransitDetails)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].Polyline" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Polyline)">
+                  <input name="Routes[0].Legs[@j].Steps[@k].TravelMode" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].TravelMode)">
 
-                        <span>@Html.Raw(HttpUtility.HtmlDecode(@Model.Routes[i].Legs[j].Steps[k].HTMLInstructions))</span>
+                  <span>@Html.Raw(HttpUtility.HtmlDecode(@Model.Routes[i].Legs[j].Steps[k].HTMLInstructions))</span>
                         <br />
                         <span>@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration.Text)</span>
                         <br />
                         <span>@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance.Text)</span>
                         <br />
                         <hr />
-                    }
-                }
-            </div>
-        </form>
-    }
-
+            }
+          }
+        </div>
+      </form>
+  }
 </div>
