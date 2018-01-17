@@ -19,10 +19,10 @@
         <span>Select your route</span>
     </div>
 </div>
-<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-12">
     @for (int i = 0; i < @Model.Routes.Length; i++)
     {
-        <form asp-controller="Navigation" asp-action="DisplayRoute" method="post" style="cursor: pointer;">
+        <form asp-controller="Navigation" asp-action="DisplayRoute" method="post">
             
             @for (int ii = 0; ii < @Model.GeocodedWaypoints.Length; ii++)
             {
@@ -48,55 +48,76 @@
                 @Html.HiddenFor(m => @Model.Routes[i].WaypointOrder[ii])
             }
 
-            <div class="col-sm-12 col-md-4 col-lg-4 thumbnail-mode thumbnail">
-                <div class="caption lowerThumbnail text-center">
-                    <h3 class="lowerThumbnail_text_big">Route @(i + 1)</h3>
-                    <button class="btn btn-default" type="submit">- click to select this route - </button>
+            <div class="col-sm-12 col-md-4 col-lg-4 PlacesResults">
+                <div class="PlaceResult">
+                    <div class="Placetext">
+                        <h3 class="PlaceTitle">Route @(i + 1)</h3>
+                    </div>
+                    <span class="PlaceAdress">
+                        <b>@Html.DisplayTextFor(m => @Model.Routes[i].Summary)</b>
+                    </span>
+                    <div class="placeDescription">
+                    @for (int j = 0; j < @Model.Routes[i].Legs.Length; j++)
+                     {
+                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Distance)
+                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Duration)
+                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].EndAddress)
+                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].EndLocation)
+                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].StartAddress)
+                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].StartLocation)
+                        for (int jj = 0; jj < @Model.Routes[i].Legs[j].ViaWaypoint.Length; jj++)
+                        {
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].ViaWaypoint[jj])
+                        }
+                        for (int jj = 0; jj < @Model.Routes[i].Legs[j].TrafficSpeedEntry.Length; jj++)
+                        {
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].TrafficSpeedEntry[jj])
+                        }
+                         <div class="row">
+                             <div class="col-lg-6">
+                                 <h4><span class="glyphicon glyphicon-time"></span>@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration)</h4>
+                             </div>
+                             <div class="col-lg-6">
+                                 <h4><span class="glyphicon glyphicon-road"></span>@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance)</h4>
+                             </div>
+                             <div class="col-lg-12">
+                                 <h4>Obstacles: </h4>
+                             </div>
+                             <div class="col-lg-12">
+                                 <button class="btn btn-default"><span class="glyphicon glyphicon-list"></span>Route Description</button>
+                             </div>
+                         </div>
+                         <hr/>
+                        for (int k = 0; k < @Model.Routes[i].Legs[j].Steps.Length; k++)
+                        {
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].HtmlInstructions)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].EndLocation)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Maneuver)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Polyline)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].StartLocation)
+                            @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].TravelMode)
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <span>@Html.Raw(HttpUtility.HtmlDecode(@Model.Routes[i].Legs[j].Steps[k].HtmlInstructions))</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h5>Duration: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration)</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h5>Time: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance)</h5>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                    }
+                    </div>
+                    <button class="btn PlaceResultButton" type="submit">- click to select this route - </button>
                 </div>
-
-                <b>@Html.DisplayTextFor(m => @Model.Routes[i].Summary)</b>
-                <br />
-                @for (int j = 0; j < @Model.Routes[i].Legs.Length; j++)
-                {
-                    @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Distance)
-                    @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Duration)
-                    @Html.HiddenFor(m => @Model.Routes[i].Legs[j].EndAddress)
-                    @Html.HiddenFor(m => @Model.Routes[i].Legs[j].EndLocation)
-                    @Html.HiddenFor(m => @Model.Routes[i].Legs[j].StartAddress)
-                    @Html.HiddenFor(m => @Model.Routes[i].Legs[j].StartLocation)
-                    for (int jj = 0; jj < @Model.Routes[i].Legs[j].ViaWaypoint.Length; jj++)
-                    {
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].ViaWaypoint[jj])
-                    }
-                    for (int jj = 0; jj < @Model.Routes[i].Legs[j].TrafficSpeedEntry.Length; jj++)
-                    {
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].TrafficSpeedEntry[jj])
-                    }
-
-                    <span>Reistijd: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Duration)</span><br />
-                    <span>Afstand: @Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Distance)</span>
-                    <hr />
-
-                    for (int k = 0; k < @Model.Routes[i].Legs[j].Steps.Length; k++)
-                    {
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].HtmlInstructions)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].EndLocation)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Maneuver)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].Polyline)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].StartLocation)
-                        @Html.HiddenFor(m => @Model.Routes[i].Legs[j].Steps[k].TravelMode)
-
-                        <span>@Html.Raw(HttpUtility.HtmlDecode(@Model.Routes[i].Legs[j].Steps[k].HtmlInstructions))</span>
-                        <br />
-                        <span>@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Duration)</span>
-                        <br />
-                        <span>@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].Distance)</span>
-                        <br />
-                        <hr />
-                    }
-                }
             </div>
         </form>
     }
