@@ -52,6 +52,11 @@ namespace HandyMapp.Controllers
             return View();
         }
 
+        public IActionResult PlaceDetails()
+        {
+            return View();
+        }
+
         /*public IActionResult SelectPlace(GoogleMapsAPI.NET.API.Geocoding.Results.GeocodeResult restult)
         {
             GoogleMapsAPI.NET.API.Places.Results.PlaceDetailsResult test;
