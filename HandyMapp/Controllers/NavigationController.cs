@@ -99,17 +99,10 @@ namespace HandyMapp.Controllers
             DirectionsController directionsController = new DirectionsController(); ;
             GetDirectionsResponse predictions = null;
 
-
             try
             {
                 predictions = directionsController.ByPlaceId(placesController.AutoComplete(search1).Result[0].PlaceId,
                     placesController.AutoComplete(search2).Result[0].PlaceId);
-                //predictions.Request = new Request()
-                //{
-                //    TravelMode = "WALKING",
-                //    Origin = new DirectionQuery() {Query = search1},
-                //    Destination = new DirectionQuery() { Query = search2}
-                //};
             }
             catch (Exception e)
             {

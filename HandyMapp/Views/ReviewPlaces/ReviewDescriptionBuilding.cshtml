@@ -1,4 +1,5 @@
-﻿
+﻿@model HandyMapp.Models.Review.ReviewBuilding
+
 @{
     ViewData["Title"] = "ReviewDescriptionBuilding";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,25 +7,29 @@
 
 
 <div class="row breadcrumbRow">
-  <ul class="container breadcrumbContainer">
-    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
-    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="ReviewPlaces" asp-action="SelectBuilding"> Select adress/building</a></li>
-    <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Enter your review</li>
-    <li class="breadcrumbHandy">Finish your review</li>
-  </ul>
+    <ul class="container breadcrumbContainer">
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="ReviewPlaces" asp-action="SelectBuilding"> Select adress/building</a></li>
+        <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Enter your review</li>
+        <li class="breadcrumbHandy">Finish your review</li>
+    </ul>
 </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
 <div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
-    <span>Describe the building</span>
-  </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+        <span>Describe the building</span>
+    </div>
 </div>
 <div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-    <textarea class="form-control form-description" placeholder="Example: I (don't) like this building because..." rows="3"></textarea>
-  </div>
-  <div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" style="margin-top: 15px;">
-    <div class="street-eval-form6 col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
-      <a class="btn btn-block btn-primary btn-lg" asp-controller="ReviewPlaces" asp-action="ReviewDetailsBuilding">Post review&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
-    </div>
-  </div>
+    <form asp-controller="ReviewPlaces" asp-action="ReviewDetailsBuilding">
+        @Html.HiddenFor(m => m.PlaceId)
+        @Html.HiddenFor(m => m.Rating)
+        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+            <textarea name="Description" class="form-control form-description" placeholder="Example: I (don't) like this building because..." rows="3"></textarea>
+        </div>
+        <div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" style="margin-top: 15px;">
+            <div class="street-eval-form6 col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-10 col-sm-offset-1">
+                <button class="btn btn-block btn-primary btn-lg">Post review&ensp;<span class="glyphicon glyphicon-arrow-right"></span></button>
+            </div>
+        </div>
+    </form>
 </div>
