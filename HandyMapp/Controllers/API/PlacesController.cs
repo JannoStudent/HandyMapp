@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
+using GoogleMapsAPI.NET.API.Common.Components.Locations.Interfaces;
 using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Data;
 using HandyMapp.Models.GoogeApi;
@@ -81,7 +82,7 @@ namespace HandyMapp.Controllers.API
                                     "&language=nl" +
                                     "&location=52.058295,4.4950389" +
                                     "&radius=4000&strictbounds" +
-                                    "&key=AIzaSyD__y27E6XwzK0tMEVezNktJb_IbyLVQWo")));
+                                    "&key=AIzaSyDlng31KQwxmdlmQme4U42NJieGP7hrpDQ")));
 
                 return new JsonSerializer().Deserialize<Predictions>(new JsonTextReader(new StreamReader(ms)));
             }

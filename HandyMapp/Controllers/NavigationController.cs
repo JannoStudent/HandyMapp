@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Directions.Enums;
+using GoogleMapsAPI.NET.API.Directions.Responses;
 using GoogleMapsAPI.NET.API.Directions.Results;
 using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Controllers.API;
@@ -22,7 +23,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite.Internal.ApacheModRewrite;
 using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 using StackExchange.Redis;
-using Predictions = HandyMapp.Models.Directions.Predictions;
+using Predictions = HandyMapp.Models.GoogeApi.Directions.Predictions;
 
 namespace HandyMapp.Controllers
 {
@@ -47,6 +48,17 @@ namespace HandyMapp.Controllers
 
         public IActionResult Preferences(string walkingAid)
         {
+            if (string.IsNullOrEmpty(walkingAid))
+            {
+                if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.Undefined)
+                {
+                    return View("SelectWalkingAid");
+                }
+                else
+                {
+                    return View();
+                }
+            }
             HttpContext.Session.Set<MobilityType>("MobilityType", (MobilityType)Enum.Parse(typeof(MobilityType), walkingAid));
             return View();
         }
@@ -85,12 +97,19 @@ namespace HandyMapp.Controllers
 
             PlacesController placesController = new PlacesController(_context);
             DirectionsController directionsController = new DirectionsController(); ;
-            Predictions predictions = null;
+            GetDirectionsResponse predictions = null;
+
 
             try
             {
                 predictions = directionsController.ByPlaceId(placesController.AutoComplete(search1).Result[0].PlaceId,
                     placesController.AutoComplete(search2).Result[0].PlaceId);
+                //predictions.Request = new Request()
+                //{
+                //    TravelMode = "WALKING",
+                //    Origin = new DirectionQuery() {Query = search1},
+                //    Destination = new DirectionQuery() { Query = search2}
+                //};
             }
             catch (Exception e)
             {
@@ -110,7 +129,7 @@ namespace HandyMapp.Controllers
 
 
         [HttpPost]
-        public IActionResult DisplayRoute(Predictions predictions)
+        public IActionResult DisplayRoute(GetDirectionsResponse predictions)
         {
             return View(predictions);
         }

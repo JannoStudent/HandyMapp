@@ -49,7 +49,9 @@ $(".PlaceResultButton").click(function () {
 var arrDescription = [];
 
 $(".search").keypress(function (e) {
-    fillautocomplete($(this));
+    if ($(this).val().length > 2) {
+        fillautocomplete($(this));
+    }
     if (e.which === 13) {
         $(".ui-autocomplete").css("display", "none");
     }

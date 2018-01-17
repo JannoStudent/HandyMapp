@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace HandyMapp.Models.GoogeApi.Directions
 {
-    public partial class Northeast
+    public partial class LatLng
     {
         [JsonProperty("lat")]
         public double Lat { get; set; }

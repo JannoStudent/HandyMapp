@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Controllers.API;
 using HandyMapp.Data;
+using HandyMapp.Models;
 using HandyMapp.Models.GoogeApi;
+using HandyMapp.Models.GoogeApi.Places.Details;
+using HandyMapp.Models.Navigation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandyMapp.Controllers
@@ -24,27 +27,38 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-        public IActionResult SelectBuilding()
+        public IActionResult SelectBuilding(string error)
         {
+            ViewBag.Error = error;
             return View();
         }
 
+        //step 1
         public IActionResult ReviewStarBuilding(IList<PlacePrediction> placePredictions)
         {
             PlacesController placesController = new PlacesController(_context);
-            return View(placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList());
-        }
+            List<PlaceDetails> placeDetailses = placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList();
 
-        public IActionResult ReviewDetailsBuilding()
-        {
+            if (placeDetailses.Count <= 0)
+            {
+                return Redirect("SelectBuilding?error=No Place was fount!");
+            }
             return View();
         }
 
+        //step 2
         public IActionResult ReviewDescriptionBuilding()
         {
             return View();
         }
 
+        //step 3
+        public IActionResult ReviewDetailsBuilding()
+        {
+            return View();
+        }
+
+        //step 4
         public IActionResult ThankYouBuilding()
         {
             return View();

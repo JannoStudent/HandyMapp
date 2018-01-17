@@ -6,8 +6,12 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
-using HandyMapp.Models.Directions;
+using GoogleMapsAPI.NET.API.Client;
+using GoogleMapsAPI.NET.API.Common.Components.Locations;
+using GoogleMapsAPI.NET.API.Directions.Enums;
+using GoogleMapsAPI.NET.API.Directions.Responses;
 using HandyMapp.Models.GoogeApi;
+using HandyMapp.Models.GoogeApi.Directions;
 using HandyMapp.Models.GoogeApi.Places.Details;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +26,7 @@ namespace HandyMapp.Controllers.API
         [HttpGet("ByLocation")]
         public Predictions ByLocation(Location start, Location end)
         {
+           
             try
             {
                 MemoryStream ms = new MemoryStream(
@@ -41,8 +46,10 @@ namespace HandyMapp.Controllers.API
         }
 
         [HttpGet("ByPlaceId/{start}/{end}")]
-        public Predictions ByPlaceId(string start, string end)
+        public GetDirectionsResponse ByPlaceId(string start, string end)
         {
+            var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+            
             try
             {
                 MemoryStream ms = new MemoryStream(
@@ -53,7 +60,10 @@ namespace HandyMapp.Controllers.API
                             "&destination=place_id:" + end +
                             "&alternatives=true" +
                             "&mode=walking&language=nl&unit=metric&key=AIzaSyA-ILiw69VUG6KWfiPwPq3ZKOTPGqf8hWI")));
-                return new JsonSerializer().Deserialize<Predictions>(new JsonTextReader(new StreamReader(ms)));
+
+                var p = new JsonSerializer().Deserialize<Predictions>(new JsonTextReader(new StreamReader(ms)));
+               
+                return client.Directions.GetDirections(origin: new GeoCoordinatesLocation(p.Routes[0].Legs[0].StartLocation.Lat, p.Routes[0].Legs[0].StartLocation.Lng), destination: new GeoCoordinatesLocation(p.Routes[0].Legs[0].EndLocation.Lat, p.Routes[0].Legs[0].EndLocation.Lng), mode: TransportationModeEnum.Walking, waypoints: null, alternatives: true, avoid: null, language: "dutch", units: UnitSystemEnum.Metric, region: null, departureTime: DateTime.Now, arrivalTime: null, optimizeWaypoints: true, transitMode: null, transitRoutingPreference: TransitRoutingPreferenceEnum.LessWalking, trafficModel: TrafficModelEnum.BestGuess);
             }
             catch (Exception e)
             {

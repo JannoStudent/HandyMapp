@@ -10,6 +10,7 @@ using HandyMapp.Controllers.API;
 using HandyMapp.Models.GoogeApi;
 using System.Linq;
 using System.Globalization;
+using HandyMapp.Models.Navigation;
 
 namespace HandyMapp.Controllers
 {
@@ -26,6 +27,17 @@ namespace HandyMapp.Controllers
         {
             return View();
         }
+
+        public IActionResult street_eval()
+        {
+            street_eval_model model = new street_eval_model();
+            model.aid = HttpContext.Session.Get<MobilityType>("MobilityType").ToString();
+            HttpContext.Session.SetString("aid", HttpContext.Session.Get<MobilityType>("MobilityType").ToString());
+
+            List<street_eval_model> list = _context.StreetEvalModels.ToList();
+            return View("street_eval", list);
+        }
+
         [HttpPost]
         public IActionResult street_eval(string walkingAid)
         {
@@ -38,14 +50,14 @@ namespace HandyMapp.Controllers
         }
         street_eval_model model;
         [HttpPost]
-        public IActionResult street_eval2(double Value1, double Value2)
+        public IActionResult street_eval2(string Value1, string Value2)
         {
             model = new street_eval_model();
             model.lat = Value1;
             model.lng = Value2;
 
-            HttpContext.Session.Set<Double>("lat", Value1);
-            HttpContext.Session.Set<Double>("lng", Value2);
+            HttpContext.Session.SetString("lat", Value1);
+            HttpContext.Session.SetString("lng", Value2);
             return View("street_eval2", model);
         }
         
@@ -80,8 +92,8 @@ namespace HandyMapp.Controllers
         {
             street_eval_model model4 = new street_eval_model();
             model4.aid = HttpContext.Session.GetString("aid");
-            model4.lat = HttpContext.Session.Get<Double>("lat");
-            model4.lng = HttpContext.Session.Get<Double>("lng");
+            model4.lat = HttpContext.Session.GetString("lat");
+            model4.lng = HttpContext.Session.GetString("lng");
             model4.rating = HttpContext.Session.GetString("rating");
             model4.description = Obst_description;
             model4.obst_type = selectedObst_type;
