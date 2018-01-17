@@ -5,17 +5,29 @@ using System.Collections.Generic;
 
 namespace HandyMapp.Data.Migrations
 {
-    public partial class First : Migration
+    public partial class streatEvals : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropIndex(
+                name: "IX_AspNetUserRoles_UserId",
+                table: "AspNetUserRoles");
+
+            migrationBuilder.DropIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles");
+
             migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LongName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LongName = table.Column<string>(maxLength: 50, nullable: false),
                     ShortName = table.Column<string>(type: "nchar(10)", nullable: true)
                 },
                 constraints: table =>
@@ -27,9 +39,9 @@ namespace HandyMapp.Data.Migrations
                 name: "Countries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LongName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LongName = table.Column<string>(maxLength: 50, nullable: false),
                     ShortName = table.Column<string>(type: "nchar(10)", nullable: true)
                 },
                 constraints: table =>
@@ -41,10 +53,10 @@ namespace HandyMapp.Data.Migrations
                 name: "Example",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Count = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Count = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,7 +67,7 @@ namespace HandyMapp.Data.Migrations
                 name: "PostCodes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PostCode = table.Column<string>(type: "nchar(10)", nullable: false)
                 },
@@ -68,7 +80,7 @@ namespace HandyMapp.Data.Migrations
                 name: "Provinces",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     LongName = table.Column<string>(type: "nchar(10)", nullable: false),
                     ShortName = table.Column<string>(type: "nchar(10)", nullable: true)
@@ -79,12 +91,30 @@ namespace HandyMapp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StreetEvalModels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    aid = table.Column<string>(nullable: true),
+                    description = table.Column<string>(nullable: true),
+                    lat = table.Column<double>(nullable: false),
+                    lng = table.Column<double>(nullable: false),
+                    obst_type = table.Column<string>(nullable: true),
+                    rating = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StreetEvalModels", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Streets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LongName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    LongName = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,11 +125,11 @@ namespace HandyMapp.Data.Migrations
                 name: "Vectors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Latitude = table.Column<double>(type: "float", nullable: true),
-                    Longitude = table.Column<double>(type: "float", nullable: true),
-                    Weight = table.Column<double>(type: "float", nullable: false)
+                    Latitude = table.Column<double>(nullable: true),
+                    Longitude = table.Column<double>(nullable: true),
+                    Weight = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,19 +140,19 @@ namespace HandyMapp.Data.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CaneRating = table.Column<int>(type: "int", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: false),
-                    PlaceId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostCodeId = table.Column<int>(type: "int", nullable: true),
-                    ProvinceId = table.Column<int>(type: "int", nullable: false),
-                    ScooterRating = table.Column<int>(type: "int", nullable: false),
-                    StreetId = table.Column<int>(type: "int", nullable: false),
+                    CaneRating = table.Column<int>(nullable: false),
+                    CityId = table.Column<int>(nullable: false),
+                    CountryId = table.Column<int>(nullable: false),
+                    PlaceId = table.Column<string>(nullable: false),
+                    PostCodeId = table.Column<int>(nullable: true),
+                    ProvinceId = table.Column<int>(nullable: false),
+                    ScooterRating = table.Column<int>(nullable: false),
+                    StreetId = table.Column<int>(nullable: false),
                     StreetNumber = table.Column<string>(type: "nchar(10)", nullable: false),
-                    WalkerRating = table.Column<int>(type: "int", nullable: false),
-                    WeelchairRating = table.Column<int>(type: "int", nullable: false)
+                    WalkerRating = table.Column<int>(nullable: false),
+                    WeelchairRating = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,13 +193,13 @@ namespace HandyMapp.Data.Migrations
                 name: "Obstacles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ObstacleType = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<int>(type: "int", nullable: false),
-                    VectorId = table.Column<int>(type: "int", nullable: true),
-                    Weight = table.Column<double>(type: "float", nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    ObstacleType = table.Column<int>(nullable: false),
+                    Rating = table.Column<int>(nullable: false),
+                    VectorId = table.Column<int>(nullable: true),
+                    Weight = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,9 +216,9 @@ namespace HandyMapp.Data.Migrations
                 name: "VectorPaths",
                 columns: table => new
                 {
-                    VectorId1 = table.Column<int>(type: "int", nullable: false),
-                    VectorId2 = table.Column<int>(type: "int", nullable: false),
-                    Distance = table.Column<double>(type: "float", nullable: true)
+                    VectorId1 = table.Column<int>(nullable: false),
+                    VectorId2 = table.Column<int>(nullable: false),
+                    Distance = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,6 +236,20 @@ namespace HandyMapp.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CityId",
@@ -241,10 +285,22 @@ namespace HandyMapp.Data.Migrations
                 name: "IX_VectorPaths_VectorId2",
                 table: "VectorPaths",
                 column: "VectorId2");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                table: "AspNetUserTokens",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                table: "AspNetUserTokens");
+
             migrationBuilder.DropTable(
                 name: "Addresses");
 
@@ -253,6 +309,9 @@ namespace HandyMapp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Obstacles");
+
+            migrationBuilder.DropTable(
+                name: "StreetEvalModels");
 
             migrationBuilder.DropTable(
                 name: "VectorPaths");
@@ -274,6 +333,30 @@ namespace HandyMapp.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vectors");
+
+            migrationBuilder.DropIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_UserId",
+                table: "AspNetUserRoles",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName");
         }
     }
 }

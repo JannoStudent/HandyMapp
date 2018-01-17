@@ -10,6 +10,9 @@ using System.Diagnostics;
 using System.Linq;
 using GoogleMapsAPI.NET.API.Places.Components;
 using HandyMapp.Models.Navigation;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace HandyMapp.Controllers
 {
@@ -21,7 +24,6 @@ namespace HandyMapp.Controllers
         {
             _context = context;
         }
-
         public IActionResult Index()
         {
             return View();
@@ -34,62 +36,91 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-        public IActionResult SelectReview()
-        {
-            return View();
-        }
-
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
-        public IActionResult street_eval()
-        {
-            return View();
-        }
-
-        public IActionResult street_eval4()
-        {
-            return View();
-        }
-
-        public IActionResult street_eval5()
-        {
-            return View();
-        }
-
-        public IActionResult street_eval6()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult street_eval2()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult street_eval2(string Value1, string Value2)
-        {
-            street_eval_model model = new street_eval_model();
-            model.lat = Value1;
-            model.lng = Value2;
-            return View("street_eval2", model);
-        }
-
-        [HttpGet]
-        public IActionResult street_eval3()
-        {
-            return View();
-        }
-
-
+        
         public IActionResult TestAPI()
         {
-            return View();
+            // Get client
+            var client = new MapsAPIClient("AIzaSyDfFiQB4uFA8_lS-24Ll1EFUXxfGVGoJWs");
+
+            var startString = "Amerikaweg 201, 2717 AZ Zoetermeer, Netherlands";
+            var endString = "Aziëweg, 2726 Zoetermeer, Netherlands";
+            var directionsResult = client.Directions.GetDirections(startString, endString, TransportationModeEnum.Walking, null, true, null, "dutch", UnitSystemEnum.Metric, null, DateTime.Now, null, true, null, TransitRoutingPreferenceEnum.LessWalking, TrafficModelEnum.BestGuess);
+
+            List<GetDirectionsRouteResult> routes = directionsResult.Routes;
+            //List<Vector> vectors = new List<Vector>();
+            //VectorNeighbor neighbor = null;
+
+            foreach (var route in directionsResult.Routes)
+            {
+                foreach (var leg in route.Legs)
+                {
+                    foreach (var step in leg.Steps)
+                    {
+                        Vector parent = new Vector(step.StartLocation.Latitude, step.StartLocation.Longitude);
+                        Vector child = new Vector(step.EndLocation.Latitude, step.EndLocation.Longitude);
+                        VectorPath vectorPath1 = new VectorPath(step.Distance.Value)
+                        {
+                            VectorId1Navigation = parent,
+                            VectorId2Navigation = child
+                        };
+                        VectorPath vectorPath2 = new VectorPath(step.Distance.Value)
+                        {
+                            VectorId1Navigation = child,
+                            VectorId2Navigation = parent
+                        };
+
+                        if (!_context.Vectors.Any(x => x.Latitude == step.StartLocation.Latitude && x.Longitude == step.StartLocation.Longitude))
+                        {
+                            _context.Vectors.Add(parent);
+                            _context.VectorPaths.Add(vectorPath1);
+                            _context.SaveChanges();
+                        }
+
+                        if (!_context.Vectors.Any(x =>
+                            x.Latitude == step.EndLocation.Latitude && x.Longitude == step.EndLocation.Longitude))
+                        {
+                            _context.Vectors.Add(child);
+                            _context.VectorPaths.Add(vectorPath2);
+                            _context.SaveChanges();
+                        }
+
+                        parent = _context.Vectors.First(x =>
+                            x.Latitude == step.StartLocation.Latitude &&
+                            x.Longitude == step.StartLocation.Longitude);
+                        child = _context.Vectors.First(x =>
+                            x.Latitude == step.EndLocation.Latitude &&
+                            x.Longitude == step.EndLocation.Longitude);
+                        
+                        if (!_context.VectorPaths.Any(x => x.VectorId1 == parent.Id && x.VectorId2 == child.Id))
+                        {
+                            vectorPath1 = new VectorPath(step.Distance.Value)
+                            {
+                                VectorId1Navigation = parent,
+                                VectorId2Navigation = child
+                            };
+                            _context.VectorPaths.Add(vectorPath1);
+                        }
+                        if (!_context.VectorPaths.Any(x => x.VectorId1 == child.Id && x.VectorId2 == parent.Id))
+                        {
+                            vectorPath2 = new VectorPath(step.Distance.Value)
+                            {
+                                VectorId1Navigation = child,
+                                VectorId2Navigation = parent
+                            };
+                            _context.VectorPaths.Add(vectorPath2);
+                        }
+                    }
+                }
+            }
+            _context.SaveChanges();
+
+            return View(directionsResult);
         }
 
         public IActionResult Error()
