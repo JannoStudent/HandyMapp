@@ -1,0 +1,83 @@
+﻿/*//////////////////////////////// SEARCH A BUILDING////////////////////////*/
+
+.PlacesReviewResults {
+    height: 50vh;
+    overflow-y: auto;
+    padding-left: 2%;
+}
+
+.PlaceReviewResult {
+    background-color: white;
+    width: 31.3%;
+    min-width: 200px;
+    margin: 1%;
+    float: left;
+    -ms-border-radius: 5px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 1px #b2b2b2;
+    box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.3);
+    padding: 0px !important;
+}
+
+.PlaceReviewTitle {
+    overflow: hidden;
+    padding-bottom: 10px;
+    font-size: 23px;
+    line-height: 28px;
+    height: 60px;
+}
+
+.PlaceReviewAdress {
+    padding: 5px 20px;
+    color: grey;
+    height: 60px;
+    overflow: hidden;
+} 
+
+#searchReviewBuilding {
+    margin: 10px;
+}
+
+/*//////////////////////////////// BUILDING QUESTIONS///////////////////////*/
+#DetailsButtons, #EndReview {
+    margin-top: 150px;
+}
+
+#DetailsButtons, #DetailsQuestionsNumber, #answers, #passToggle, #passToggleSmall {
+    display: none;
+}
+
+#DetailsQuestionsNumber {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+/*/////////////////////////////// MEDIA QUERIES //////////////////////*/
+
+@media (max-width: 970px) {
+    html {
+        width: 100%;
+    }
+
+    .handyContainer {
+        width: 100%;
+    }
+
+    #pass, #passToggleSmall {
+        display: none;
+    }
+    #passToggle {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    #pass, #passToggle {
+        display: none;
+    }
+
+    #passToggleSmall {
+        display: block;
+    }
+}
