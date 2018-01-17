@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using HandyMapp.Models.GoogeApi.Directions;
+﻿using Newtonsoft.Json;
 
-namespace HandyMapp.Models.Directions
+namespace HandyMapp.Models.GoogeApi.Directions
 {
     public partial class Predictions
     {
@@ -14,6 +9,9 @@ namespace HandyMapp.Models.Directions
 
         [JsonProperty("routes")]
         public Route[] Routes { get; set; }
+
+        [JsonProperty("request")]
+        public Request Request { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }

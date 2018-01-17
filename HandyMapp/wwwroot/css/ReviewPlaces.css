@@ -1,8 +1,8 @@
 ﻿/*//////////////////////////////// SEARCH A BUILDING////////////////////////*/
 
 .PlacesReviewResults {
-    height: 50vh;
-    overflow-y: auto;
+    height: 60vh;
+    overflow-y: hidden;
     padding-left: 2%;
 }
 
@@ -19,20 +19,24 @@
     padding: 0px !important;
 }
 
-.ImageReviewContainter {
-    -ms-border-radius: 15px;
-    border-radius: 15px 15px 0 0;
+.PlaceReviewTitle {
     overflow: hidden;
-    max-height: 150px;
+    padding-bottom: 10px;
+    font-size: 23px;
+    line-height: 28px;
+    height: 60px;
 }
 
-.ImageReviewContainter img {
-        width: 100%;
-        -webkit-object-fit: cover;
-        object-fit: cover;
-        -webkit-object-position: 50% 50%;
-        object-position: 50% 50%;
-    }
+.PlaceReviewAdress {
+    padding: 5px 20px;
+    color: grey;
+    height: 60px;
+    overflow: hidden;
+} 
+
+#searchReviewBuilding {
+    margin: 10px;
+}
 
 /*//////////////////////////////// BUILDING QUESTIONS///////////////////////*/
 #DetailsButtons, #EndReview {
