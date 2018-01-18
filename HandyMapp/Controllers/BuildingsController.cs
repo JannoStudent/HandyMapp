@@ -10,6 +10,8 @@ using GoogleMapsAPI.NET.API.Places.Results;
 using HandyMapp.Controllers.API;
 using HandyMapp.Data;
 using HandyMapp.Models.GoogeApi;
+using HandyMapp.Models.GoogeApi.Places.Details;
+using HandyMapp.Models.Review;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandyMapp.Controllers
@@ -52,9 +54,19 @@ namespace HandyMapp.Controllers
             return View();
         }
 
-        public IActionResult PlaceDetails()
+        public IActionResult PlaceDetails(string PlaceId)
         {
-            return View();
+            PlaceId = "ChIJR46gVD_JxUcRidwGgVIl1wU";
+            PlacesController placesController = new PlacesController(_context);
+            PlaceDetails placeDetails = placesController.Get(PlaceId);
+            List<ReviewBuilding> buildings =_context.ReviewBuildings.Where(m => m.PlaceId.Equals(placeDetails.result.place_id)).ToList();
+            DisplayReviewBuilding reviewBuilding = new DisplayReviewBuilding(){PlaceDetails = placeDetails, ReviewBuildings = buildings};
+            reviewBuilding.AvrageRatting = 4;
+            reviewBuilding.ScooterRatting = 4;
+            reviewBuilding.WheelchairRatting = 4;
+            reviewBuilding.WalkerRatting = 4;
+            reviewBuilding.WalkingStickRatting = 4;
+            return View(reviewBuilding);
         }
 
         /*public IActionResult SelectPlace(GoogleMapsAPI.NET.API.Geocoding.Results.GeocodeResult restult)

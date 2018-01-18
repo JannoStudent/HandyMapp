@@ -4,13 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using HandyMapp.Models.GoogeApi.Places.Details;
+using HandyMapp.Models.Navigation;
 using Newtonsoft.Json;
 
 namespace HandyMapp.Models.Review
 {
     public class ReviewBuilding
     {
-        [Key]
+        [JsonProperty("id")]
+        public int Id { get; set; }
         [JsonProperty("placeId")]
         public string PlaceId { get; set; }
         [JsonProperty("rating")]
@@ -29,5 +31,6 @@ namespace HandyMapp.Models.Review
         public QuestionOption HallwaysWide { get; set; }
         [JsonProperty("looseTilesOrFloormats")]
         public QuestionOption LooseTilesOrFloormats { get; set; }
+        public MobilityType MobilityType { get; set; }
     }
 }

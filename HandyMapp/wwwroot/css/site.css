@@ -231,6 +231,9 @@ p .hard:hover {
 }
 
 .thumbnail-mode {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     margin: 40px 0 0 0;
     border-color: #1371B8;
     border-width: 4px;
@@ -598,6 +601,13 @@ input {
         height: auto;
     }
 }
+/*
+@media (min-width: 1080px) {
+    .lowerThumbnail{
+        min-height: 120px;
+    }
+}
+    */
 
 @media (max-width: 768px) {
     .handyContainer {
@@ -605,5 +615,21 @@ input {
     }
     .breadcrumbContainer {
         width: 90%;
+    }
+}
+
+@media (max-width: 760px) {
+    .handyContainer {
+        width: 100%;
+    }
+    .breadcrumbContainer {
+        width: 90%;
+    }
+    .img-navbar {
+        display: inline;
+    }
+
+    .navbar-collapse {
+        background-color: white;
     }
 }

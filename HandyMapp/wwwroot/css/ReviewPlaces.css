@@ -1,8 +1,8 @@
 ﻿/*//////////////////////////////// SEARCH A BUILDING////////////////////////*/
 
 .PlacesReviewResults {
-    height: 50vh;
-    overflow-y: auto;
+    height: 60vh;
+    overflow-y: hidden;
     padding-left: 2%;
 }
 

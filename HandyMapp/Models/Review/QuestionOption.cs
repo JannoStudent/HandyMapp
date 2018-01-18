@@ -7,6 +7,6 @@ namespace HandyMapp.Models.Review
 {
     public enum QuestionOption
     {
-        Undefined,Yes,Dontknow,No
+        Undefined,Yes,Pass,No
     }
 }

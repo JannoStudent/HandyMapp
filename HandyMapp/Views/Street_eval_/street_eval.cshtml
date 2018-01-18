@@ -1,64 +1,22 @@
-﻿
-@model List<street_eval_model>
+﻿@model List<street_eval_model>
 
 @{
     street_eval_model myModel = new street_eval_model();
 }
-
-<div class="jumbotron text-center jumbotron-notFront">
-    <div class="container">
-
-        <svg class="stepDiactivated stepVisited" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <a class="step-breadcrumbs" asp-controller="Home" asp-action="SelectReview" style="cursor: pointer;">
-        <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;" />
-
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="27.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">1</text>
-            </g>
-            </a>
-        </svg>
-
-        <svg class="stepActivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <circle cx="50" cy="50" r="40.372" style="fill:#fff; stroke:#fff; stroke-width: 4px;"></circle>
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#1370B8; stroke:#1370B8;stroke-width:1px;">2</text>
-            </g>
-        </svg>
-
-        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;" />
-
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">3</text>
-                </g>
-        </svg>
-        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle> 
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">4</text>
-            </g>
-        </svg>
-
-        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle> 
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">5</text>
-            </g>
-        </svg>
-
-        <svg class="stepDiactivated" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-        <circle cx="50" cy="50" r="40.372" style="fill:transparent; stroke:#fff; stroke-width: 4px;"></circle> 
-        <g id="_2" transform="matrix(1,0,0,1,3.75692,-2.72152)">
-        <text x="29.164px" y="75.726px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:64.014px;fill:#fff;stroke:#fff;stroke-width:1px;">6</text>
-            </g>
-        </svg>
-    </div>
-</div>
+<div class="row breadcrumbRow">
+    <ul class="container breadcrumbContainer">
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Street_eval_" asp-action="select_walking_aid"> Review choice</a></li>
+        <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Select adress/building</li>
+        <li class="breadcrumbHandy">Enter your review</li>
+        <li class="breadcrumbHandy">Finish your review</li>
+    </ul>
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
+   
 
 <!--Description-->
 <div class="input-group description-container">
     <span class="input-group-btn">
-        <a class="btn btn-default back-button" asp-controller="home" asp-action="SelectReview"><span class="glyphicon glyphicon-arrow-left"></span>BACK</a>
+        <a class="btn btn-default back-button" asp-controller="home" asp-action="index" value="Back"><span class="glyphicon glyphicon-arrow-left"></span></a>
     </span>
     <p class="description-text container-fluid">Select the street you want to review by entering streetname or dropping the marker on the map:</p>
 </div>
@@ -81,64 +39,80 @@
     var mylat, mylng, mystring, mynumber, ausgabe, coords_array;
 
 
-            // GETTING COORDS AND VISALIZE THEM
+    // GETTING COORDS AND VISALIZE THEM
 
-            var map, latZoe, lngZoe;
-            var service;
-            var infoWindow;
-            var service;
-            var place, placeId;
-            var placesearch;
+    var map, latZoe, lngZoe;
+    var service;
+    var infoWindow;
+    var service;
+    var place, placeId;
+    var placesearch;
 
-            function initialize() {
-                //zoetermeer coords
-                latZoe = 52.0575;
-                lngZoe = 4.49306;
-                //set up google map
-                //map Object
-                map = new google.maps.Map(document.getElementById('map_canvas'), {
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    //latLng: new google.maps.LatLng(latZoe, lngZoe),
-                    center: new google.maps.LatLng(latZoe, lngZoe),
-                    //mapTypeId: 'hybrid',
-                    zoom: 15,
-                    zoomControl: true,
-                    zoomControlOptions: {
-                                style: google.maps.ZoomControlStyle.LARGE
-                    },
-                    scaleControl: true,
-                    streetViewControl: true,
-                    streetViewControlOptions: {
-                                position: google.maps.ControlPosition.LEFT_TOP
-                    },
-                    fullscreenControl: true
-                });
-               /**
-                  * Set markers
-                */
-                var list_var = @Html.Raw(Json.Serialize(Model));
+    function initialize() {
+        //zoetermeer coords
+        latZoe = 52.0575;
+        lngZoe = 4.49306;
+        //set up google map
+        //map Object
+        map = new google.maps.Map(document.getElementById('map_canvas'), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            //latLng: new google.maps.LatLng(latZoe, lngZoe),
+            center: new google.maps.LatLng(latZoe, lngZoe),
+            //mapTypeId: 'hybrid',
+            zoom: 15,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.LARGE
+            },
+            scaleControl: true,
+            streetViewControl: true,
+            streetViewControlOptions: {
+                position: google.maps.ControlPosition.LEFT_TOP
+            },
+            fullscreenControl: true
+        });
+        /**
+           * Set markers
+         */
+        var list_var = @Html.Raw(Json.Serialize(Model));
                 //console.log(list_var);
-            
+
                 for (var i = 0; i < list_var.length; i++) {
                      markers = new google.maps.Marker({
-                         position: new google.maps.LatLng(list_var[i].lat.replace(/"/g, '') , list_var[i].lng.replace(/"/g, '')),
+                         position: new google.maps.LatLng(list_var[i].lat, list_var[i].lng),
                         map: map,
                         title: 'Click Me ' + i
                     });
-                    
+
                      console.log(list_var[i].lat.replace(/"/g, ''));
                     google.maps.event.addListener(markers, 'click', (function (markers, i) {
                         return function () {
-                            infowindow.setContent("hure");
+                            //hurer
+                           // latLng = new google.maps.LatLng(list_var[i].lat, list_var[i].lng);
+                            //  var street = geocode(latLng);
+                            infowindow.setContent('<div id="marker_info_window" ' +
+                                'style="max-width:250px;font-size="2em"color:#000"> ' +
+                                '<span style="font-size:12pt"><b>Description: </b>' + list_var[i].description +
+                                '</span>'+
+                                '</br > <span style="font-size:12pt"><b>Obstacle type: </b>' + list_var[i].obst_type +
+                                '</span>' +
+                                '</br ><span style="font-size:12pt"><b>Rating: </b>' + list_var[i].rating +
+                                '</span>'+
+                                '</br > <form method="post" action="@Url.Action("street_eval2","Street_eval_")" >'+
+                                '<input type="hidden" name="Value1" value="' + list_var[i].lat + '"/>' +
+                                '<input type="hidden" name="Value2" value="' + list_var[i].lng + '"/>'+
+                                '<input type="submit" value= "Evaluate" > </div > ' +
+                                '</form');
+
                             infowindow.open(map, markers);
                         }
                      })(markers, i));
                     markers.setMap(map);
                 }
-               
+
                 /*
                 * set markers end
-                */                
+                */
             marker = new google.maps.Marker({
                 position: latLng,
                 map: map,
@@ -150,7 +124,7 @@
                 content: '<div id="iw" style="max-width:300px;font-size:1.1em;color:#333">Drag the red marker anywhere on the map to know the approximate postal address of that location.<br>For help, please </div>'
             });
             marker.addListener('click', toggleBounce);
-            latLng = new google.maps.LatLng(latZoe, lngZoe);
+
 
             var infowindow = new google.maps.InfoWindow();
 
@@ -161,7 +135,7 @@
 
             google.maps.event.addListener(marker, 'dragend', function (e) {
                 clearMarkers();
-                //marker.setMap(null);    
+                //marker.setMap(null);
                 var point = marker.getPosition();
                 map.panTo(point);
                 geocode(point);
@@ -171,7 +145,7 @@
             * click function map
            */
             google.maps.event.addListener(map, 'click', function (event) {
-                marker.setMap(null); 
+                marker.setMap(null);
         placeMarker(event.latLng);
         mylat = event.latLng.lat();
         mylng = event.latLng.lng();
@@ -246,7 +220,6 @@
                 autocomplete = new google.maps.places.Autocomplete(input, options);
                 autocomplete.bindTo('bounds', map);
 
-
                 google.maps.event.addListener(autocomplete, 'place_changed', function () {
                     clearMarkers();
                     infoWindow.close();
@@ -305,8 +278,9 @@
                     html_eval_text += '<b><span style="font-size:150%;">Selected Street:</b> </br>' + address + '</span>';
                     html_eval_button += '<form method="POST" id=\"sampleForm\" action="\street_eval2\" controller="\Street_eval_\">' +
 
-                        '<input style=\"visibility: hidden; position: absolute;\" name=\"Value1\" type=\"text\" value="' + mylat + '">' +
-                        '<input style=\"visibility: hidden; position: absolute;\"  name=\"Value2\" type=\"text\" value="' + mylng + '">' +
+                        '<input style=\"visibility: hidden; position: absolute;\" name=\"lat\" type=\"text\" value="' + mylat + '">' +
+                        '<input style=\"visibility: hidden; position: absolute;\"  name=\"lng\" type=\"text\" value="' + mylng + '">' +
+                        '<input style=\"visibility: hidden; position: absolute;\"  name=\"streetname\" type=\"text\" value="' + address + '">' +
                         '<button type=\"submit\" style=\"position: relative\"class=\"btn btn-success btn-lg btn-block\">Evaluate this street <span class=\"glyphicon glyphicon-arrow-right\"></span></button>' +
                         ' </form> ';
 

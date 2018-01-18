@@ -13,9 +13,10 @@ using System;
 namespace HandyMapp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180117162644_updateReviewBuildings")]
+    partial class updateReviewBuildings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,7 +267,7 @@ namespace HandyMapp.Data.Migrations
 
             modelBuilder.Entity("HandyMapp.Models.Review.ReviewBuilding", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("PlaceId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessibleToilets");
@@ -281,15 +282,13 @@ namespace HandyMapp.Data.Migrations
 
                     b.Property<int>("MobilityType");
 
-                    b.Property<string>("PlaceId");
-
                     b.Property<int>("Ramps");
 
                     b.Property<int>("Rating");
 
                     b.Property<int>("Threshold");
 
-                    b.HasKey("Id");
+                    b.HasKey("PlaceId");
 
                     b.ToTable("ReviewBuildings");
                 });
@@ -310,8 +309,6 @@ namespace HandyMapp.Data.Migrations
                     b.Property<string>("obst_type");
 
                     b.Property<string>("rating");
-
-                    b.Property<string>("streetname");
 
                     b.HasKey("Id");
 
