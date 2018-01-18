@@ -208,7 +208,7 @@
                 });
 
             map.addListener('zoom_changed',
-                function() {
+                function () {
                     if (map.getZoom() > 15) {
                         map.setMapTypeId('roadmap');
                     } else {
@@ -230,13 +230,17 @@
 
             flightPath.setMap(map);
 
+            var test = 'mapIcons';
+
             markers.push(new window.google.maps.Marker({
                 position: response.routes[0].legs[0].start_location,
+                icon: '@Url.Content("~/img/mapIcons/startPoint.png")',
                 map: map
             }));
 
             markers.push(new window.google.maps.Marker({
                 position: response.routes[0].legs[0].end_location,
+                icon: '@Url.Content("~/img/mapIcons/endPoint.png")',
                 map: map
             }));
 
