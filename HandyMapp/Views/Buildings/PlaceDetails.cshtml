@@ -1,0 +1,151 @@
+﻿@using System.Runtime.InteropServices.ComTypes
+@model HandyMapp.Models.Review.DisplayReviewBuilding
+
+@{
+    ViewData["Title"] = "PlacesDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row breadcrumbRow">
+    <ul class="container breadcrumbContainer">
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Buildings" asp-action="WayOfSearching">Way of searching</a></li>
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Buildings" asp-action="PlaceInput">Enter adress/name</a></li>
+        <li class="breadcrumbHandy currentBreadcrumb breadcrumblineVisited">Find your place</li>
+    </ul>
+</div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>-->
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 pageTitle">
+        <span>Building information</span>
+    </div>
+</div>
+<div class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
+    @if (@Model.PlaceDetails.result.photos != null)
+    {
+        <div class="col-lg-5 col-md-5 col-sm-10 ">
+            <img src=@("https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=" + @Model.PlaceDetails.result.photos[0].photo_reference + "&key=AIzaSyAlvCDCInzIY4nkZMM5iZLkF8VZagEO8QY") style="width: 90%" /><!---------------------------------- Image-->
+        </div>
+    }
+    <div class="col-lg-5 col-md-5 col-sm-10">
+        <div>
+            <div class="from-to">Adress</div>
+            <div id="buildingAdress">@Html.DisplayTextFor(m => Model.PlaceDetails.result.formatted_address)</div><!------------------- Adress-->
+        </div>
+        <div>
+            <div class="from-to" style="margin-top: 10px;">Average rating</div>
+            <div id="averageRating">
+                @Html.HiddenFor(m => m.AvrageRatting)  <!---------id=AvrageRatting-------------------------------------- Everage star rating-->
+                <svg viewBox="0 0 750 50" class="rating" id="averageRatingStars">
+                    <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        C24,0.8,24.5,0.5,25,0.5V39.4z" />
+                    <path class="helft" d="M25,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L37.2,30.5l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                    <path class="midden" d="M23.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39L25,39.4l-1.5,0.9L23.8,1.3z" />
+                    <path class="helft" d="M80,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L55.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        C79,0.8,79.5,0.5,80,0.5V39.4z" />
+                    <path class="helft" d="M80,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L92.2,30.5l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                    <path class="midden" d="M78.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39L80,39.4l-1.5,0.9L78.8,1.3z" />
+                    <path class="helft" d="M135,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
+                    <path class="helft" d="M135,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                    <path class="midden" d="M133.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L133.8,1.3z" />
+                    <path class="helft" d="M190,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
+                    <path class="helft" d="M190,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                    <path class="midden" d="M188.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L188.8,1.3z" />
+                    <path class="helft" d="M245,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
+                    <path class="helft" d="M245,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                    <path class="midden" d="M243.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L243.8,1.3z" />
+                </svg>
+            </div>
+        </div>
+        <div>
+            <div class="from-to" style="margin-top: 10px;">Rating per transportation method</div>
+            <div id="specificRating">
+                <!------------------------------------------------------------- Rating For Specific disabilities-->
+                <div class="walkingStick" style="display: inline; margin-right: 4%;">
+                    <img src="~/img/walkingStick.svg" style="width: 8%" />
+                    <span>@Html.DisplayTextFor(m => Model.WalkingStickRatting)</span><!------------------------------------------------------->
+                </div>
+                <div class="Walker" style="display: inline; margin-right: 4%;">
+                    <img src="~/img/walker.svg" style="width: 8%" />
+                    <span>@Html.DisplayTextFor(m => Model.WalkerRatting)</span><!------------------------------------------------------->
+                </div>
+                <div class="Wheelchair" style="display: inline; margin-right: 4%;">
+                    <img src="~/img/wheelchair.svg" style="width: 8%" />
+                    <span>@Html.DisplayTextFor(m => Model.WheelchairRatting)</span><!------------------------------------------------------->
+                </div>
+                <div class="Mobilityscooter" style="display: inline; margin-right: 4%;">
+                    <img src="~/img/MobilityScooter.svg" style="width: 8%" />
+                    <span>@Html.DisplayTextFor(m => Model.ScooterRatting)</span><!------------------------------------------------------->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
+    <div class="row col-lg-10 col-md-10 col-sm-10">
+        <div class="col-lg-12 col-md-12 col-sm-12 from-to" style="margin-top: 10px;">Reviews</div>
+        @for (int i = 0; i < @Model.ReviewBuildings.Count; i++)
+        {
+            <div class="reviewContainer" style="max-height: 400px; background-color: green;">
+                <!-- Loop-->
+                <div class="Name col-lg-3 col-md-3 col-sm-3"></div>
+                <div class="ReviewStar col-lg-3 col-md-3 col-sm-3" style="display: inline; float: right;">
+                    <div>
+                        <div id="@("reviewRatting"+i)" class="hidden">@Html.DisplayTextFor(m => Model.ReviewBuildings[i].Rating)</div><!-- StarRating-- Value--haal de waarden uit de div------------------------------------------------------------------->
+                        <svg viewBox="0 0 550 50" class="rating" id="@("reviewRattingStars"+i)">
+                            <!-- StarRating----------------------------------------------------------------------->
+                            <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        C24,0.8,24.5,0.5,25,0.5V39.4z" />
+                            <path class="helft" d="M25,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L37.2,30.5l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                            <path class="midden" d="M23.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39L25,39.4l-1.5,0.9L23.8,1.3z" />
+                            <path class="helft" d="M80,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L55.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        C79,0.8,79.5,0.5,80,0.5V39.4z" />
+                            <path class="helft" d="M80,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L92.2,30.5l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                            <path class="midden" d="M78.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39L80,39.4l-1.5,0.9L78.8,1.3z" />
+                            <path class="helft" d="M135,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
+                            <path class="helft" d="M135,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                            <path class="midden" d="M133.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L133.8,1.3z" />
+                            <path class="helft" d="M190,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
+                            <path class="helft" d="M190,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                            <path class="midden" d="M188.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L188.8,1.3z" />
+                            <path class="helft" d="M245,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9l-12.3-10.7c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
+	        c0.2-0.5,0.7-0.8,1.2-0.8V39.4z" />
+                            <path class="helft" d="M245,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2l-12.4,10.7l3.7,15.9
+	        c0.3,1.1-0.9,2-1.9,1.4l-14-8.4V0.5z" />
+                            <path class="midden" d="M243.8,1.3c0.4-0.9,1.8-1.1,2.4-0.1v39l-1.2-0.8l-1.5,0.9L243.8,1.3z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class=" col-lg-1 col-md-1 col-sm-1" style="float:right">
+                    <img src="~/img/MobilityScooter.svg" style="width: 60%" />
+                </div>
+                <div class="review  col-lg-12 col-md-12 col-sm-12" style="font-style: italic;font-size: 80%;line-height: 120%; max-height: 58px; overflow: hidden;">
+                    @Html.DisplayTextFor(m => Model.ReviewBuildings[@i].Description)
+                </div>
+            </div>
+        }
+        <!-- EndLoop-->
+    </div>
+</div>
+
+
+@section Style {
+    <link rel="stylesheet" href="~/css/PlacesResult.css" />
+    <link rel="stylesheet" href="~/css/ReviewPlaces.css" />
+    <link rel="stylesheet" href="~/css/StarReview.css" />
+}
+
+@section Scripts {
+    <script src="~/js/PlaceDetails.js"></script>
+}

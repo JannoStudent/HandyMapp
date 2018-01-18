@@ -60,11 +60,33 @@ namespace HandyMapp.Controllers
                 }
             }
             HttpContext.Session.Set<MobilityType>("MobilityType", (MobilityType)Enum.Parse(typeof(MobilityType), walkingAid));
-            return View();
+
+            Preference preferences = null;
+            if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.Scooter)
+            {
+                preferences = new Preference() { Bench = false,DamagedSideWalk = true,Elevator = true,NarrowEntrance = true,RoadWork = true,Stairs = true,SteepRoad = false};
+            }
+            if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.Wheelchair)
+            {
+                preferences = new Preference() { Bench = false, DamagedSideWalk = true, Elevator = true, NarrowEntrance = true, RoadWork = true, Stairs = true, SteepRoad = true };
+            }
+            if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.Walker)
+            {
+                preferences = new Preference() { Bench = true, DamagedSideWalk = true, Elevator = true, NarrowEntrance = false, RoadWork = true, Stairs = true, SteepRoad = false };
+            }
+            if (HttpContext.Session.Get<MobilityType>("MobilityType") == MobilityType.WalkingStick)
+            {
+                preferences = new Preference() { Bench = true, DamagedSideWalk = true, Elevator = true, NarrowEntrance = false, RoadWork = false, Stairs = false, SteepRoad = false };
+            }
+
+            HttpContext.Session.Set<Preference>("Prefrences", preferences);
+
+            return View(preferences);
         }
 
-        public IActionResult SelectWalkingAid()
+        public IActionResult SelectWalkingAid(string query)
         {
+            HttpContext.Session.SetString("Destination", query);
             return View();
         }
 
@@ -74,6 +96,12 @@ namespace HandyMapp.Controllers
             {
                 return Redirect("SelectWalkingAid");
             }
+            if (HttpContext.Session.Get<Preference>("Prefrences") == null)
+            {
+                return Redirect("Preferences");
+            }
+
+            ViewBag.Destinations = HttpContext.Session.GetString("Destination");
             ViewBag.Error = error;
             return View();
         }

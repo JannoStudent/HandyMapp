@@ -83,13 +83,15 @@
             } else {
                 //var image = "~/img/mapIcons/icon_" + list_var[i].obst_type;
                 //var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-                var image = '@Url.Content("~/img/mapIcons/icon_benches.svg")';
+                var imagepath = '@Url.Content("~/img/mapIcons/icon.png")';
+                imagepath = imagepath.replace("icon", list_var[i].obst_type);
+               
                 objectList.push(list_var[i].streetname);
                 markers = new google.maps.Marker({
                     position: new google.maps.LatLng(list_var[i].lat, list_var[i].lng),
                     map: map,
                     title: 'Click Me ',
-                    icon : image
+                    icon : imagepath
                 });
 
                 google.maps.event.addListener(markers, 'click', (function (markers, i) {
