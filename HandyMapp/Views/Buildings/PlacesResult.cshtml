@@ -84,21 +84,16 @@
                     }
                 </div>
                 <div class="row PlaceButtons">
-                    <form method="post">
-                        <div style="display: none">
-                            <input asp-for="@Model[i].result.place_id" />
-                            <input asp-for="@Model[i].result.formatted_phone_number" />
-                            <input asp-for="@Model[i].result.geometry.location.lat" id="lat" />
-                            <input asp-for="@Model[i].result.geometry.location.lng" id="lng" />
-                            <input asp-for="@Model[i].result.website" />
-                            <input asp-for="@Model[i].result.adr_address" />
-                            <input asp-for="@Model[i].result.photos" />
-                        </div>
+                    <form method="post" asp-controller="Buildings" asp-action="PlaceDetails">
                         <div class="col-lg-6 col-md-12 col-sm-12">
+                            <input class="hidden" name="PlaceId" value="@Model[i].result.place_id" />
                             <button class="btn btn-primary btn-block btn-large" href="#"><span class="glyphicon glyphicon-globe"></span>Review</button>
                         </div>
+                    </form>
+                    <form method="post" asp-controller="Navigation" asp-action="SelectWalkingAid">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <button class="btn btn-primary btn-block btn-large" asp-controller="Buildings" asp-action="PlacesResult"><span class="glyphicon glyphicon-road"></span>Route</button>
+                            <input class="hidden" name="query" value="@Model[i].result.name" />
+                            <button class="btn btn-primary btn-block btn-large"><span class="glyphicon glyphicon-road"></span>Route</button>
                         </div>
                     </form>
                 </div>
@@ -118,7 +113,7 @@
         </ul>
     </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
 
-   
+
 </div>
 @section Style {
     <link rel="stylesheet" href="~/css/PlacesResult.css" />
