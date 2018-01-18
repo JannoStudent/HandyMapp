@@ -11,6 +11,7 @@ using HandyMapp.Controllers.API;
 using HandyMapp.Data;
 using HandyMapp.Models.GoogeApi;
 using HandyMapp.Models.GoogeApi.Places.Details;
+using HandyMapp.Models.Navigation;
 using HandyMapp.Models.Review;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace HandyMapp.Controllers
     [Route("home/[controller]/[action]")]
     public class BuildingsController : Controller
     {
-        private  readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public BuildingsController(ApplicationDbContext context)
         {
@@ -62,13 +63,42 @@ namespace HandyMapp.Controllers
             }
             PlacesController placesController = new PlacesController(_context);
             PlaceDetails placeDetails = placesController.Get(PlaceId);
-            List<ReviewBuilding> buildings =_context.ReviewBuildings.Where(m => m.PlaceId.Equals(placeDetails.result.place_id)).ToList();
-            DisplayReviewBuilding reviewBuilding = new DisplayReviewBuilding(){PlaceDetails = placeDetails, ReviewBuildings = buildings};
-            reviewBuilding.AvrageRatting = 4;
-            reviewBuilding.ScooterRatting = 4;
-            reviewBuilding.WheelchairRatting = 4;
-            reviewBuilding.WalkerRatting = 4;
-            reviewBuilding.WalkingStickRatting = 4;
+            List<ReviewBuilding> buildings = _context.ReviewBuildings.Where(m => m.PlaceId.Equals(placeDetails.result.place_id)).ToList();
+            DisplayReviewBuilding reviewBuilding = new DisplayReviewBuilding() { PlaceDetails = placeDetails, ReviewBuildings = buildings };
+            reviewBuilding.AvrageRatting = (int)buildings.Average(m => m.Rating);
+            try
+            {
+                reviewBuilding.ScooterRatting = (int)buildings.Where(m => m.MobilityType == MobilityType.Scooter).Average(m => m.Rating);
+            }
+            catch (Exception e)
+            {
+                reviewBuilding.ScooterRatting = 0;
+            }
+            try
+            {
+                reviewBuilding.WheelchairRatting = (int)buildings.Where(m => m.MobilityType == MobilityType.Wheelchair).Average(m => m.Rating);
+            }
+            catch (Exception e)
+            {
+                reviewBuilding.WheelchairRatting = 0;
+            }
+            try
+            {
+                reviewBuilding.WalkerRatting = (int)buildings.Where(m => m.MobilityType == MobilityType.Walker).Average(m => m.Rating);
+            }
+            catch (Exception e)
+            {
+                reviewBuilding.WalkerRatting = 0;
+            }
+            try
+            {
+                reviewBuilding.WalkingStickRatting = (int)buildings.Where(m => m.MobilityType == MobilityType.WalkingStick).Average(m => m.Rating);
+            }
+            catch (Exception e)
+            {
+                reviewBuilding.WalkingStickRatting = 0;
+            }
+            
             return View(reviewBuilding);
         }
 
