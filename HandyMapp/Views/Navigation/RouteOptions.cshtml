@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row breadcrumbRow">
+<div class="row breadcrumbRow" style="margin-bottom: 40px;">
     <ul class="container breadcrumbContainer">
         <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="SelectWalkingAid">Way of navigating</a></li>
         <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="Navigation" asp-action="Preferences">Selecting preferences</a></li>
@@ -21,7 +21,7 @@
         <span>Select your route</span>
     </div>
 </div>
-<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-offset-1 col-lg-11">
+<div class="row col-sm-offset-1 col-sm-10 col-md-10 col-md-offset-1 col-lg-offset-1 col-lg-11" style="margin-top: 20px;">
     @for (int i = 0; i < @Model.Routes.Count; i++)
     {
         <form method="post" style="cursor: pointer;">
@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                         <hr />
-                        <div class="row routeDescription" style="height: 200px; overflow-y: scroll; overflow-x: hidden; display:none;">
+                        <div class="row routeDescription" style="height: 150px; overflow-y: scroll; overflow-x: hidden; display:none;">
                         @for (int k = 0; k < @Model.Routes[i].Legs[j].Steps.Count; k++)
                         {
                         <input name="Routes[0].Legs[@j].Steps[@k].HTMLInstructions" type="hidden" value="@Html.DisplayTextFor(m => @Model.Routes[i].Legs[j].Steps[k].HTMLInstructions)">
