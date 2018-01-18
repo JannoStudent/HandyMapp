@@ -10,5 +10,7 @@ namespace HandyMapp.Models.GoogeApi.Places.Details
         public List<object> html_attributions { get; set; }
         public Result result { get; set; }
         public string status { get; set; }
+
+        public int Ratting { get; set; }
     }
 }
