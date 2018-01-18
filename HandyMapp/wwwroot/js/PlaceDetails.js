@@ -12,8 +12,8 @@
         var starId = "#reviewRatting" + [a];
         var starHalfId = "#reviewRattingStars" + [a];
         var ratingReview = ($(starId).text() * 2);
-        console.log(starId);
-        console.log(ratingReview);
+        //console.log(starId);
+        //console.log(ratingReview);
         var b;
         for (b = 0; b <= ratingReview - 1; b++) {
             $(starHalfId + "> path.helft").eq(b).addClass("colorSelected");
