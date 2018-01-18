@@ -75,40 +75,55 @@
            * Set markers
          */
         var list_var = @Html.Raw(Json.Serialize(Model));
-                //console.log(list_var);
+        var objectList = [];
 
-                for (var i = 0; i < list_var.length; i++) {
-                     markers = new google.maps.Marker({
-                         position: new google.maps.LatLng(list_var[i].lat, list_var[i].lng),
-                        map: map,
-                        title: 'Click Me ' + i
-                    });
+        for (var i = 0; i < list_var.length; i++) {
+            if (objectList.includes(list_var[i].streetname)) {
+                alert("hure");
+            } else {
+                //var image = "~/img/mapIcons/icon_" + list_var[i].obst_type;
+                //var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+                var image = '@Url.Content("~/img/mapIcons/icon_benches.svg")';
+                objectList.push(list_var[i].streetname);
+                markers = new google.maps.Marker({
+                    position: new google.maps.LatLng(list_var[i].lat, list_var[i].lng),
+                    map: map,
+                    title: 'Click Me ',
+                    icon : image
+                });
 
-                     console.log(list_var[i].lat.replace(/"/g, ''));
-                    google.maps.event.addListener(markers, 'click', (function (markers, i) {
-                        return function () {
-                            //hurer
-                           // latLng = new google.maps.LatLng(list_var[i].lat, list_var[i].lng);
-                            //  var street = geocode(latLng);
-                            infowindow.setContent('<div id="marker_info_window" ' +
-                                'style="max-width:250px;font-size="2em"color:#000"> ' +
-                                '<span style="font-size:12pt"><b>Description: </b>' + list_var[i].description +
-                                '</span>'+
-                                '</br > <span style="font-size:12pt"><b>Obstacle type: </b>' + list_var[i].obst_type +
-                                '</span>' +
-                                '</br ><span style="font-size:12pt"><b>Rating: </b>' + list_var[i].rating +
-                                '</span>'+
-                                '</br > <form method="post" action="@Url.Action("street_eval2","Street_eval_")" >'+
-                                '<input type="hidden" name="Value1" value="' + list_var[i].lat + '"/>' +
-                                '<input type="hidden" name="Value2" value="' + list_var[i].lng + '"/>'+
-                                '<input type="submit" value= "Evaluate" > </div > ' +
-                                '</form');
+                google.maps.event.addListener(markers, 'click', (function (markers, i) {
+                    return function () {
 
-                            infowindow.open(map, markers);
-                        }
-                     })(markers, i));
-                    markers.setMap(map);
-                }
+                        var mystreet = list_var[i].streetname;
+                        var newString = mystreet.replace('"', '');
+
+                        infowindow.setContent('<div id="marker_info_window" ' +
+                            'style="max-width:250px;color:#000"> ' +
+                            '<span style="font-size:12pt"><b>Streetname: </b>' + list_var[i].streetname +
+                            '</span>' +
+                            '<span style="font-size:12pt"><b>Description: </b>' + list_var[i].description +
+                            '</span>' +
+                            '</br > <span style="font-size:12pt"><b>Obstacle type: </b>' + list_var[i].obst_type +
+                            '</span>' +
+                            '</br > <span style="font-size:12pt"><b>Image: </b>' +
+                            '<img src="/img/mapIcons/icon_'+ list_var[i].obst_type +'.svg" alt="Smiley face" height="42" width="42">' +
+                            '</span>' +
+                            '</br ><span style="font-size:12pt"><b>Rating: </b>' + list_var[i].rating +
+                            '</span>' +
+                            '</br > <form method="post" action="@Url.Action("street_eval2","Street_eval_")" >' +
+                            '<input type="hidden" name="lat" value="' + list_var[i].lat + '"/>' +
+                            '<input type="hidden" name="lng" value="' + list_var[i].lng + '"/>' +
+                            '<input type="hidden" name="streetname" value="' + newString + '"/>' +
+                            '<input type="submit" value="Evaluate" /> </div > ' +
+                            '</form></div>');
+
+                        infowindow.open(map, markers);
+                    }
+                })(markers, i));
+                markers.setMap(map);
+            }
+            }
 
                 /*
                 * set markers end
