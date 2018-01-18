@@ -86,7 +86,10 @@ namespace HandyMapp.Controllers
 
         public IActionResult SelectWalkingAid(string query)
         {
-            HttpContext.Session.SetString("Destination", query);
+            if (!string.IsNullOrEmpty(query))
+            {
+                HttpContext.Session.SetString("Destination", query);
+            }
             return View();
         }
 

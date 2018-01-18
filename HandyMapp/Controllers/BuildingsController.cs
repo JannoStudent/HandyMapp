@@ -37,7 +37,24 @@ namespace HandyMapp.Controllers
         public IActionResult PlacesResult(IList<PlacePrediction> placePredictions)
         {
             PlacesController placesController = new PlacesController(_context);
-            return View(placePredictions.Select(m => placesController.Get(m.PlaceId)).Where(m => m != null).ToList());
+            List<PlaceDetails> placeDetailses = placePredictions.Select(m => placesController.Get(m.PlaceId))
+                .Where(m => m != null).ToList();
+
+            foreach (var placeDetailse in placeDetailses)
+            {
+                List<ReviewBuilding> buildings = _context.ReviewBuildings.Where(m => m.PlaceId.Equals(placeDetailse.result.place_id)).ToList();
+                try
+                {
+                    placeDetailse.Ratting = (int) buildings.Average(m => m.Rating);
+                }
+                catch (Exception e)
+                {
+                    placeDetailse.Ratting = 0;
+                }
+
+            }
+
+            return View(placeDetailses);
         }
 
         public IActionResult SelectArea()
