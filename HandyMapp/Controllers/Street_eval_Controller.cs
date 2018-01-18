@@ -69,7 +69,6 @@ namespace HandyMapp.Controllers
         [HttpGet]
         public IActionResult street_eval3(street_eval_model model)
         {
-
             return View("street_eval3", model);
         }
 
