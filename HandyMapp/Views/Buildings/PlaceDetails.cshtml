@@ -31,7 +31,7 @@
         <div>
             <div class="from-to" style="margin-top: 10px;">Average rating</div>
             <div id="averageRating">  @Html.HiddenFor(m => m.AvrageRatting)  <!---------id=AvrageRatting-------------------------------------- Everage star rating-->
-                <svg viewBox="0 0 750 50" class="rating">
+                <svg viewBox="0 0 750 50" class="rating" id="averageRatingStars">
                     <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
 	        C24,0.8,24.5,0.5,25,0.5V39.4z"/>
                     <path class="helft" d="M25,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L37.2,30.5l3.7,15.9
@@ -92,8 +92,8 @@
               <div class="Name col-lg-3 col-md-3 col-sm-3"></div>
               <div class="ReviewStar col-lg-3 col-md-3 col-sm-3" style="display: inline; float: right;">
                   <div>
-                      <div id="reviewRatting" class="hidden">@reviewBuilding.Rating></div><!-- StarRating-- Value--haal de waarden uit de div------------------------------------------------------------------->
-                      <svg viewBox="0 0 550 50" class="rating"><!-- StarRating----------------------------------------------------------------------->
+                      <div id="reviewRatting" class="hidden">@reviewBuilding.Rating</div><!-- StarRating-- Value--haal de waarden uit de div------------------------------------------------------------------->
+                      <svg viewBox="0 0 550 50" class="rating" id="reviewRattingStars"><!-- StarRating----------------------------------------------------------------------->
                           <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
 	        C24,0.8,24.5,0.5,25,0.5V39.4z"/>
                           <path class="helft" d="M25,0.5c0.5,0,0.9,0.2,1.2,0.7l0,0l6.4,15l16.3,1.4c1.1,0.1,1.6,1.5,0.7,2.2L37.2,30.5l3.7,15.9
@@ -138,4 +138,9 @@
 @section Style {
   <link rel="stylesheet" href="~/css/PlacesResult.css" />
   <link rel="stylesheet" href="~/css/ReviewPlaces.css" />
+  <link rel="stylesheet" href="~/css/StarReview.css" />
+}
+
+@section Scripts {
+  <script src="~/js/PlaceDetails.js"></script>
 }
