@@ -11,6 +11,7 @@ using HandyMapp.Models.GoogeApi.Places.Details;
 using HandyMapp.Models.Navigation;
 using HandyMapp.Models.Review;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HandyMapp.Controllers
 {
@@ -70,6 +71,24 @@ namespace HandyMapp.Controllers
             _context.SaveChanges();
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id, string placeId)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var reviewBuilding = await _context.ReviewBuildings.SingleOrDefaultAsync(m => m.Id == id);
+            if (reviewBuilding == null)
+            {
+                return NotFound();
+            }
+            _context.ReviewBuildings.Remove(reviewBuilding);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("PlaceInput", "Buildings");
+        }
+
         public IActionResult SearchPlaces(string searchstext)
         {
             PlacesController placesController = new PlacesController(_context);
