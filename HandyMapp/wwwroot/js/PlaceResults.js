@@ -4,8 +4,8 @@
     var reviewCounter = $(".PlaceResult").length;
     console.log(reviewCounter);
     for (a = 0; a < reviewCounter; a++) {
-        var starId = "#rating" + [a];
-        var starHalfId = "#reviewRattingStars" + [a];
+        var starId = "#RatingAverageNU" + [a];
+        var starHalfId = "#rating" + [a];
         var ratingReview = ($(starId).text() * 2);
         //console.log(starId);
         //console.log(ratingReview);
