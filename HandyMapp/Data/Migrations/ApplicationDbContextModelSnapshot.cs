@@ -299,7 +299,7 @@ namespace HandyMapp.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("aid");
+                    b.Property<int>("aid");
 
                     b.Property<string>("description");
 
