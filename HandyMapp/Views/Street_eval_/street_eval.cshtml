@@ -85,7 +85,7 @@
                 //var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
                 var imagepath = '@Url.Content("~/img/mapIcons/icon.png")';
                 imagepath = imagepath.replace("icon", list_var[i].obst_type);
-               
+
                 objectList.push(list_var[i].streetname);
                 markers = new google.maps.Marker({
                     position: new google.maps.LatLng(list_var[i].lat, list_var[i].lng),
@@ -101,24 +101,31 @@
                         var newString = mystreet.replace('"', '');
 
                         infowindow.setContent('<div id="marker_info_window" ' +
+
                             'style="max-width:250px;color:#000"> ' +
+                            '<h3>Latest review</h1>' +
+                           
                             '<span style="font-size:12pt"><b>Streetname: </b>' + list_var[i].streetname +
-                            '</span>' +
+                            '</span></br>' +
                             '<span style="font-size:12pt"><b>Description: </b>' + list_var[i].description +
                             '</span>' +
                             '</br > <span style="font-size:12pt"><b>Obstacle type: </b>' + list_var[i].obst_type +
-                            '</span>' +
-                            '</br > <span style="font-size:12pt"><b>Image: </b>' +
-                            '<img src="/img/mapIcons/icon_'+ list_var[i].obst_type +'.svg" alt="Smiley face" height="42" width="42">' +
-                            '</span>' +
+
                             '</br ><span style="font-size:12pt"><b>Rating: </b>' + list_var[i].rating +
-                            '</span>' +
+                            '</span> </br>' +
                             '</br > <form method="post" action="@Url.Action("street_eval2","Street_eval_")" >' +
                             '<input type="hidden" name="lat" value="' + list_var[i].lat + '"/>' +
                             '<input type="hidden" name="lng" value="' + list_var[i].lng + '"/>' +
                             '<input type="hidden" name="streetname" value="' + newString + '"/>' +
-                            '<input type="submit" value="Evaluate" /> </div > ' +
-                            '</form></div>');
+                           
+                            '<input type="submit" style=" padding:3px 10px; background:#1370B8;border: 0 none;cursor: pointer;-webkit - border - radius: 5px; border - radius: 5px; " value="Evaluate this street" /> ' +
+                            '</div > ' +
+                            '</form ></br>'+
+                            '<form method="post" action="@Url.Action("street_eval2","Street_eval_")" >'+
+                            '<input type="submit" style=" padding:3px 10px; background:#1370B8;border: 0 none;cursor: pointer;-webkit - border - radius: 5px; border - radius: 5px; " value="See all reviews" /> ' +
+                            '</form>' +
+                            
+                            '</div>');
 
                         infowindow.open(map, markers);
                     }
