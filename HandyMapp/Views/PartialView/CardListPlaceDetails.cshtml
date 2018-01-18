@@ -5,9 +5,9 @@
   for (int i = 0; i < @Model.Count; i++)
   {
         <div class="PlaceReviewResult ">
-          <div class="Placetext" id="@(" PlaceTitle" + i)">
-            <div class="PlaceReviewTitle">
-              @Html.DisplayTextFor(m => Model[i].result.name)
+          <div id="@(" PlaceTitle" + i)">
+            <div class="Placetext">
+                <h3 class="PlaceTitle">@Html.DisplayTextFor(m => Model[i].result.name)</h3>
             </div>
           </div>
             <div class="PlaceReviewAdress">@Html.DisplayTextFor(m => Model[i].result.formatted_address)</div>
@@ -15,7 +15,7 @@
             <form>
                 <input id="z0__result_place_id" name="[0].result.place_id" type="hidden" value="@Html.DisplayTextFor(m => Model[i].result.place_id)">
                 @* <div class="PlaceResultButton" style="text-align: center; padding: 5px; height: 80px;">*@
-                    <button class="btn btn-block btn-primary btn-lg" type="submit" asp-controller="ReviewPlaces" asp-action="ReviewStarBuilding"><span style="display: inline;">Review</span><span class="glyphicon glyphicon-pencil" style="display: inline;"></span></button>
+                    <button class="btn PlaceResultButton" style="width: 100%;" type="submit" asp-controller="ReviewPlaces" asp-action="ReviewStarBuilding"><span style="display: inline;">Review</span><span class="glyphicon glyphicon-pencil" style="display: inline;"></span></button>
                 @*</div>*@
             </form>
         </div>
