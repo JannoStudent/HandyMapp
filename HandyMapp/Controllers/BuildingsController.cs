@@ -56,7 +56,10 @@ namespace HandyMapp.Controllers
 
         public IActionResult PlaceDetails(string PlaceId)
         {
-            PlaceId = "ChIJR46gVD_JxUcRidwGgVIl1wU";
+            if (string.IsNullOrEmpty(PlaceId))
+            {
+                return Redirect("PlaceInput");
+            }
             PlacesController placesController = new PlacesController(_context);
             PlaceDetails placeDetails = placesController.Get(PlaceId);
             List<ReviewBuilding> buildings =_context.ReviewBuildings.Where(m => m.PlaceId.Equals(placeDetails.result.place_id)).ToList();

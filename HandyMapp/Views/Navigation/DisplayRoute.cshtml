@@ -234,13 +234,13 @@
 
             markers.push(new window.google.maps.Marker({
                 position: response.routes[0].legs[0].start_location,
-                icon: '@Url.Content("~/img/mapIcons/startPoint.svg")',
+                icon: '@Url.Content("~/img/mapIcons/startPoint.png")',
                 map: map
             }));
 
             markers.push(new window.google.maps.Marker({
                 position: response.routes[0].legs[0].end_location,
-                icon: '@Url.Content("~/img/mapIcons/bench.svg")',
+                icon: '@Url.Content("~/img/mapIcons/endPoint.png")',
                 map: map
             }));
 
