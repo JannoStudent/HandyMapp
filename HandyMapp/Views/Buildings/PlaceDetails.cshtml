@@ -96,7 +96,7 @@
                 <div class="Name col-lg-3 col-md-3 col-sm-3"></div>
                 <div class="ReviewStar col-lg-3 col-md-3 col-sm-3" style="display: inline; float: right;">
                     <div>
-                        <div id="@("reviewRatting"+i)" class="hidden">@Html.DisplayTextFor(m => Model.ReviewBuildings[@i].Rating)</div><!-- StarRating-- Value--haal de waarden uit de div------------------------------------------------------------------->
+                        <div id="@("reviewRatting"+i)" class="hidden">@Html.DisplayTextFor(m => Model.ReviewBuildings[i].Rating)</div><!-- StarRating-- Value--haal de waarden uit de div------------------------------------------------------------------->
                         <svg viewBox="0 0 550 50" class="rating" id="@("reviewRattingStars"+i)">
                             <!-- StarRating----------------------------------------------------------------------->
                             <path class="helft" d="M25,39.4l-14.1,8.5c-1,0.6-2.2-0.3-1.9-1.4l3.7-15.9L0.4,19.9c-0.9-0.7-0.4-2.2,0.7-2.2l16.3-1.4l6.4-15
