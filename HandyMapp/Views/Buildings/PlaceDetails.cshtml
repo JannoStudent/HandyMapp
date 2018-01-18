@@ -91,7 +91,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 from-to" style="margin-top: 10px;">Reviews</div>
         @for (int i = 0; i < @Model.ReviewBuildings.Count; i++)
         {
-            <div class="reviewContainer" style="max-height: 400px; background-color: green;">
+            <div class="reviewContainer" style="max-height: 400px;">
                 <!-- Loop-->
                 <div class="Name col-lg-3 col-md-3 col-sm-3"></div>
                 <div class="ReviewStar col-lg-3 col-md-3 col-sm-3" style="display: inline; float: right;">
@@ -128,11 +128,16 @@
                     </div>
                 </div>
                 <div class=" col-lg-1 col-md-1 col-sm-1" style="float:right">
-                    <img src="~/img/MobilityScooter.svg" style="width: 60%" />
+                    <img src="@Url.Content("~/img/" + @Html.DisplayTextFor(m => Model.ReviewBuildings[@i].MobilityType) +".svg")" style="width: 60%" />
                 </div>
                 <div class="review  col-lg-12 col-md-12 col-sm-12" style="font-style: italic;font-size: 80%;line-height: 120%; max-height: 58px; overflow: hidden;">
                     @Html.DisplayTextFor(m => Model.ReviewBuildings[@i].Description)
                 </div>
+                <form asp-controller="ReviewPlaces" asp-action="Delete" method="post">
+                    <input class="hidden" name="id" value="@Html.DisplayTextFor(m => Model.ReviewBuildings[i].Id)"/>
+                    <input class="hidden" name="placeId" value="@Html.DisplayTextFor(m => Model.ReviewBuildings[i].PlaceId)"/>
+                    <button class="btn btn-default"  type="submit">Delete Review</button>
+                </form>
             </div>
         }
         <!-- EndLoop-->
