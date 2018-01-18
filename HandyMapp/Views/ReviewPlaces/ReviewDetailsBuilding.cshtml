@@ -1,62 +1,66 @@
-﻿
+﻿@model HandyMapp.Models.Review.ReviewBuilding
+
 @{
     ViewData["Title"] = "ReviewDetailsBuilding";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row breadcrumbRow">
-  <ul class="container breadcrumbContainer">
-    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
-    <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="ReviewPlaces" asp-action="SelectBuilding"> Select adress/building</a></li>
-    <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Enter your review</li>
-    <li class="breadcrumbHandy">Finish your review</li>
-  </ul>
+    <ul class="container breadcrumbContainer">
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="home" asp-action="SelectReview"> Review choice</a></li>
+        <li class="breadcrumbHandy visitedBreadcrumb breadcrumblineVisited"><a asp-controller="ReviewPlaces" asp-action="SelectBuilding"> Select adress/building</a></li>
+        <li class="breadcrumbHandy currentBreadcrumb"><div class="breadcrumbLineCurrent"></div>Enter your review</li>
+        <li class="breadcrumbHandy">Finish your review</li>
+    </ul>
 </div> <!-- visitedBreadcrumb breadcrumblineVisited     <div class="breadcrumbLineCurrent"></div>       currentBreadcrumb-->
 <div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12" id="DetailsQuestionsNumber">
-    <span>1/6</span>
-  </div>
+    <div class="col-lg-12 col-md-12 col-sm-12" id="DetailsQuestionsNumber">
+        <span>1/6</span>
+    </div>
 </div>
 <div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12 pageTitle" id="DetailsQuestions">
-    <span>Do you want to give extra information?</span>
-  </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 pageTitle" id="DetailsQuestions">
+        <span>Do you want to give extra information?</span>
+    </div>
 </div>
 <div class="row col-sm-offset-3 col-sm-6 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" id="EndReview">
-  <div class="col-sm-6 col-md-6 col-lg-6" id="leave">
-    <a class="btn btn-block btn-danger btn-lg" asp-controller="ReviewPlaces" asp-action="ThankYouBuilding">No, thank you&ensp;<span class="glyphicon glyphicon-home"></span></a>
-  </div>
-  <div class="col-sm-6 col-md-6 col-lg-6" id="further">
-    <a class="btn btn-block btn-success btn-lg">Yes, go further&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
-  </div>
+    <div class="col-sm-6 col-md-6 col-lg-6" id="leave">
+        <form asp-controller="ReviewPlaces" asp-action="ThankYouBuilding">
+            @Html.HiddenFor(m => m.PlaceId)
+            @Html.HiddenFor(m => m.Rating)
+            @Html.HiddenFor(m => m.Description)
+            <button class="btn btn-block btn-danger btn-lg">No, thank you&ensp;<span class="glyphicon glyphicon-home"></span></button>
+        </form>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6" id="further">
+        <a class="btn btn-block btn-success btn-lg">Yes, go further&ensp;<span class="glyphicon glyphicon-arrow-right"></span></a>
+    </div>
 </div>
 <div class="row col-sm-offset-3 col-sm-6 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" id="DetailsButtons">
-  <div class="col-sm-4 col-md-4 col-lg-4" id="no">
-    <a class="btn btn-block btn-danger btn-lg">No&ensp;<span class="glyphicon glyphicon-remove"></span></a>
-  </div>
-  <div class="col-sm-4 col-md-4 col-lg-4" id="pass">
-    <a class="btn btn-block btn-default btn-lg">I don't know</a>
-  </div>
-  <div class="col-sm-4 col-md-4 col-lg-4" id="passToggle">
-    <a class="btn btn-block btn-default btn-lg">Pass</a>
-  </div>
-  <div class="col-sm-4 col-md-4 col-lg-4" id="passToggleSmall">
-    <a class="btn btn-block btn-default btn-lg">Pass&ensp;<span class="glyphicon glyphicon-minus"></span></a>
-  </div>
-  <div class="col-sm-4 col-md-4 col-lg-4" id="yes">
-    <a class="btn btn-block btn-success btn-lg">Yes&ensp;<span class="glyphicon glyphicon-ok"></span></a>
-  </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" id="no">
+        <a class="btn btn-block btn-danger btn-lg">No&ensp;<span class="glyphicon glyphicon-remove"></span></a>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" id="pass">
+        <a class="btn btn-block btn-default btn-lg">I don't know</a>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" id="passToggle">
+        <a class="btn btn-block btn-default btn-lg">Pass</a>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" id="passToggleSmall">
+        <a class="btn btn-block btn-default btn-lg">Pass&ensp;<span class="glyphicon glyphicon-minus"></span></a>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" id="yes">
+        <a class="btn btn-block btn-success btn-lg">Yes&ensp;<span class="glyphicon glyphicon-ok"></span></a>
+    </div>
 </div>
 
-<table id="answers">
-  
-</table>
+<table id="answers"></table>
 
 @section Style {
-  <link rel="stylesheet" href="~/css/ReviewPlaces.css" />
+    <link rel="stylesheet" href="~/css/ReviewPlaces.css" />
 }
 
 @section Scripts {
-  <script src="~/js/ReviewPage.js"></script>
+    <script src="~/js/ReviewPage.js"></script>
 }
 

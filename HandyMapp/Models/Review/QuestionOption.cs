@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace HandyMapp.Models.Review
 {
-    public class QuestionOptions
+    public enum QuestionOption
     {
+        Undefined,Yes,Dontknow,No
     }
 }
